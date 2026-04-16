@@ -26,9 +26,9 @@ export default function LandingPage() {
     <main className="flex-1">
       {/* ── 1. HERO ── */}
       <section className="bg-[#0D1117]">
-        <div className="max-w-[640px] mx-auto px-5 py-16 md:py-24">
+        <div className="max-w-[640px] mx-auto px-5 py-20 md:py-28">
           {/* Badge */}
-          <div className="flex justify-center mb-7">
+          <div className="flex justify-center mb-8">
             <div className="inline-flex items-center gap-2 bg-primary/15 border border-primary/25 rounded-full px-4 py-1.5 text-sm font-semibold text-primary">
               <span
                 className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse inline-block"
@@ -39,17 +39,17 @@ export default function LandingPage() {
           </div>
 
           {/* Headline */}
-          <h1 className="text-3xl md:text-5xl font-black leading-tight mb-5 text-center text-white">
+          <h1 className="text-3xl md:text-5xl font-black leading-tight mb-4 text-center text-white">
             תבנית המכירה שעזרה ללקוחות שלי{" "}
             <span className="text-primary">להכפיל ולשלש</span> את ההכנסות
           </h1>
 
-          <p className="text-base text-white/55 text-center mb-8 leading-relaxed">
+          <p className="text-base text-white/55 text-center mb-10 leading-relaxed">
             איך להעלות את האמון בשיחה ולהגיע לסגירה מהר יותר
           </p>
 
-          {/* Benefit bullets */}
-          <ul className="flex flex-col gap-3 mb-10 max-w-md mx-auto">
+          {/* Benefit bullets — start-aligned for personality */}
+          <ul className="flex flex-col gap-3 mb-12 max-w-md mx-auto">
             {benefits.map((b) => (
               <li key={b} className="flex items-start gap-3">
                 <span className="mt-0.5 flex-shrink-0 w-5 h-5 rounded-full bg-primary/20 flex items-center justify-center">
@@ -77,71 +77,44 @@ export default function LandingPage() {
       </section>
 
       {/* ── 2. WHAT'S INSIDE ── */}
-      <FadeIn>
-        <section className="bg-white">
-          <div className="max-w-[640px] mx-auto px-5 py-14">
-            <p className="text-xs font-bold tracking-widest text-muted-foreground text-center uppercase mb-2">
-              מה יש בתוך התבנית
-            </p>
-            <h2 className="text-xl font-extrabold text-foreground text-center mb-8">
-              8 שלבים מהפתיחה ועד הסגירה
-            </h2>
+      {/* No FadeIn — this section is just below the fold, animation here feels noise */}
+      <section className="bg-white">
+        <div className="max-w-[640px] mx-auto px-5 py-12 md:py-16">
+          <h2 className="text-xl font-extrabold text-foreground text-start mb-7">
+            8 שלבים מהפתיחה ועד הסגירה
+          </h2>
 
-            <div className="grid grid-cols-2 gap-3">
-              {steps.map(({ n, title }) => (
-                <div
-                  key={n}
-                  className={`step-card-${n} bg-slate-50 rounded-xl p-4 border border-slate-100`}
+          <div className="grid grid-cols-2 gap-x-4 gap-y-1">
+            {steps.map(({ n, title }) => (
+              <div key={n} className="flex items-center gap-3 py-3">
+                <span
+                  className={`step-badge-${n} flex-shrink-0 inline-flex items-center justify-center w-7 h-7 rounded-full text-white text-xs font-bold`}
                 >
-                  <span
-                    className={`step-badge-${n} inline-flex items-center justify-center w-6 h-6 rounded-full text-white text-xs font-bold mb-2`}
-                  >
-                    {n}
-                  </span>
-                  <p className="text-sm font-medium text-foreground">{title}</p>
-                </div>
-              ))}
-            </div>
+                  {n}
+                </span>
+                <p className="text-sm font-medium text-foreground leading-snug">{title}</p>
+              </div>
+            ))}
           </div>
-        </section>
-      </FadeIn>
+        </div>
+      </section>
 
       {/* ── 3. CREDENTIALS ── */}
       <FadeIn>
-        <section className="bg-slate-50">
-          <div className="max-w-[640px] mx-auto px-5 py-14">
-            {/* Stats */}
-            <div className="grid grid-cols-3 gap-4 mb-8">
-              {[
-                { n: "5", label: "שנים בעולם המכירות" },
-                { n: "8", label: "שלבים בתהליך" },
-                { n: "עשרות", label: "בעלי עסקים השתמשו" },
-              ].map((s) => (
-                <div
-                  key={s.label}
-                  className="bg-white rounded-2xl p-4 text-center border border-slate-200 shadow-sm"
-                >
-                  <p className="text-2xl md:text-3xl font-black text-primary leading-none mb-1">
-                    {s.n}
-                  </p>
-                  <p className="text-xs text-muted-foreground leading-snug">
-                    {s.label}
-                  </p>
-                </div>
-              ))}
-            </div>
-
-            {/* Personal statement */}
-            <div className="bg-[#0D1117] rounded-2xl p-6 text-center border border-white/5">
-              <p className="text-sm md:text-base leading-relaxed text-white/75">
-                אחרי 5 שנים בעולם המכירות שיפצרתי את תבנית המכירה וחידדתי
-                אותה לאורך השנים עד למצב העכשווי שלה, בו{" "}
-                <strong className="text-white">
-                  כל הלקוחות שלי ואני משתמשים בה כדי לסגור עסקאות בעשרות
-                  אלפי שקלים.
-                </strong>
-              </p>
-            </div>
+        <section className="bg-[#0D1117]">
+          <div className="max-w-[640px] mx-auto px-5 py-16 md:py-20">
+            <p className="text-xs font-bold tracking-widest text-primary/60 uppercase mb-6">
+              מי מאחורי התבנית
+            </p>
+            <p className="text-lg md:text-xl font-semibold text-white/75 leading-relaxed">
+              אחרי{" "}
+              <strong className="text-white font-black">5 שנות ניסיון</strong>{" "}
+              בעולם המכירות ו
+              <strong className="text-white font-black">עשרות בעלי עסקים</strong>{" "}
+              שעזרתי להם לסגור — שיפצרתי את תהליך המכירה ל-8 שלבים שאני ולקוחותיי
+              משתמשים בהם כדי לסגור עסקאות{" "}
+              <strong className="text-primary font-black">בעשרות אלפי ₪</strong>.
+            </p>
           </div>
         </section>
       </FadeIn>
@@ -149,12 +122,9 @@ export default function LandingPage() {
       {/* ── 4. PHOTO TESTIMONIALS ── */}
       <FadeIn>
         <section className="bg-white">
-          <div className="max-w-[640px] mx-auto px-5 py-14">
-            <p className="text-xs font-bold tracking-widest text-muted-foreground text-center uppercase mb-2">
-              מה אומרים עליי
-            </p>
-            <h2 className="text-xl font-extrabold text-foreground text-center mb-8">
-              המלצות מלקוחות
+          <div className="max-w-[640px] mx-auto px-5 py-16 md:py-20">
+            <h2 className="text-xl font-extrabold text-foreground text-start mb-8">
+              מה אומרים לקוחות
             </h2>
             <TestimonialCarousel />
           </div>
@@ -163,12 +133,12 @@ export default function LandingPage() {
 
       {/* ── 5. VIDEO TESTIMONIALS ── */}
       <FadeIn>
-        <section className="bg-slate-50">
-          <div className="max-w-[640px] mx-auto px-5 py-14">
-            <p className="text-xs font-bold tracking-widest text-muted-foreground text-center uppercase mb-2">
+        <section className="bg-white border-t border-slate-100">
+          <div className="max-w-[640px] mx-auto px-5 py-16 md:py-20">
+            <p className="text-xs font-bold tracking-widest text-muted-foreground uppercase mb-3">
               סרטוני המלצה
             </p>
-            <h2 className="text-xl font-extrabold text-foreground text-center mb-8">
+            <h2 className="text-xl font-extrabold text-foreground text-start mb-8">
               לקוחות מספרים
             </h2>
             <VideoCarousel />
@@ -178,7 +148,7 @@ export default function LandingPage() {
 
       {/* ── 6. FINAL CTA ── */}
       <section className="bg-[#0D1117]">
-        <div className="max-w-sm mx-auto px-5 py-16 text-center">
+        <div className="max-w-sm mx-auto px-5 py-20 md:py-24 text-center">
           <h2 className="text-2xl font-extrabold text-white mb-2">
             מוכן לסגור יותר עסקאות?
           </h2>

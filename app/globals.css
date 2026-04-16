@@ -69,16 +69,6 @@
   }
 }
 
-/* Step card accent borders */
-.step-card-1 { border-inline-start: 4px solid oklch(0.65 0.2 264); }
-.step-card-2 { border-inline-start: 4px solid oklch(0.65 0.18 200); }
-.step-card-3 { border-inline-start: 4px solid oklch(0.65 0.2 140); }
-.step-card-4 { border-inline-start: 4px solid oklch(0.78 0.17 70); }
-.step-card-5 { border-inline-start: 4px solid oklch(0.65 0.2 30); }
-.step-card-6 { border-inline-start: 4px solid oklch(0.55 0.2 300); }
-.step-card-7 { border-inline-start: 4px solid oklch(0.65 0.2 164); }
-.step-card-8 { border-inline-start: 4px solid oklch(0.6 0.18 15); }
-
 .step-badge-1 { background: oklch(0.65 0.2 264); }
 .step-badge-2 { background: oklch(0.65 0.18 200); }
 .step-badge-3 { background: oklch(0.65 0.2 140); }
