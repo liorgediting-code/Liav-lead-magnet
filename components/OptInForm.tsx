@@ -9,6 +9,7 @@ import { Button } from "@/components/ui/button";
 export default function OptInForm() {
   const router = useRouter();
   const [form, setForm] = useState({ name: "", phone: "", email: "" });
+  const [consent, setConsent] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
 
@@ -28,6 +29,11 @@ export default function OptInForm() {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(form.email)) {
       setError("כתובת אימייל לא תקינה");
+      return;
+    }
+
+    if (!consent) {
+      setError("יש לאשר קבלת תכנים לפני המשך");
       return;
     }
 
@@ -100,6 +106,22 @@ export default function OptInForm() {
         />
       </div>
 
+      {/* Consent checkbox — חוק התקשורת (בזק ושידורים) תיקון מס׳ 40 */}
+      <label className="flex items-start gap-3 cursor-pointer">
+        <input
+          type="checkbox"
+          checked={consent}
+          onChange={(e) => setConsent(e.target.checked)}
+          disabled={loading}
+          className="mt-1 w-4 h-4 accent-primary flex-shrink-0 cursor-pointer"
+        />
+        <span className="text-xs text-muted-foreground leading-relaxed">
+          אני מאשר/ת קבלת תכנים שיווקיים ועדכונים בדוא״ל ובמסרונים, בהתאם
+          לחוק התקשורת (בזק ושידורים) (תיקון מס׳ 40), התשס״ח-2008. ניתן לבטל
+          בכל עת.
+        </span>
+      </label>
+
       {error && (
         <p className="text-sm text-destructive font-medium text-center">
           {error}
@@ -109,7 +131,7 @@ export default function OptInForm() {
       <Button
         type="submit"
         disabled={loading}
-        className="cursor-pointer h-14 text-base font-bold mt-2 bg-primary text-primary-foreground hover:bg-primary/90 active:scale-[0.98] transition-colors duration-200 shadow-lg shadow-primary/20 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
+        className="cursor-pointer h-14 text-base font-bold mt-2 bg-primary text-white hover:bg-primary/90 active:scale-[0.98] transition-colors duration-200 shadow-lg shadow-primary/20 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
       >
         {loading ? "שולח..." : "שלח לי את המדריך בחינם"}
       </Button>
