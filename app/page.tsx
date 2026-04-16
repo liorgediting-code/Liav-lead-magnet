@@ -63,7 +63,7 @@ export default function LandingPage() {
           {/* Hero form card */}
           <div className="bg-card rounded-2xl p-6 max-w-sm mx-auto shadow-2xl shadow-black/50">
             <p className="text-sm font-extrabold text-foreground mb-1 text-center">
-              שלושה שדות וזה הכל
+              קבלו את תבנית המכירה במתנה
             </p>
             <p className="text-xs text-muted-foreground text-center mb-5 leading-relaxed">
               גישה מיידית לתבנית +{" "}
