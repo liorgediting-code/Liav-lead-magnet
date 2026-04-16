@@ -4,6 +4,16 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 @AGENTS.md
 
+## Git & Deployment
+
+Always push changes to GitHub after committing — this triggers the Vercel deployment automatically.
+
+```bash
+git push origin main
+```
+
+Remote: `https://github.com/liorgediting-code/Liav-lead-magnet`
+
 ## Commands
 
 ```bash
