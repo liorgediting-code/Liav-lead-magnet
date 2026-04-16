@@ -22,18 +22,18 @@ export default function OptInForm() {
     setError("");
 
     if (!form.name.trim() || !form.phone.trim() || !form.email.trim()) {
-      setError("אנא מלא את כל השדות");
+      setError("מלא את כל השדות כדי להמשיך");
       return;
     }
 
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(form.email)) {
-      setError("כתובת אימייל לא תקינה");
+      setError("האימייל לא נראה תקין — בדוק שיש @");
       return;
     }
 
     if (!consent) {
-      setError("יש לאשר קבלת תכנים לפני המשך");
+      setError("סמן את תיבת האישור כדי להמשיך");
       return;
     }
 
@@ -48,7 +48,7 @@ export default function OptInForm() {
       if (!res.ok) throw new Error("שגיאה בשרת");
       router.push("/guide");
     } catch {
-      setError("משהו השתבש, אנא נסה שוב");
+      setError("קרתה תקלה — נסה שוב");
       setLoading(false);
     }
   }
@@ -131,11 +131,11 @@ export default function OptInForm() {
         disabled={loading}
         className="cursor-pointer h-14 text-base font-bold mt-2 bg-primary text-white hover:bg-primary/90 active:scale-[0.98] transition-colors duration-200 shadow-lg shadow-primary/20 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
       >
-        {loading ? "שולח..." : "שלח לי את המדריך בחינם"}
+        {loading ? "שולח..." : "שלח לי את התבנית בחינם"}
       </Button>
 
       <p className="text-xs text-muted-foreground text-center leading-relaxed">
-        ללא ספאם. ללא כרטיס אשראי. המדריך יישלח אלייך מיידית.
+        ללא ספאם — התבנית מגיעה ישר למייל.
       </p>
     </form>
   );

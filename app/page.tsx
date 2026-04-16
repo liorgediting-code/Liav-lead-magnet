@@ -34,7 +34,7 @@ export default function LandingPage() {
                 className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse inline-block"
                 aria-hidden="true"
               />
-              מוגבל ל-5 לקוחות חדשים בחודש
+              גישה מיידית • בחינם לחלוטין
             </div>
           </div>
 
@@ -63,13 +63,11 @@ export default function LandingPage() {
           {/* Hero form card */}
           <div className="bg-card rounded-2xl p-6 max-w-sm mx-auto shadow-2xl shadow-black/50">
             <p className="text-sm font-extrabold text-foreground mb-1 text-center">
-              קבל את התבנית בחינם
+              שלושה שדות וזה הכל
             </p>
             <p className="text-xs text-muted-foreground text-center mb-5 leading-relaxed">
-              תשאירו פרטים ותעברו ישר לתבנית המכירה,{" "}
-              <strong className="text-foreground">
-                בנוסף תקבלו אותה ישר למייל!
-              </strong>
+              גישה מיידית לתבנית +{" "}
+              <strong className="text-foreground">שליחה ישירה למייל</strong>
             </p>
             <OptInForm />
           </div>
@@ -153,7 +151,7 @@ export default function LandingPage() {
             מוכן לסגור יותר עסקאות?
           </h2>
           <p className="text-sm text-white/50 mb-8">
-            30 שניות ← גישה מיידית לתבנית + שליחה למייל
+            30 שניות בלבד — גישה מיידית ושליחה למייל
           </p>
           <div className="bg-card rounded-2xl p-6 shadow-2xl shadow-black/50">
             <OptInForm />
