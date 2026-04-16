@@ -3,31 +3,22 @@
 import { useState } from "react";
 import { ChevronRight, ChevronLeft, PlayCircle } from "lucide-react";
 
-// ──────────────────────────────────────────────────────────────────
-// הוסף כאן את פרטי הסרטונים שלך.
-// כדי לחבר YouTube: הוסף videoId: "YOUTUBE_VIDEO_ID"
-// ──────────────────────────────────────────────────────────────────
 const videos = [
   {
-    name: "שם הממליץ",
-    role: "תפקיד / עיסוק",
-    caption: "תיאור קצר של מה הממליץ מספר בסרטון",
-    videoId: "", // "dQw4w9WgXcQ" — הוסף YouTube ID כאן
-    thumbnailUrl: "", // "/thumbnails/video1.jpg" — או תמונת thumbnail מקומית
+    name: "המלצת לקוח",
+    videoId: "1Y9PickBDC4",
   },
   {
-    name: "ממליץ שני",
-    role: "תפקיד / עיסוק",
-    caption: "תיאור קצר של הסרטון השני",
-    videoId: "",
-    thumbnailUrl: "",
+    name: "המלצת לקוח",
+    videoId: "4dGhUrmYuuA",
   },
   {
-    name: "ממליץ שלישי",
-    role: "תפקיד / עיסוק",
-    caption: "תיאור קצר של הסרטון השלישי",
-    videoId: "",
-    thumbnailUrl: "",
+    name: "המלצת לקוח",
+    videoId: "cNVG_vn6E6U",
+  },
+  {
+    name: "המלצת לקוח",
+    videoId: "yWRl0O4quuU",
   },
 ];
 
@@ -44,11 +35,10 @@ export default function VideoCarousel() {
 
   return (
     <div>
-      {/* Video container */}
-      <div className="rounded-2xl overflow-hidden border border-border shadow-sm">
-        {/* 16:9 video area */}
-        <div className="relative aspect-video bg-navy">
-          {item.videoId && playing ? (
+      {/* Portrait video container — Shorts are 9:16 */}
+      <div className="mx-auto max-w-[300px]">
+        <div className="relative aspect-[9/16] bg-navy rounded-2xl overflow-hidden border border-border shadow-sm">
+          {playing ? (
             <iframe
               src={`https://www.youtube.com/embed/${item.videoId}?autoplay=1`}
               title={`המלצת וידאו — ${item.name}`}
@@ -58,43 +48,19 @@ export default function VideoCarousel() {
             />
           ) : (
             <>
-              {/* Thumbnail or warm-dark placeholder */}
-              {item.thumbnailUrl ? (
-                // eslint-disable-next-line @next/next/no-img-element
-                <img
-                  src={item.thumbnailUrl}
-                  alt={`תמונה ממוזערת — ${item.name}`}
-                  className="absolute inset-0 w-full h-full object-cover"
-                />
-              ) : (
-                <div className="absolute inset-0 bg-gradient-to-br from-[#1e1410] to-[#0e0b08]" />
-              )}
-
-              {/* Play button overlay */}
+              <div className="absolute inset-0 bg-gradient-to-br from-[#1e1410] to-[#0e0b08]" />
               <button
-                onClick={() => item.videoId && setPlaying(true)}
-                aria-label={`הפעל סרטון של ${item.name}`}
-                className="absolute inset-0 flex flex-col items-center justify-center gap-3 group cursor-pointer"
+                onClick={() => setPlaying(true)}
+                aria-label={`הפעל סרטון ${current + 1}`}
+                className="absolute inset-0 flex items-center justify-center group cursor-pointer"
               >
                 <PlayCircle
                   className="w-16 h-16 text-white/70 group-hover:text-white group-hover:scale-110 transition-all duration-200 drop-shadow-lg"
                   aria-hidden="true"
                 />
-                {!item.videoId && (
-                  <span className="text-xs text-white/40 px-3 py-1 bg-black/30 rounded-full">
-                    הוסף videoId להפעלת הסרטון
-                  </span>
-                )}
               </button>
             </>
           )}
-        </div>
-
-        {/* Caption */}
-        <div className="bg-card px-5 py-4 border-t border-border">
-          <p className="text-sm font-bold text-foreground">{item.name}</p>
-          <p className="text-xs text-muted-foreground mb-1">{item.role}</p>
-          <p className="text-xs text-foreground/60 leading-relaxed">{item.caption}</p>
         </div>
       </div>
 

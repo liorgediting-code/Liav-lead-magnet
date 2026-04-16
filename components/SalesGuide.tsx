@@ -114,7 +114,7 @@ export default function SalesGuide() {
       {steps.map((step) => (
         <div
           key={step.number}
-          className={`step-card-${step.number} bg-white rounded-xl p-6 shadow-sm border border-border/40`}
+          className="bg-card rounded-xl p-6 shadow-sm border border-border/40"
         >
           <div className="flex items-start gap-4 mb-4">
             <div

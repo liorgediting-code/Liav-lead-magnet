@@ -116,7 +116,7 @@ export default function OptInForm() {
           className="mt-1 w-4 h-4 accent-primary flex-shrink-0 cursor-pointer"
         />
         <span className="text-xs text-muted-foreground leading-relaxed">
-          אני מאשר/ת קבלת תכנים שיווקיים ועדכונים בדוא״ל ובמסרונים. ניתן לבטל בכל עת.
+          אני מאשר/ת קבלת תכנים שיווקיים ועדכונים בדוא״ל. ניתן לבטל בכל עת.
         </span>
       </label>
 
