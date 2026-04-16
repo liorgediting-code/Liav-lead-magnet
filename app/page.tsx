@@ -41,7 +41,7 @@ export default function LandingPage() {
           {/* Headline */}
           <h1 className="text-3xl md:text-5xl font-black leading-tight mb-4 text-center text-white">
             תבנית המכירה שעזרה ללקוחות שלי{" "}
-            <span className="text-primary">להכפיל ולשלש</span> את ההכנסות
+            <span className="text-primary">להכפיל את המחזור עסקאות שלהם</span>
           </h1>
 
           <p className="text-base text-white/55 text-center mb-10 leading-relaxed">
