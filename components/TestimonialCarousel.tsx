@@ -25,15 +25,17 @@ export default function TestimonialCarousel() {
 
   return (
     <div>
-      {/* Screenshot card */}
-      <div className="rounded-2xl overflow-hidden border border-border shadow-sm">
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
-          src={item.screenshotUrl}
-          alt={item.alt}
-          className="w-full h-auto"
-          loading="lazy"
-        />
+      {/* Fixed-height container — image fits inside, never cropped */}
+      <div className="rounded-2xl overflow-hidden border border-border bg-muted">
+        <div className="h-[480px] flex items-center justify-center">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src={item.screenshotUrl}
+            alt={item.alt}
+            className="h-full w-auto max-w-full object-contain"
+            loading="lazy"
+          />
+        </div>
       </div>
 
       {/* Controls */}
