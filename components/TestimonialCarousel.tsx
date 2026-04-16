@@ -1,33 +1,20 @@
 "use client";
 
 import { useState } from "react";
-import { ChevronRight, ChevronLeft, Star, User } from "lucide-react";
+import { ChevronRight, ChevronLeft } from "lucide-react";
 
-// ──────────────────────────────────────────────────────────────────
-// הוסף כאן את ההמלצות האמיתיות שלך.
-// כדי להוסיף תמונה: הוסף imageUrl: "/testimonials/client1.jpg"
-// ──────────────────────────────────────────────────────────────────
 const testimonials = [
   {
-    name: "שם הלקוח",
-    role: "יועץ עסקי",
-    quote:
-      "כאן תוסיף המלצה אמיתית. ככל שהיא יותר ספציפית עם מספרים ותוצאות — כך היא עובדת טוב יותר.",
-    imageUrl: "", // "/testimonials/client1.jpg"
+    screenshotUrl: "/testimonials/whatsapp-1.png",
+    alt: 'לקוח: "בזכותך אני מרגיש כל כך ביטחון... אתה תותח ומקצועי"',
   },
   {
-    name: "שם לקוח נוסף",
-    role: "מאמן כושר",
-    quote:
-      "המלצה שנייה כאן. לדוגמה: אחוז הסגירה שלי עלה מ-X ל-Y תוך חודש אחד בלבד.",
-    imageUrl: "", // "/testimonials/client2.jpg"
+    screenshotUrl: "/testimonials/whatsapp-2.jpg",
+    alt: 'לקוח: "אני מקבל ממך הרבה ערך... עוזר לי מאד להתקדם"',
   },
   {
-    name: "שם לקוח שלישי",
-    role: "יזם ופרילנסר",
-    quote:
-      "המלצה שלישית כאן. מומלץ לכלול שם ועיר אמיתיים להגברת האמינות.",
-    imageUrl: "", // "/testimonials/client3.jpg"
+    screenshotUrl: "/testimonials/whatsapp-3.jpg",
+    alt: 'לקוח: "אני מיישם את זה על לידים חדשים... כל ליד שנכנס — טיק טק שיחת טלפון"',
   },
 ];
 
@@ -38,41 +25,15 @@ export default function TestimonialCarousel() {
 
   return (
     <div>
-      {/* Card */}
-      <div className="bg-muted rounded-2xl p-6 md:p-8 border border-border min-h-[260px] flex flex-col items-center justify-center">
-        {/* Avatar */}
-        <div className="w-16 h-16 rounded-full bg-border border-4 border-card shadow-md flex items-center justify-center overflow-hidden mb-4">
-          {item.imageUrl ? (
-            // eslint-disable-next-line @next/next/no-img-element
-            <img
-              src={item.imageUrl}
-              alt={item.name}
-              className="w-full h-full object-cover"
-            />
-          ) : (
-            <User className="w-7 h-7 text-muted-foreground" aria-hidden="true" />
-          )}
-        </div>
-
-        {/* Stars */}
-        <div className="flex gap-1 mb-4" aria-label="דירוג 5 כוכבים">
-          {Array.from({ length: 5 }).map((_, i) => (
-            <Star
-              key={i}
-              className="w-4 h-4 fill-primary text-primary"
-              aria-hidden="true"
-            />
-          ))}
-        </div>
-
-        {/* Quote */}
-        <blockquote className="text-sm md:text-base text-foreground/80 leading-relaxed text-center mb-5 max-w-sm">
-          ״{item.quote}״
-        </blockquote>
-
-        {/* Name + role */}
-        <p className="text-sm font-bold text-foreground">{item.name}</p>
-        <p className="text-xs text-muted-foreground">{item.role}</p>
+      {/* Screenshot card */}
+      <div className="rounded-2xl overflow-hidden border border-border shadow-sm">
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src={item.screenshotUrl}
+          alt={item.alt}
+          className="w-full h-auto"
+          loading="lazy"
+        />
       </div>
 
       {/* Controls */}
