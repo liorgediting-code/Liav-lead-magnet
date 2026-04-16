@@ -19,12 +19,12 @@ export default function LandingPage() {
       <section className="bg-[#111111] text-white">
         <div className="max-w-[600px] mx-auto px-5 py-16 md:py-24 text-center">
           <h1 className="text-3xl md:text-5xl font-black leading-tight mb-4">
-            תבנית מכירה ב-8 שלבים
+            תבנית המכירה שעזרה ללקוחות שלי
             <br />
-            <span className="text-gold">עם תסריטים מוכנים</span>
+            <span className="text-gold">להכפיל ולשלש את ההכנסות</span>
           </h1>
           <p className="text-base text-white/60 mb-10">
-            פתח, התאם לעסק שלך, ותתחיל לסגור יותר שיחות. חינם.
+            איך תוכלו להעלות את האמון בשיחה ולהגיע לסגירה כמה שיותר מהר
           </p>
 
           <div className="bg-white rounded-2xl p-6 max-w-sm mx-auto text-foreground">
@@ -56,9 +56,6 @@ export default function LandingPage() {
             ))}
           </div>
 
-          <p className="text-center text-sm text-muted-foreground">
-            +30 תסריטים מוכנים שאפשר להשתמש בהם מחר
-          </p>
         </section>
       </FadeIn>
 
@@ -66,11 +63,10 @@ export default function LandingPage() {
       <FadeIn>
         <section className="bg-navy text-white">
           <div className="max-w-[600px] mx-auto px-5 py-12">
-            <div className="grid grid-cols-3 gap-6 text-center mb-10">
+            <div className="grid grid-cols-2 gap-6 text-center mb-10">
               {[
                 { n: "8", label: "שלבים" },
-                { n: "30+", label: "תסריטים" },
-                { n: "500+", label: "בעלי עסקים" },
+                { n: "עשרות", label: "בעלי עסקים שהשתמשו בזה" },
               ].map((s) => (
                 <div key={s.label}>
                   <p className="text-3xl font-black text-gold">{s.n}</p>
@@ -79,15 +75,9 @@ export default function LandingPage() {
               ))}
             </div>
 
-            <blockquote className="bg-white/5 rounded-xl p-5 border border-white/10 border-s-2 border-s-primary">
-              <p className="text-sm text-white/80 leading-relaxed mb-3">
-                ״הייתי סוגר 1 מ-7 לידים. אחרי שהתחלתי לעבוד עם התבנית, אני
-                סוגר 1 מ-3.״
-              </p>
-              <footer className="text-xs text-white/40">
-                — יועץ עסקי
-              </footer>
-            </blockquote>
+            <p className="text-sm text-white/70 leading-relaxed text-center">
+              אחרי 5 שנים בעולם המכירות שיפצרתי את תבנית המכירה וחידדתי אותה לאורך השנים עד למצב העכשווי שלה, בו כל הלקוחות שלי ואני משתמשים בה כדי לסגור עסקאות בעשרות אלפי שקלים.
+            </p>
           </div>
         </section>
       </FadeIn>
