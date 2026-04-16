@@ -35,29 +35,31 @@
 }
 
 :root {
-  --background: oklch(0.98 0 0);
-  --foreground: oklch(0.18 0.04 264);
-  --card: oklch(1 0 0);
-  --card-foreground: oklch(0.18 0.04 264);
-  --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.18 0.04 264);
-  --primary: oklch(0.78 0.17 70);
-  --primary-foreground: oklch(0.14 0.04 264);
-  --secondary: oklch(0.95 0.01 264);
-  --secondary-foreground: oklch(0.18 0.04 264);
-  --muted: oklch(0.95 0.01 264);
-  --muted-foreground: oklch(0.5 0.02 264);
-  --accent: oklch(0.94 0.04 70);
-  --accent-foreground: oklch(0.18 0.04 264);
+  /* Warm off-white — every neutral tinted toward orange (hue ~65) */
+  --background: oklch(0.97 0.015 65);
+  --foreground: oklch(0.16 0.04 55);
+  --card: oklch(0.99 0.007 65);
+  --card-foreground: oklch(0.16 0.04 55);
+  --popover: oklch(0.99 0.007 65);
+  --popover-foreground: oklch(0.16 0.04 55);
+  /* Rich orange — slightly deeper and more saturated than before */
+  --primary: oklch(0.72 0.21 50);
+  --primary-foreground: oklch(0.98 0.01 65);
+  --secondary: oklch(0.93 0.025 65);
+  --secondary-foreground: oklch(0.16 0.04 55);
+  --muted: oklch(0.93 0.02 65);
+  --muted-foreground: oklch(0.52 0.04 60);
+  --accent: oklch(0.92 0.05 65);
+  --accent-foreground: oklch(0.16 0.04 55);
   --destructive: oklch(0.577 0.245 27.325);
-  --border: oklch(0.88 0.01 264);
-  --input: oklch(0.88 0.01 264);
-  --ring: oklch(0.78 0.17 70);
+  --border: oklch(0.87 0.025 65);
+  --input: oklch(0.87 0.025 65);
+  --ring: oklch(0.72 0.21 50);
   --radius: 0.75rem;
-  /* Brand colors */
-  --navy: oklch(0.18 0.04 264);
-  --gold: oklch(0.78 0.17 70);
-  --gold-light: oklch(0.94 0.07 70);
+  /* Brand colors — navy is now warm dark instead of cold blue-black */
+  --navy: oklch(0.14 0.045 55);
+  --gold: oklch(0.72 0.21 50);
+  --gold-light: oklch(0.92 0.08 65);
 }
 
 @layer base {
@@ -69,11 +71,12 @@
   }
 }
 
-.step-badge-1 { background: oklch(0.65 0.2 264); }
-.step-badge-2 { background: oklch(0.65 0.18 200); }
-.step-badge-3 { background: oklch(0.65 0.2 140); }
-.step-badge-4 { background: oklch(0.78 0.17 70); }
-.step-badge-5 { background: oklch(0.65 0.2 30); }
-.step-badge-6 { background: oklch(0.55 0.2 300); }
-.step-badge-7 { background: oklch(0.65 0.2 164); }
-.step-badge-8 { background: oklch(0.6 0.18 15); }
+/* Step badge colors — warm orange/amber spectrum instead of rainbow */
+.step-badge-1 { background: oklch(0.56 0.22 30); }
+.step-badge-2 { background: oklch(0.61 0.22 42); }
+.step-badge-3 { background: oklch(0.67 0.21 52); }
+.step-badge-4 { background: oklch(0.72 0.21 50); }
+.step-badge-5 { background: oklch(0.66 0.20 58); }
+.step-badge-6 { background: oklch(0.70 0.18 68); }
+.step-badge-7 { background: oklch(0.58 0.21 38); }
+.step-badge-8 { background: oklch(0.54 0.18 45); }

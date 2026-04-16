@@ -25,7 +25,7 @@ export default function LandingPage() {
   return (
     <main className="flex-1">
       {/* ── 1. HERO ── */}
-      <section className="bg-[#0D1117]">
+      <section className="bg-navy">
         <div className="max-w-[640px] mx-auto px-5 py-20 md:py-28">
           {/* Badge */}
           <div className="flex justify-center mb-8">
@@ -61,7 +61,7 @@ export default function LandingPage() {
           </ul>
 
           {/* Hero form card */}
-          <div className="bg-white rounded-2xl p-6 max-w-sm mx-auto shadow-2xl shadow-black/50">
+          <div className="bg-card rounded-2xl p-6 max-w-sm mx-auto shadow-2xl shadow-black/50">
             <p className="text-sm font-extrabold text-foreground mb-1 text-center">
               קבל את התבנית בחינם
             </p>
@@ -78,7 +78,7 @@ export default function LandingPage() {
 
       {/* ── 2. WHAT'S INSIDE ── */}
       {/* No FadeIn — this section is just below the fold, animation here feels noise */}
-      <section className="bg-white">
+      <section className="bg-background">
         <div className="max-w-[640px] mx-auto px-5 py-12 md:py-16">
           <h2 className="text-xl font-extrabold text-foreground text-start mb-7">
             8 שלבים מהפתיחה ועד הסגירה
@@ -101,7 +101,7 @@ export default function LandingPage() {
 
       {/* ── 3. CREDENTIALS ── */}
       <FadeIn>
-        <section className="bg-[#0D1117]">
+        <section className="bg-navy">
           <div className="max-w-[640px] mx-auto px-5 py-16 md:py-20">
             <p className="text-xs font-bold tracking-widest text-primary/60 uppercase mb-6">
               מי מאחורי התבנית
@@ -121,7 +121,7 @@ export default function LandingPage() {
 
       {/* ── 4. PHOTO TESTIMONIALS ── */}
       <FadeIn>
-        <section className="bg-white">
+        <section className="bg-background">
           <div className="max-w-[640px] mx-auto px-5 py-16 md:py-20">
             <h2 className="text-xl font-extrabold text-foreground text-start mb-8">
               מה אומרים לקוחות
@@ -133,7 +133,7 @@ export default function LandingPage() {
 
       {/* ── 5. VIDEO TESTIMONIALS ── */}
       <FadeIn>
-        <section className="bg-white border-t border-slate-100">
+        <section className="bg-background border-t border-border">
           <div className="max-w-[640px] mx-auto px-5 py-16 md:py-20">
             <p className="text-xs font-bold tracking-widest text-muted-foreground uppercase mb-3">
               סרטוני המלצה
@@ -147,7 +147,7 @@ export default function LandingPage() {
       </FadeIn>
 
       {/* ── 6. FINAL CTA ── */}
-      <section className="bg-[#0D1117]">
+      <section className="bg-navy">
         <div className="max-w-sm mx-auto px-5 py-20 md:py-24 text-center">
           <h2 className="text-2xl font-extrabold text-white mb-2">
             מוכן לסגור יותר עסקאות?
@@ -155,7 +155,7 @@ export default function LandingPage() {
           <p className="text-sm text-white/50 mb-8">
             30 שניות ← גישה מיידית לתבנית + שליחה למייל
           </p>
-          <div className="bg-white rounded-2xl p-6 shadow-2xl shadow-black/50">
+          <div className="bg-card rounded-2xl p-6 shadow-2xl shadow-black/50">
             <OptInForm />
           </div>
         </div>

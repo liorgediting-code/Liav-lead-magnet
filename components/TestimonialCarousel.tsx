@@ -39,9 +39,9 @@ export default function TestimonialCarousel() {
   return (
     <div>
       {/* Card */}
-      <div className="bg-slate-50 rounded-2xl p-6 md:p-8 border border-slate-200 min-h-[260px] flex flex-col items-center justify-center">
+      <div className="bg-muted rounded-2xl p-6 md:p-8 border border-border min-h-[260px] flex flex-col items-center justify-center">
         {/* Avatar */}
-        <div className="w-16 h-16 rounded-full bg-slate-200 border-4 border-white shadow-md flex items-center justify-center overflow-hidden mb-4">
+        <div className="w-16 h-16 rounded-full bg-border border-4 border-card shadow-md flex items-center justify-center overflow-hidden mb-4">
           {item.imageUrl ? (
             // eslint-disable-next-line @next/next/no-img-element
             <img
@@ -50,7 +50,7 @@ export default function TestimonialCarousel() {
               className="w-full h-full object-cover"
             />
           ) : (
-            <User className="w-7 h-7 text-slate-400" aria-hidden="true" />
+            <User className="w-7 h-7 text-muted-foreground" aria-hidden="true" />
           )}
         </div>
 
@@ -80,9 +80,9 @@ export default function TestimonialCarousel() {
         <button
           onClick={() => setCurrent((c) => (c - 1 + total) % total)}
           aria-label="המלצה קודמת"
-          className="cursor-pointer w-10 h-10 rounded-full bg-slate-100 border border-slate-200 flex items-center justify-center hover:bg-slate-200 transition-colors duration-200 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
+          className="cursor-pointer w-10 h-10 rounded-full bg-muted border border-border flex items-center justify-center hover:bg-accent transition-colors duration-200 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
         >
-          <ChevronRight className="w-5 h-5 text-slate-600" aria-hidden="true" />
+          <ChevronRight className="w-5 h-5 text-muted-foreground" aria-hidden="true" />
         </button>
 
         <div className="flex gap-2" role="tablist" aria-label="בחר המלצה">
@@ -96,7 +96,7 @@ export default function TestimonialCarousel() {
               className={`cursor-pointer rounded-full transition-all duration-200 focus-visible:outline-2 focus-visible:outline-primary ${
                 i === current
                   ? "w-5 h-2 bg-primary"
-                  : "w-2 h-2 bg-slate-300 hover:bg-slate-400"
+                  : "w-2 h-2 bg-border hover:bg-muted-foreground"
               }`}
             />
           ))}
@@ -105,9 +105,9 @@ export default function TestimonialCarousel() {
         <button
           onClick={() => setCurrent((c) => (c + 1) % total)}
           aria-label="המלצה הבאה"
-          className="cursor-pointer w-10 h-10 rounded-full bg-slate-100 border border-slate-200 flex items-center justify-center hover:bg-slate-200 transition-colors duration-200 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
+          className="cursor-pointer w-10 h-10 rounded-full bg-muted border border-border flex items-center justify-center hover:bg-accent transition-colors duration-200 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
         >
-          <ChevronLeft className="w-5 h-5 text-slate-600" aria-hidden="true" />
+          <ChevronLeft className="w-5 h-5 text-muted-foreground" aria-hidden="true" />
         </button>
       </div>
     </div>

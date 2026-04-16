@@ -45,9 +45,9 @@ export default function VideoCarousel() {
   return (
     <div>
       {/* Video container */}
-      <div className="rounded-2xl overflow-hidden border border-slate-200 shadow-sm">
+      <div className="rounded-2xl overflow-hidden border border-border shadow-sm">
         {/* 16:9 video area */}
-        <div className="relative aspect-video bg-slate-800">
+        <div className="relative aspect-video bg-navy">
           {item.videoId && playing ? (
             <iframe
               src={`https://www.youtube.com/embed/${item.videoId}?autoplay=1`}
@@ -58,7 +58,7 @@ export default function VideoCarousel() {
             />
           ) : (
             <>
-              {/* Thumbnail or gradient placeholder */}
+              {/* Thumbnail or warm-dark placeholder */}
               {item.thumbnailUrl ? (
                 // eslint-disable-next-line @next/next/no-img-element
                 <img
@@ -67,7 +67,7 @@ export default function VideoCarousel() {
                   className="absolute inset-0 w-full h-full object-cover"
                 />
               ) : (
-                <div className="absolute inset-0 bg-gradient-to-br from-slate-700 to-slate-900" />
+                <div className="absolute inset-0 bg-gradient-to-br from-[#1e1410] to-[#0e0b08]" />
               )}
 
               {/* Play button overlay */}
@@ -91,7 +91,7 @@ export default function VideoCarousel() {
         </div>
 
         {/* Caption */}
-        <div className="bg-white px-5 py-4 border-t border-slate-100">
+        <div className="bg-card px-5 py-4 border-t border-border">
           <p className="text-sm font-bold text-foreground">{item.name}</p>
           <p className="text-xs text-muted-foreground mb-1">{item.role}</p>
           <p className="text-xs text-foreground/60 leading-relaxed">{item.caption}</p>
@@ -103,9 +103,9 @@ export default function VideoCarousel() {
         <button
           onClick={() => goTo((current - 1 + total) % total)}
           aria-label="סרטון קודם"
-          className="cursor-pointer w-10 h-10 rounded-full bg-slate-100 border border-slate-200 flex items-center justify-center hover:bg-slate-200 transition-colors duration-200 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
+          className="cursor-pointer w-10 h-10 rounded-full bg-muted border border-border flex items-center justify-center hover:bg-accent transition-colors duration-200 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
         >
-          <ChevronRight className="w-5 h-5 text-slate-600" aria-hidden="true" />
+          <ChevronRight className="w-5 h-5 text-muted-foreground" aria-hidden="true" />
         </button>
 
         <div className="flex gap-2" role="tablist" aria-label="בחר סרטון">
@@ -119,7 +119,7 @@ export default function VideoCarousel() {
               className={`cursor-pointer rounded-full transition-all duration-200 focus-visible:outline-2 focus-visible:outline-primary ${
                 i === current
                   ? "w-5 h-2 bg-primary"
-                  : "w-2 h-2 bg-slate-300 hover:bg-slate-400"
+                  : "w-2 h-2 bg-border hover:bg-muted-foreground"
               }`}
             />
           ))}
@@ -128,9 +128,9 @@ export default function VideoCarousel() {
         <button
           onClick={() => goTo((current + 1) % total)}
           aria-label="סרטון הבא"
-          className="cursor-pointer w-10 h-10 rounded-full bg-slate-100 border border-slate-200 flex items-center justify-center hover:bg-slate-200 transition-colors duration-200 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
+          className="cursor-pointer w-10 h-10 rounded-full bg-muted border border-border flex items-center justify-center hover:bg-accent transition-colors duration-200 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
         >
-          <ChevronLeft className="w-5 h-5 text-slate-600" aria-hidden="true" />
+          <ChevronLeft className="w-5 h-5 text-muted-foreground" aria-hidden="true" />
         </button>
       </div>
     </div>
