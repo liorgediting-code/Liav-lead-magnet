@@ -133,7 +133,7 @@ export default function LandingPage() {
         <section className="bg-background">
           <div className="max-w-[640px] mx-auto px-5 py-16 md:py-20">
             <h2 className="text-xl font-extrabold text-foreground text-start mb-8">
-              מה אומרים לקוחות
+              הוכחות מהשטח
             </h2>
             <TestimonialCarousel />
           </div>
@@ -148,7 +148,7 @@ export default function LandingPage() {
               סרטוני המלצה
             </p>
             <h2 className="text-xl font-extrabold text-foreground text-start mb-8">
-              לקוחות מספרים
+              מה קורה אחרי שמשתמשים בתבנית
             </h2>
             <VideoCarousel />
           </div>
