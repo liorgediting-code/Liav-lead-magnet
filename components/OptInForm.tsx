@@ -21,8 +21,8 @@ export default function OptInForm() {
     e.preventDefault();
     setError("");
 
-    if (!form.name.trim() || !form.phone.trim() || !form.email.trim()) {
-      setError("מלא את כל השדות כדי להמשיך");
+    if (!form.name.trim() || !form.email.trim()) {
+      setError("מלא שם ואימייל כדי להמשיך");
       return;
     }
 
@@ -74,7 +74,7 @@ export default function OptInForm() {
 
       <div className="flex flex-col gap-1.5">
         <Label htmlFor="phone" className="text-sm font-medium text-foreground">
-          טלפון
+          טלפון <span className="text-muted-foreground font-normal text-xs">(אופציונלי)</span>
         </Label>
         <Input
           id="phone"
@@ -85,7 +85,6 @@ export default function OptInForm() {
           onChange={handleChange}
           className="text-base h-12 bg-white border-border/60 focus-visible:ring-primary"
           disabled={loading}
-          required
         />
       </div>
 
@@ -131,11 +130,11 @@ export default function OptInForm() {
         disabled={loading}
         className="cursor-pointer h-14 text-base font-bold mt-2 bg-primary text-white hover:bg-primary/90 active:scale-[0.98] transition-colors duration-200 shadow-lg shadow-primary/20 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
       >
-        {loading ? "שולח..." : "שלח לי את התבנית בחינם"}
+        {loading ? "שולח..." : "שלחו לי את התבנית"}
       </Button>
 
       <p className="text-xs text-muted-foreground text-center leading-relaxed">
-        ללא ספאם — התבנית מגיעה ישר למייל.
+        🔒 100% חינם · לא נשלח ספאם · ביטול בלחיצה אחת
       </p>
     </form>
   );
