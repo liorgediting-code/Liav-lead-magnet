@@ -2,8 +2,6 @@ import OptInForm from "@/components/OptInForm";
 import FadeIn from "@/components/FadeIn";
 import TestimonialCarousel from "@/components/TestimonialCarousel";
 import VideoCarousel from "@/components/VideoCarousel";
-import OfferMockup from "@/components/OfferMockup";
-import AnchorTestimonial from "@/components/AnchorTestimonial";
 import ExitIntentPopup from "@/components/ExitIntentPopup";
 import FAQ from "@/components/FAQ";
 import { Check } from "lucide-react";
@@ -22,7 +20,7 @@ const steps = [
 const benefits = [
   "תהליך מובנה ב-8 שלבים עם תסריטים מוכנים — אף פעם לא תישאר בלי מה להגיד",
   'טיפול בכל התנגדויות — "יקר לי", "צריך לחשוב", "לא עכשיו" — כדי שלא תצא יותר משיחה בידיים ריקות',
-  "אותה תבנית שאתה מקבל עכשיו — בדיוק מה שמביא לסגירות של עשרות אלפי ₪ בפועל",
+  "אותה תבנית שאתה מקבל עכשיו — בדיוק מה שמביא לסגירות של עשרות אלפי שקלים בפועל",
 ];
 
 export default function LandingPage() {
@@ -42,13 +40,11 @@ export default function LandingPage() {
             </div>
           </div>
 
-          <OfferMockup />
-
           {/* Headline */}
           <h1 className="text-3xl md:text-5xl font-black leading-tight mb-4 text-center text-white">
-            8 השלבים שאני ולקוחותיי משתמשים בהם{" "}
-            <span className="text-primary">כדי לסגור עסקאות בעשרות אלפי ₪</span>
-            {" "}— עכשיו בחינם
+            8 השלבים שאני ולקוחות שלי משתמשים בהם{" "}
+            <span className="text-primary">כדי לסגור עסקאות בעשרות אלפי שקלים</span>
+            {" "}עכשיו בחינם
           </h1>
 
           <p className="text-base text-white/55 text-center mb-10 leading-relaxed">
@@ -85,8 +81,6 @@ export default function LandingPage() {
         </div>
       </section>
 
-      <AnchorTestimonial />
-
       {/* ── 2. WHAT'S INSIDE ── */}
       {/* No FadeIn — this section is just below the fold, animation here feels noise */}
       <section className="bg-background">
@@ -122,9 +116,9 @@ export default function LandingPage() {
               <strong className="text-white font-black">5 שנות ניסיון</strong>{" "}
               בעולם המכירות ו
               <strong className="text-white font-black">עשרות בעלי עסקים</strong>{" "}
-              שעזרתי להם לסגור — שיפצרתי את תהליך המכירה ל-8 שלבים שאני ולקוחותיי
+              שעזרתי להם לסגור — שיפצרתי את תהליך המכירה ל-8 שלבים שאני ולקוחות שלי
               משתמשים בהם כדי לסגור עסקאות{" "}
-              <strong className="text-primary font-black">בעשרות אלפי ₪</strong>.
+              <strong className="text-primary font-black">בעשרות אלפי שקלים</strong>.
             </p>
           </div>
         </section>
