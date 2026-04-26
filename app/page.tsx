@@ -18,9 +18,9 @@ const steps = [
 ];
 
 const benefits = [
-  "תהליך מובנה ב-8 שלבים עם תסריטים מוכנים — אף פעם לא תישאר בלי מה להגיד",
-  'טיפול בכל התנגדויות — "יקר לי", "צריך לחשוב", "לא עכשיו" — כדי שלא תצא יותר משיחה בידיים ריקות',
-  "אותה תבנית שאתה מקבל עכשיו — בדיוק מה שמביא לסגירות של עשרות אלפי שקלים בפועל",
+  "תהליך מובנה ב-8 שלבים עם תסריטים מוכנים, כדי שאף פעם לא תישאר בלי מה להגיד",
+  'טיפול בכל התנגדות: "יקר לי", "צריך לחשוב", "לא עכשיו", כדי שלא תצא יותר משיחה בידיים ריקות',
+  "אותה תבנית שאתה מקבל עכשיו, בדיוק מה שמביא לסגירות של עשרות אלפי שקלים בפועל",
 ];
 
 export default function LandingPage() {
@@ -42,13 +42,15 @@ export default function LandingPage() {
 
           {/* Headline */}
           <h1 className="text-3xl md:text-5xl font-black leading-tight mb-4 text-center text-white">
-            8 השלבים שאני ולקוחות שלי משתמשים בהם{" "}
+            8 השלבים שאני ולקוחות שלי משתמשים בהם
+            <br />
             <span className="text-primary">כדי לסגור עסקאות בעשרות אלפי שקלים</span>
-            {" "}עכשיו בחינם
+            <br />
+            <span className="text-4xl md:text-6xl">עכשיו בחינם</span>
           </h1>
 
           <p className="text-base text-white/55 text-center mb-10 leading-relaxed">
-            כדי שתדע בדיוק מה להגיד בכל רגע בשיחה — ותגיע לסגירה מהר יותר
+            כדי שתדע בדיוק מה להגיד בכל רגע בשיחה, ותגיע לסגירה מהר יותר
           </p>
 
           {/* Benefit bullets — start-aligned for personality */}
@@ -63,18 +65,13 @@ export default function LandingPage() {
             ))}
           </ul>
 
-          <p className="text-xs text-white/45 text-center mb-3 leading-relaxed max-w-sm mx-auto">
-            נותן את זה בחינם — כי אחרי שתראה את התבנית, תבין בדיוק למה אנשים משלמים לי לעבוד איתם
-          </p>
-
           {/* Hero form card */}
           <div className="bg-card rounded-2xl p-6 max-w-sm mx-auto shadow-2xl shadow-black/50">
             <p className="text-sm font-extrabold text-foreground mb-1 text-center">
               קבל את התבנית עכשיו
             </p>
             <p className="text-xs text-muted-foreground text-center mb-5 leading-relaxed">
-              גישה מיידית —{" "}
-              <strong className="text-foreground">נשלחת ישירות למייל שלך</strong>
+              מעבר ישיר לתבנית + נשלח ישירות למייל
             </p>
             <OptInForm />
           </div>
@@ -116,7 +113,7 @@ export default function LandingPage() {
               <strong className="text-white font-black">5 שנות ניסיון</strong>{" "}
               בעולם המכירות ו
               <strong className="text-white font-black">עשרות בעלי עסקים</strong>{" "}
-              שעזרתי להם לסגור — שיפצרתי את תהליך המכירה ל-8 שלבים שאני ולקוחות שלי
+              שעזרתי להם לסגור, שיפצרתי את תהליך המכירה ל-8 שלבים שאני ולקוחות שלי
               משתמשים בהם כדי לסגור עסקאות{" "}
               <strong className="text-primary font-black">בעשרות אלפי שקלים</strong>.
             </p>
@@ -170,7 +167,7 @@ export default function LandingPage() {
             מוכן לסגור יותר עסקאות?
           </h2>
           <p className="text-sm text-white/50 mb-8">
-            30 שניות בלבד — גישה מיידית ושליחה למייל
+            30 שניות בלבד, גישה מיידית ושליחה למייל
           </p>
           <div className="bg-card rounded-2xl p-6 shadow-2xl shadow-black/50">
             <OptInForm />
