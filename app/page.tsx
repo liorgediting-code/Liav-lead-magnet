@@ -4,6 +4,7 @@ import TestimonialCarousel from "@/components/TestimonialCarousel";
 import VideoCarousel from "@/components/VideoCarousel";
 import OfferMockup from "@/components/OfferMockup";
 import AnchorTestimonial from "@/components/AnchorTestimonial";
+import FAQ from "@/components/FAQ";
 import { Check } from "lucide-react";
 
 const steps = [
@@ -155,7 +156,19 @@ export default function LandingPage() {
         </section>
       </FadeIn>
 
-      {/* ── 6. FINAL CTA ── */}
+      {/* ── 6. FAQ ── */}
+      <FadeIn>
+        <section className="bg-background border-t border-border">
+          <div className="max-w-[640px] mx-auto px-5 py-16 md:py-20">
+            <h2 className="text-xl font-extrabold text-foreground text-start mb-6">
+              שאלות נפוצות
+            </h2>
+            <FAQ />
+          </div>
+        </section>
+      </FadeIn>
+
+      {/* ── 7. FINAL CTA ── */}
       <section className="bg-navy">
         <div className="max-w-sm mx-auto px-5 py-20 md:py-24 text-center">
           <h2 className="text-2xl font-extrabold text-white mb-2">
