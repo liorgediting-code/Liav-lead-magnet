@@ -4,6 +4,7 @@ import TestimonialCarousel from "@/components/TestimonialCarousel";
 import VideoCarousel from "@/components/VideoCarousel";
 import OfferMockup from "@/components/OfferMockup";
 import AnchorTestimonial from "@/components/AnchorTestimonial";
+import ExitIntentPopup from "@/components/ExitIntentPopup";
 import FAQ from "@/components/FAQ";
 import { Check } from "lucide-react";
 
@@ -182,6 +183,8 @@ export default function LandingPage() {
           </div>
         </div>
       </section>
+
+      <ExitIntentPopup />
     </main>
   );
 }
