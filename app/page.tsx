@@ -2,6 +2,7 @@ import OptInForm from "@/components/OptInForm";
 import FadeIn from "@/components/FadeIn";
 import TestimonialCarousel from "@/components/TestimonialCarousel";
 import VideoCarousel from "@/components/VideoCarousel";
+import OfferMockup from "@/components/OfferMockup";
 import { Check } from "lucide-react";
 
 const steps = [
@@ -37,6 +38,8 @@ export default function LandingPage() {
               גישה מיידית • בחינם לחלוטין
             </div>
           </div>
+
+          <OfferMockup />
 
           {/* Headline */}
           <h1 className="text-3xl md:text-5xl font-black leading-tight mb-4 text-center text-white">
