@@ -1,8 +1,7 @@
 import type { Metadata } from "next";
-import { CheckCircle } from "lucide-react";
+import { CheckCircle, Search, PhoneCall, RotateCcw } from "lucide-react";
 import SalesGuide from "@/components/SalesGuide";
-import OfferPanel from "@/components/OfferPanel";
-import PhonePrompt from "@/components/PhonePrompt";
+import NamePhonePrompt from "@/components/NamePhonePrompt";
 
 export const metadata: Metadata = {
   title: "המדריך שלך — תהליך מכירה ב-8 שלבים",
@@ -10,9 +9,25 @@ export const metadata: Metadata = {
   robots: "noindex",
 };
 
-export default function GuidePage() {
-  const calendarLink = process.env.CALENDAR_LINK || "#";
+const callFeatures = [
+  {
+    Icon: Search,
+    title: "נבין יחד איפה השיחות שלך נופלות",
+    desc: "נעבור על תהליך המכירה שלך ונאתר בדיוק באיזה שלב הלקוחות מתנתקים — ולמה.",
+  },
+  {
+    Icon: PhoneCall,
+    title: "סימולציית שיחת מכירה חיה",
+    desc: "אני אהיה הלקוח, אתה תמכור לי. נראה בזמן אמת במה אתה מתקשה ומה אפשר לשפר.",
+  },
+  {
+    Icon: RotateCcw,
+    title: "תצא עם תסריט מותאם ונקודות שיפור ברורות",
+    desc: "לא עצות כלליות. תסריט שמתאים לעסק שלך ורשימה ספציפית של מה לתקן.",
+  },
+];
 
+export default function GuidePage() {
   return (
     <main className="flex-1">
       {/* Header */}
@@ -42,35 +57,43 @@ export default function GuidePage() {
         <SalesGuide />
       </section>
 
-      {/* Celebrate */}
-      <section className="max-w-[680px] mx-auto px-5 pb-4">
-        <div className="bg-gradient-to-l from-primary/5 to-primary/15 rounded-2xl p-8 text-center border border-primary/20">
-          <p className="text-3xl mb-3" aria-hidden="true">🎯</p>
-          <h2 className="text-2xl font-extrabold text-foreground mb-2">
-            לקוח נסלק!
+      {/* פגישת פיצוח */}
+      <section className="bg-navy">
+        <div className="max-w-[680px] mx-auto px-5 py-16 md:py-20">
+          <h2 className="text-2xl md:text-3xl font-extrabold text-white leading-tight mb-3 text-center">
+            רוצה לדעת בדיוק{" "}
+            <span className="text-primary">איפה אתה נופל בשיחות?</span>
           </h2>
-          <p className="text-sm text-muted-foreground max-w-md mx-auto">
-            אם עברת על כל 8 השלבים, יש לך עכשיו תהליך מכירה מובנה ומוכח.
-            עכשיו, תתאים, תתרגל, ותסגור.
+          <p className="text-white/55 text-sm text-center leading-relaxed mb-10 max-w-md mx-auto">
+            פגישת פיצוח אחד על אחד — 30 דקות שבהן נעבור על השיחות שלך, נעשה סימולציה חיה, ותצא עם תמונה ברורה של מה לשנות.
           </p>
+
+          <div className="flex flex-col gap-4 mb-10 max-w-md mx-auto">
+            {callFeatures.map((item) => (
+              <div
+                key={item.title}
+                className="flex items-start gap-4 bg-white/[0.05] rounded-2xl p-5 border border-white/10"
+              >
+                <item.Icon className="w-5 h-5 text-primary mt-0.5 flex-shrink-0" aria-hidden="true" />
+                <div>
+                  <p className="text-sm font-bold text-white mb-1">{item.title}</p>
+                  <p className="text-xs text-white/55 leading-relaxed">{item.desc}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          <div className="bg-white/[0.07] rounded-2xl p-6 max-w-sm mx-auto border border-white/10">
+            <p className="text-sm font-extrabold text-white text-center mb-1">
+              השאר שם ומספר — נחזור אליך
+            </p>
+            <p className="text-xs text-white/40 text-center mb-5">
+              ללא עלות. ללא התחייבות.
+            </p>
+            <NamePhonePrompt />
+          </div>
         </div>
       </section>
-
-      {/* Phone Prompt */}
-      <section className="max-w-[680px] mx-auto px-5 pb-8">
-        <div className="bg-navy rounded-2xl p-6 text-center">
-          <h2 className="text-lg font-extrabold text-white mb-1">
-            רוצה סקירה אישית של התבנית?
-          </h2>
-          <p className="text-sm text-white/60 mb-4">
-            השאר מספר ונחזור אליך
-          </p>
-          <PhonePrompt />
-        </div>
-      </section>
-
-      {/* Offer + Social Proof + CTA */}
-      <OfferPanel calendarLink={calendarLink} />
     </main>
   );
 }
