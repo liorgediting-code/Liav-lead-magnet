@@ -23,7 +23,7 @@ const videos = [
 ];
 
 export default function VideoCarousel() {
-  const [current, setCurrent] = useState(0);
+  const [current, setCurrent] = useState(videos.length - 1);
   const [playing, setPlaying] = useState(false);
   const total = videos.length;
   const item = videos[current];
@@ -47,19 +47,23 @@ export default function VideoCarousel() {
               allowFullScreen
             />
           ) : (
-            <>
-              <div className="absolute inset-0 bg-gradient-to-br from-[#1e1410] to-[#0e0b08]" />
-              <button
-                onClick={() => setPlaying(true)}
-                aria-label={`הפעל סרטון ${current + 1}`}
-                className="absolute inset-0 flex items-center justify-center group cursor-pointer"
-              >
-                <PlayCircle
-                  className="w-16 h-16 text-white/70 group-hover:text-white group-hover:scale-110 transition-all duration-200 drop-shadow-lg"
-                  aria-hidden="true"
-                />
-              </button>
-            </>
+            <button
+              onClick={() => setPlaying(true)}
+              aria-label={`הפעל סרטון ${current + 1}`}
+              className="absolute inset-0 w-full h-full group cursor-pointer"
+            >
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src={`https://img.youtube.com/vi/${item.videoId}/hqdefault.jpg`}
+                alt={item.name}
+                className="absolute inset-0 w-full h-full object-cover"
+              />
+              <div className="absolute inset-0 bg-black/20 group-hover:bg-black/30 transition-colors duration-200" />
+              <PlayCircle
+                className="absolute inset-0 m-auto w-16 h-16 text-white/90 group-hover:text-white group-hover:scale-110 transition-all duration-200 drop-shadow-lg"
+                aria-hidden="true"
+              />
+            </button>
           )}
         </div>
       </div>
