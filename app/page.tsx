@@ -16,9 +16,9 @@ const steps = [
 ];
 
 const benefits = [
-  "תהליך מכירה מובנה ב-8 שלבים עם תסריטים מוכנים לכל מצב",
-  'טיפול בכל התנגדות — "יקר לי", "צריך לחשוב", "לא עכשיו"',
-  "בדיוק מה שהלקוחות שלי ואני משתמשים בו כדי לסגור בעשרות אלפי ₪",
+  "תהליך מובנה ב-8 שלבים עם תסריטים מוכנים — אף פעם לא תישאר בלי מה להגיד",
+  'טיפול בכל התנגדויות — "יקר לי", "צריך לחשוב", "לא עכשיו" — כדי שלא תצא יותר משיחה בידיים ריקות',
+  "אותה תבנית שאתה מקבל עכשיו — בדיוק מה שמביא לסגירות של עשרות אלפי ₪ בפועל",
 ];
 
 export default function LandingPage() {
@@ -40,12 +40,13 @@ export default function LandingPage() {
 
           {/* Headline */}
           <h1 className="text-3xl md:text-5xl font-black leading-tight mb-4 text-center text-white">
-            תבנית המכירה שעזרה ללקוחות שלי{" "}
-            <span className="text-primary">להכפיל את המחזור עסקאות שלהם</span>
+            8 השלבים שאני ולקוחותיי משתמשים בהם{" "}
+            <span className="text-primary">כדי לסגור עסקאות בעשרות אלפי ₪</span>
+            {" "}— עכשיו בחינם
           </h1>
 
           <p className="text-base text-white/55 text-center mb-10 leading-relaxed">
-            איך להעלות את האמון בשיחה ולהגיע לסגירה מהר יותר
+            כדי שתדע בדיוק מה להגיד בכל רגע בשיחה — ותגיע לסגירה מהר יותר
           </p>
 
           {/* Benefit bullets — start-aligned for personality */}
@@ -60,14 +61,18 @@ export default function LandingPage() {
             ))}
           </ul>
 
+          <p className="text-xs text-white/45 text-center mb-3 leading-relaxed max-w-sm mx-auto">
+            נותן את זה בחינם — כי אחרי שתראה את התבנית, תבין בדיוק למה אנשים משלמים לי לעבוד איתם
+          </p>
+
           {/* Hero form card */}
           <div className="bg-card rounded-2xl p-6 max-w-sm mx-auto shadow-2xl shadow-black/50">
             <p className="text-sm font-extrabold text-foreground mb-1 text-center">
-              קבלו את תבנית המכירה במתנה
+              קבל את התבנית עכשיו
             </p>
             <p className="text-xs text-muted-foreground text-center mb-5 leading-relaxed">
-              גישה מיידית לתבנית +{" "}
-              <strong className="text-foreground">שליחה ישירה למייל</strong>
+              גישה מיידית —{" "}
+              <strong className="text-foreground">נשלחת ישירות למייל שלך</strong>
             </p>
             <OptInForm />
           </div>
