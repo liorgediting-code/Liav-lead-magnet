@@ -3,6 +3,7 @@ import FadeIn from "@/components/FadeIn";
 import TestimonialCarousel from "@/components/TestimonialCarousel";
 import VideoCarousel from "@/components/VideoCarousel";
 import OfferMockup from "@/components/OfferMockup";
+import AnchorTestimonial from "@/components/AnchorTestimonial";
 import { Check } from "lucide-react";
 
 const steps = [
@@ -81,6 +82,8 @@ export default function LandingPage() {
           </div>
         </div>
       </section>
+
+      <AnchorTestimonial />
 
       {/* ── 2. WHAT'S INSIDE ── */}
       {/* No FadeIn — this section is just below the fold, animation here feels noise */}
