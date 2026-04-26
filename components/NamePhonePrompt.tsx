@@ -18,7 +18,7 @@ export default function NamePhonePrompt() {
       await fetch("/api/submit", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ name, phone, email: "" }),
+        body: JSON.stringify({ name, phone, email: "", source: "offer" }),
       });
     } finally {
       setSent(true);
