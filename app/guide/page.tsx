@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { CheckCircle } from "lucide-react";
 import SalesGuide from "@/components/SalesGuide";
 import OfferPanel from "@/components/OfferPanel";
+import PhonePrompt from "@/components/PhonePrompt";
 
 export const metadata: Metadata = {
   title: "המדריך שלך — תהליך מכירה ב-8 שלבים",
@@ -52,6 +53,19 @@ export default function GuidePage() {
             אם עברת על כל 8 השלבים, יש לך עכשיו תהליך מכירה מובנה ומוכח.
             עכשיו, תתאים, תתרגל, ותסגור.
           </p>
+        </div>
+      </section>
+
+      {/* Phone Prompt */}
+      <section className="max-w-[680px] mx-auto px-5 pb-8">
+        <div className="bg-navy rounded-2xl p-6 text-center">
+          <h2 className="text-lg font-extrabold text-white mb-1">
+            רוצה סקירה אישית של התבנית?
+          </h2>
+          <p className="text-sm text-white/60 mb-4">
+            השאר מספר ונחזור אליך
+          </p>
+          <PhonePrompt />
         </div>
       </section>
 
