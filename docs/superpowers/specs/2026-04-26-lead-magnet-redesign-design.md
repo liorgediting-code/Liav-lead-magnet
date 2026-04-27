@@ -55,12 +55,13 @@ Maximize opt-in conversion rate on the Hebrew sales lead magnet landing page by 
 - Format: large pull-quote text + name + business type
 - Not a carousel — one static testimonial at this position
 
-### Credentials section copy update
-- Change `עשרות בעלי עסקים` → `יותר מ-[X] בעלי עסקים` (use real number)
+### Credentials section copy
+- Keep `עשרות בעלי עסקים` as-is
 
 ### Section header refreshes
 | Current | New |
 |---|---|
+| עשרות בעלי עסקים | עשרות בעלי עסקים (unchanged) |
 | מה אומרים לקוחות | הוכחות מהשטח |
 | לקוחות מספרים | מה קורה אחרי שמשתמשים בתבנית |
 

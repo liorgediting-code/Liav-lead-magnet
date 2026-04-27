@@ -44,7 +44,7 @@ export default function ExitIntentPopup() {
 
         <div className="text-center mb-5">
           <p className="text-xs font-bold tracking-widest text-primary/60 uppercase mb-2">
-            רגע לפני שאתה עוזב —
+            רגע לפני שאתה עוזב:
           </p>
           <h2 className="text-lg font-extrabold text-foreground leading-snug">
             קח את תבנית המכירה בחינם

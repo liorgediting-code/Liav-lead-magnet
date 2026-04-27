@@ -25,7 +25,7 @@ const callFeatures = [
   {
     Icon: PhoneCall,
     title: "סימולציית מכירה חיה",
-    desc: "ננסה שיחת מכירה בזמן אמת — אני אהיה הלקוח, ואתה תמכור לי.",
+    desc: "ננסה שיחת מכירה בזמן אמת. אני אהיה הלקוח ואתה תמכור לי.",
   },
   {
     Icon: RotateCcw,
@@ -86,7 +86,7 @@ export default function OfferPanel({ calendarLink }: { calendarLink: string }) {
             <Gift className="w-5 h-5 text-primary flex-shrink-0" aria-hidden="true" />
             <div>
               <p className="text-sm font-bold text-primary">
-                בונוס במתנה — מאסטרמיינד מכירות ושיווק
+                בונוס במתנה: מאסטרמיינד מכירות ושיווק
               </p>
               <p className="text-xs text-white/45 mt-0.5">
                 גישה לקבוצה בלעדית לבעלי עסקים שמתקדמים יחד
@@ -101,7 +101,7 @@ export default function OfferPanel({ calendarLink }: { calendarLink: string }) {
               rel="noopener noreferrer"
               className="cursor-pointer inline-flex items-center justify-center h-14 px-10 bg-primary text-primary-foreground font-bold text-base rounded-xl hover:bg-primary/90 transition-colors duration-200 shadow-lg shadow-primary/25 active:scale-[0.98] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
             >
-              קבע שיחת ייעוץ — בחינם
+              קבע שיחת ייעוץ בחינם
             </a>
             <p className="text-white/35 text-xs mt-3">
               שיחה קצרה לבדוק אם התוכנית מתאימה לך
@@ -118,7 +118,7 @@ export default function OfferPanel({ calendarLink }: { calendarLink: string }) {
               במתנה
             </p>
             <h3 className="text-xl md:text-2xl font-extrabold text-foreground text-center mb-3">
-              שיחת פיצוח בחינם — אחד על אחד
+              שיחת פיצוח בחינם | אחד על אחד
             </h3>
             <p className="text-sm text-muted-foreground text-center leading-relaxed mb-6 max-w-sm mx-auto">
               30-60 דקות. לא שיחת מכירה. תצא עם תמונה ברורה של מה שבור ואיך לתקן.

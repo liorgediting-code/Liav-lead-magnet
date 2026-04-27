@@ -58,7 +58,7 @@ export default function NamePhonePrompt() {
         disabled={loading}
         className="cursor-pointer h-11 w-full font-bold bg-primary text-white hover:bg-primary/90"
       >
-        {loading ? "..." : "שלח — נחזור אליך"}
+        {loading ? "..." : "שלח ונחזור אליך"}
       </Button>
     </form>
   );

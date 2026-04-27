@@ -4,7 +4,7 @@ import SalesGuide from "@/components/SalesGuide";
 import NamePhonePrompt from "@/components/NamePhonePrompt";
 
 export const metadata: Metadata = {
-  title: "המדריך שלך — תהליך מכירה ב-8 שלבים",
+  title: "המדריך שלך | תהליך מכירה ב-8 שלבים",
   description: "תבנית מכירה מוכנה עם תסריטים לכל שלב בשיחת המכירה",
   robots: "noindex",
 };
@@ -13,7 +13,7 @@ const callFeatures = [
   {
     Icon: Search,
     title: "נבין יחד איפה השיחות שלך נופלות",
-    desc: "נעבור על תהליך המכירה שלך ונאתר בדיוק באיזה שלב הלקוחות מתנתקים — ולמה.",
+    desc: "נעבור על תהליך המכירה שלך ונאתר בדיוק באיזה שלב הלקוחות מתנתקים ולמה.",
   },
   {
     Icon: PhoneCall,
@@ -46,7 +46,7 @@ export default function GuidePage() {
             תבנית המכירה שסוגר לי וללקוחות שלי <span className="text-primary">עסקאות בקלות:</span>
           </h1>
           <p className="text-base text-white/70 max-w-lg mx-auto">
-            תהליך המכירה האפקטיבי שלי ב-8 שלבים — עם תסריטים מוכנים לכל רגע בשיחה.
+            תהליך המכירה האפקטיבי שלי ב-8 שלבים, עם תסריטים מוכנים לכל רגע בשיחה.
           </p>
         </div>
       </section>
@@ -64,7 +64,7 @@ export default function GuidePage() {
             <span className="text-primary">איפה אתה נופל בשיחות?</span>
           </h2>
           <p className="text-white/55 text-sm text-center leading-relaxed mb-10 max-w-md mx-auto">
-            פגישת פיצוח אחד על אחד — 30 דקות שבהן נעבור על השיחות שלך, נעשה סימולציה חיה, ותצא עם תמונה ברורה של מה לשנות.
+            פגישת פיצוח אחד על אחד. 30 דקות שבהן נעבור על השיחות שלך, נעשה סימולציה חיה, ותצא עם תמונה ברורה של מה לשנות.
           </p>
 
           <div className="flex flex-col gap-4 mb-10 max-w-md mx-auto">
@@ -84,7 +84,7 @@ export default function GuidePage() {
 
           <div className="bg-white/[0.07] rounded-2xl p-6 max-w-sm mx-auto border border-white/10">
             <p className="text-sm font-extrabold text-white text-center mb-1">
-              השאר שם ומספר — נחזור אליך
+              השאר שם ומספר ונחזור אליך
             </p>
             <p className="text-xs text-white/40 text-center mb-5">
               ללא עלות. ללא התחייבות.

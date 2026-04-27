@@ -28,7 +28,7 @@ export default function OptInForm() {
 
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(form.email)) {
-      setError("האימייל לא נראה תקין — בדוק שיש @");
+      setError("האימייל לא נראה תקין, בדוק שיש @");
       return;
     }
 
@@ -48,7 +48,7 @@ export default function OptInForm() {
       if (!res.ok) throw new Error("שגיאה בשרת");
       router.push("/guide");
     } catch {
-      setError("קרתה תקלה — נסה שוב");
+      setError("קרתה תקלה, נסה שוב");
       setLoading(false);
     }
   }
