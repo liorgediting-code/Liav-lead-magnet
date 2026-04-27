@@ -43,11 +43,10 @@ export default function GuidePage() {
             </span>
           </div>
           <h1 className="text-3xl md:text-4xl font-extrabold leading-tight mb-4">
-            תהליך המכירה <span className="text-primary">ב-8 שלבים</span>
+            תבנית מכירה <span className="text-primary">מותאמת אליי</span>
           </h1>
           <p className="text-base text-white/70 max-w-lg mx-auto">
-            להלן התבנית המלאה עם תסריטים מוכנים שאפשר להתאים מיידית לעסק שלך.
-            תעבור שלב אחרי שלב ותתרגל.
+            תהליך המכירה האפקטיבי שלי ב-8 שלבים — עם תסריטים מוכנים לכל רגע בשיחה.
           </p>
         </div>
       </section>
