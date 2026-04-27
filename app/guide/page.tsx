@@ -43,7 +43,7 @@ export default function GuidePage() {
             </span>
           </div>
           <h1 className="text-3xl md:text-4xl font-extrabold leading-tight mb-4">
-            תבנית מכירה <span className="text-primary">מותאמת אליי</span>
+            תבנית המכירה שסוגר לי וללקוחות שלי <span className="text-primary">עסקאות בקלות:</span>
           </h1>
           <p className="text-base text-white/70 max-w-lg mx-auto">
             תהליך המכירה האפקטיבי שלי ב-8 שלבים — עם תסריטים מוכנים לכל רגע בשיחה.
