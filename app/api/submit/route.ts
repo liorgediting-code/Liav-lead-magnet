@@ -19,11 +19,11 @@ export async function POST(req: NextRequest) {
   const makeWebhook = isOffer
     ? process.env.MAKE_OFFER_WEBHOOK
     : process.env.MAKE_SIGNUP_WEBHOOK;
+  const gasWebhook = isOffer
+    ? process.env.GAS_OFFER_WEBHOOK
+    : process.env.SHEETS_WEBHOOK_URL;
 
-  const webhooks = [
-    process.env.SHEETS_WEBHOOK_URL,
-    makeWebhook,
-  ].filter(Boolean) as string[];
+  const webhooks = [gasWebhook, makeWebhook].filter(Boolean) as string[];
 
   await Promise.allSettled(
     webhooks.map((url) =>
