@@ -56,9 +56,7 @@ export default function RootLayout({
             alt=""
           />
         </noscript>
-        <Script
-          id="clarity"
-          strategy="afterInteractive"
+        <script
           dangerouslySetInnerHTML={{
             __html: `
               (function(c,l,a,r,i,t,y){
