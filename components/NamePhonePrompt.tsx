@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
+import { trackPurchase } from "@/lib/meta-pixel";
 
 export default function NamePhonePrompt() {
   const [name, setName] = useState("");
@@ -20,6 +21,7 @@ export default function NamePhonePrompt() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ name, phone, email: "", source: "offer" }),
       });
+      trackPurchase({ currency: "ILS" });
     } finally {
       setSent(true);
       setLoading(false);

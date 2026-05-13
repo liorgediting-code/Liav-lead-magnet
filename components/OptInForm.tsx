@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
+import { trackLead } from "@/lib/meta-pixel";
 
 export default function OptInForm() {
   const router = useRouter();
@@ -46,6 +47,7 @@ export default function OptInForm() {
       });
 
       if (!res.ok) throw new Error("שגיאה בשרת");
+      trackLead({ email: form.email, phone: form.phone });
       router.push("/guide");
     } catch {
       setError("קרתה תקלה, נסה שוב");
