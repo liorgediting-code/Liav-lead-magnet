@@ -36,5 +36,27 @@ export async function POST(req: NextRequest) {
     )
   );
 
+  // Ingest to mail-sequence (email drip). Only for the main landing-page signup
+  // (not the offer form on /guide), and only when we have an email address —
+  // the drip is email-based, no email = nothing to send.
+  const mailSeqUrl = process.env.MAIL_SEQUENCE_INGEST_URL;
+  const mailSeqSecret = process.env.MAIL_SEQUENCE_INGEST_SECRET;
+  if (!isOffer && email && mailSeqUrl && mailSeqSecret) {
+    // Fire-and-forget — never block lead capture on this.
+    fetch(mailSeqUrl, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "x-ingest-secret": mailSeqSecret,
+      },
+      body: JSON.stringify({
+        email,
+        name: name || null,
+        phone: phone || null,
+        source: "liav-lead-magnet",
+      }),
+    }).catch(() => {});
+  }
+
   return NextResponse.json({ success: true });
 }
