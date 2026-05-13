@@ -22,8 +22,9 @@ export async function POST(req: NextRequest) {
   const gasWebhook = isOffer
     ? process.env.GAS_OFFER_WEBHOOK
     : process.env.SHEETS_WEBHOOK_URL;
+  const whatsappWebhook = process.env.WHATSAPP_WEBHOOK;
 
-  const webhooks = [gasWebhook, makeWebhook].filter(Boolean) as string[];
+  const webhooks = [gasWebhook, makeWebhook, whatsappWebhook].filter(Boolean) as string[];
 
   await Promise.allSettled(
     webhooks.map((url) =>
