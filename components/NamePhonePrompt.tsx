@@ -4,6 +4,7 @@ import { useState } from "react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { trackPurchase } from "@/lib/meta-pixel";
+import { readAttribution } from "@/lib/utm";
 
 export default function NamePhonePrompt() {
   const [name, setName] = useState("");
@@ -16,12 +17,14 @@ export default function NamePhonePrompt() {
     if (!phone.trim()) return;
     setLoading(true);
     try {
+      const attribution = readAttribution();
+      const eventId = `purchase_${Date.now()}_${Math.random().toString(36).slice(2, 10)}`;
       await fetch("/api/submit", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ name, phone, email: "", source: "offer" }),
+        body: JSON.stringify({ name, phone, email: "", source: "offer", attribution, eventId }),
       });
-      trackPurchase({ currency: "ILS" });
+      trackPurchase({ currency: "ILS" }, eventId);
     } finally {
       setSent(true);
       setLoading(false);

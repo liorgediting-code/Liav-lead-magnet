@@ -6,6 +6,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
 import { trackLead } from "@/lib/meta-pixel";
+import { readAttribution } from "@/lib/utm";
 
 export default function OptInForm() {
   const router = useRouter();
@@ -40,14 +41,16 @@ export default function OptInForm() {
 
     setLoading(true);
     try {
+      const attribution = readAttribution();
+      const eventId = `lead_${Date.now()}_${Math.random().toString(36).slice(2, 10)}`;
       const res = await fetch("/api/submit", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(form),
+        body: JSON.stringify({ ...form, attribution, eventId }),
       });
 
       if (!res.ok) throw new Error("שגיאה בשרת");
-      trackLead({ email: form.email, phone: form.phone });
+      trackLead({ email: form.email, phone: form.phone }, eventId);
       await new Promise((resolve) => setTimeout(resolve, 300));
       router.push("/guide");
     } catch {

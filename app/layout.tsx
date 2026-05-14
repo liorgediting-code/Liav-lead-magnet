@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Heebo } from "next/font/google";
 import Script from "next/script";
+import AttributionCapture from "@/components/AttributionCapture";
 import "./globals.css";
 
 const heebo = Heebo({
@@ -68,7 +69,10 @@ export default function RootLayout({
           }}
         />
       </head>
-      <body className="min-h-full flex flex-col antialiased">{children}</body>
+      <body className="min-h-full flex flex-col antialiased">
+        <AttributionCapture />
+        {children}
+      </body>
     </html>
   );
 }
