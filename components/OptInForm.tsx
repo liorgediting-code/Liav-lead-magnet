@@ -48,6 +48,7 @@ export default function OptInForm() {
 
       if (!res.ok) throw new Error("שגיאה בשרת");
       trackLead({ email: form.email, phone: form.phone });
+      await new Promise((resolve) => setTimeout(resolve, 300));
       router.push("/guide");
     } catch {
       setError("קרתה תקלה, נסה שוב");
