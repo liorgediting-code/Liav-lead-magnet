@@ -1,6 +1,6 @@
 "use client";
 
-import { Lightbulb, AlertCircle, Trophy } from "lucide-react";
+import { Lightbulb, AlertCircle, Trophy, ChevronDown } from "lucide-react";
 
 const steps = [
   {
@@ -16,7 +16,7 @@ const steps = [
   },
   {
     number: 2,
-    title: "היכרות צד ב׳ + בניית סמכות",
+    title: "היכרות צד ב׳ + הסבר רזומה שלי",
     subtitle: "ראפור אישי לפני עסקי",
     importance:
       "אל תרוץ ישר לעניין. זה מראה שאתה בלחץ למכור. התעניין בו קודם כל כאדם. אחרי שהוא שיתף על עצמו, ורק אז, ספר לו כמה מילים על הרזומה שלך. זה בונה סמכות, מקצועיות ואמון שאתה יודע על מה אתה מדבר.",
@@ -223,6 +223,16 @@ export default function SalesGuide() {
           <div className="text-4xl opacity-20 font-black text-white">
             ✓
           </div>
+        </div>
+      </div>
+
+      {/* חץ הנעה ללמטה */}
+      <div className="flex flex-col items-center mt-10 mb-2">
+        <p className="text-sm font-bold text-foreground/70 mb-3">
+          רוצה לדעת איפה אתה נופל בשיחות שלך?
+        </p>
+        <div className="w-14 h-14 rounded-full bg-primary flex items-center justify-center shadow-lg shadow-primary/40 animate-bounce">
+          <ChevronDown className="w-8 h-8 text-white" aria-hidden="true" strokeWidth={3} />
         </div>
       </div>
     </div>

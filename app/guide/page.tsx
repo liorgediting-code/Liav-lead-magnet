@@ -74,26 +74,34 @@ export default function GuidePage() {
             <div className="flex flex-col gap-3 text-[15px] text-foreground/85 leading-relaxed">
               <p>
                 בני אדם נמשכים <span className="font-bold text-foreground">תמיד אל הצד השלילי</span>.
-                המוח שלהם סורק קודם את הסיכון, את האיום, את האכזבה האפשרית — הרבה לפני שהוא רואה את ההזדמנות.
+                המוח שלנו סורק קודם את הסיכון, את האיום, את האכזבה האפשרית, הרבה לפני שהוא רואה את ההזדמנות.
                 במכירה זו לא חולשה שצריך להתחבא ממנה, זו מציאות שצריך לעבוד איתה.
               </p>
               <p>
                 המטרה שלך בשיחת המכירה היא <span className="font-bold text-foreground">לא לייפות</span>,
-                לא להבטיח שהכול יהיה ורוד ולא לטייח את הקשיים. ברגע שתעשה את זה — הלקוח ירגיש את זה,
+                לא להבטיח שהכול יהיה ורוד ולא לטייח את הקשיים. ברגע שתעשה את זה, הלקוח ירגיש את זה.
                 ההגנות שלו יעלו, והאמון יישבר עוד לפני שאמרת מחיר.
               </p>
               <p>
                 המהלך האמיתי הוא ההפך הגמור: <span className="font-bold text-foreground">אתה</span> זה
                 שפותח את הצד השלילי. מדבר על האתגרים שיעמדו בדרך, על הקושי, על הרגעים שבהם הוא ירצה לוותר.
-                מראה לו שאתה רואה את התמונה המלאה — לא רק את חלון הראווה.
+                מראה לו שאתה רואה את התמונה המלאה, לא רק את חלון הראווה.
               </p>
-              <div className="mt-1 rounded-xl bg-primary/[0.08] border border-primary/20 px-4 py-3">
+              <div className="rounded-xl bg-primary/[0.10] border border-primary/30 px-4 py-3">
                 <p className="text-[14px] text-foreground/90 leading-relaxed">
-                  ואז, אחרי שהנחת את האמת על השולחן, תגיד לו:
-                  <span className="block mt-2 font-bold text-foreground">
-                    &quot;אם תעמוד בזה — תצא מהצד השני אדם אחר. חזק יותר, ממושמע יותר, בטוח יותר בעצמך.
-                    כי עמדת במילה שאמרת לעצמך, למרות הכול.&quot;
-                  </span>
+                  <span className="font-black text-foreground">קריטי לעשות את זה כמה שיותר מוקדם בשיחה.</span>{" "}
+                  ככל שתפתח את הצד השלילי מהר יותר, ככה תייצר יותר אמון, תוריד את הסקפטיות של הלקוח,
+                  ותהפוך בעיניו מ&quot;עוד מוכר שמנסה לדחוף לי משהו&quot; ל&quot;בן אדם שמבין אותי באמת&quot;.
+                  כל דקה שמתעכבת היא דקה שבה הוא בונה הגנות נגדך.
+                </p>
+              </div>
+              <p>
+                ואז, אחרי שהנחת את האמת על השולחן, תגיד לו:
+              </p>
+              <div className="rounded-xl bg-primary/[0.08] border border-primary/20 px-4 py-3">
+                <p className="font-bold text-foreground text-[15px] leading-relaxed">
+                  &quot;אם תעמוד בזה, תצא מהצד השני אדם אחר. חזק יותר, ממושמע יותר, בטוח יותר בעצמך.
+                  כי עמדת במילה שאמרת לעצמך, למרות הכול.&quot;
                 </p>
               </div>
               <p className="text-sm text-muted-foreground italic">
@@ -101,6 +109,14 @@ export default function GuidePage() {
               </p>
             </div>
           </div>
+        </div>
+
+        {/* כותרת מעל השלבים */}
+        <div className="text-center mb-8">
+          <h2 className="text-2xl md:text-3xl font-black text-foreground leading-tight">
+            תבנית המכירה שעוזרת ללקוחות שלי{" "}
+            <span className="text-primary">להכפיל את המחזורים שלהם</span>
+          </h2>
         </div>
 
         <SalesGuide />

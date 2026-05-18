@@ -4,18 +4,29 @@ import TestimonialCarousel from "@/components/TestimonialCarousel";
 import VideoCarousel from "@/components/VideoCarousel";
 import ExitIntentPopup from "@/components/ExitIntentPopup";
 import FAQ from "@/components/FAQ";
-import { Check } from "lucide-react";
+import { Check, ChevronDown } from "lucide-react";
 
 const steps = [
-  { n: 1, title: "פתיחה ויצירת אמון" },
-  { n: 2, title: "היכרות + בניית סמכות" },
+  { n: 1, title: "הצגה עצמית ויצירת אמון" },
+  { n: 2, title: "היכרות + הסבר רזומה" },
   { n: 3, title: "שאלות אבחון" },
-  { n: 4, title: "סגירת ביניים" },
-  { n: 5, title: "הצגת השירות" },
-  { n: 6, title: "הצגת מחיר בביטחון" },
-  { n: 7, title: "טיפול בהתנגדויות" },
-  { n: 8, title: "סגירה ופולואפ" },
+  { n: 4, title: "סגירת ביניים לפני השירות" },
+  { n: 5, title: "הצגת המוצר" },
+  { n: 6, title: "סגירת ביניים לפני המחיר" },
+  { n: 7, title: "הצגת המחיר בביטחון" },
+  { n: 8, title: "טיפול בהתנגדויות" },
 ];
+
+function ScrollCue({ label }: { label: string }) {
+  return (
+    <div className="flex flex-col items-center gap-2 py-6">
+      <p className="text-sm font-bold text-foreground/70">{label}</p>
+      <div className="w-10 h-10 rounded-full bg-primary/15 border border-primary/30 flex items-center justify-center animate-bounce">
+        <ChevronDown className="w-5 h-5 text-primary" aria-hidden="true" strokeWidth={3} />
+      </div>
+    </div>
+  );
+}
 
 const benefits = [
   "תהליך מובנה ב-8 שלבים עם תסריטים מוכנים, כדי שאף פעם לא תישאר בלי מה להגיד",
@@ -79,12 +90,20 @@ export default function LandingPage() {
         </div>
       </section>
 
+      {/* Scroll cue */}
+      <div className="bg-background border-t border-border/30">
+        <div className="max-w-[640px] mx-auto px-5">
+          <ScrollCue label="תראה מה בפנים" />
+        </div>
+      </div>
+
       {/* ── 2. WHAT'S INSIDE ── */}
       {/* No FadeIn — this section is just below the fold, animation here feels noise */}
       <section className="bg-background">
-        <div className="max-w-[640px] mx-auto px-5 py-12 md:py-16">
-          <h2 className="text-xl font-extrabold text-foreground text-start mb-7">
-            8 שלבים מהפתיחה ועד הסגירה
+        <div className="max-w-[640px] mx-auto px-5 pb-12 md:pb-16 pt-2">
+          <h2 className="text-xl md:text-2xl font-black text-foreground text-start mb-7 leading-tight">
+            תבנית המכירה שעוזרת ללקוחות שלי{" "}
+            <span className="text-primary">להכפיל את המחזורים שלהם</span>
           </h2>
 
           <div className="grid grid-cols-2 gap-x-4 gap-y-1">
@@ -101,6 +120,13 @@ export default function LandingPage() {
           </div>
         </div>
       </section>
+
+      {/* Scroll cue */}
+      <div className="bg-background">
+        <div className="max-w-[640px] mx-auto px-5">
+          <ScrollCue label="מי עומד מאחורי התבנית" />
+        </div>
+      </div>
 
       {/* ── 3. CREDENTIALS ── */}
       <FadeIn>
@@ -122,6 +148,18 @@ export default function LandingPage() {
         </section>
       </FadeIn>
 
+      {/* Scroll cue (on navy) */}
+      <div className="bg-navy">
+        <div className="max-w-[640px] mx-auto px-5">
+          <div className="flex flex-col items-center gap-2 py-6">
+            <p className="text-sm font-bold text-white/80">תראה הוכחות מהשטח</p>
+            <div className="w-10 h-10 rounded-full bg-primary/20 border border-primary/40 flex items-center justify-center animate-bounce">
+              <ChevronDown className="w-5 h-5 text-primary" aria-hidden="true" strokeWidth={3} />
+            </div>
+          </div>
+        </div>
+      </div>
+
       {/* ── 4. PHOTO TESTIMONIALS ── */}
       <FadeIn>
         <section className="bg-background">
@@ -133,6 +171,13 @@ export default function LandingPage() {
           </div>
         </section>
       </FadeIn>
+
+      {/* Scroll cue */}
+      <div className="bg-background">
+        <div className="max-w-[640px] mx-auto px-5">
+          <ScrollCue label="עוד המלצות בוידאו" />
+        </div>
+      </div>
 
       {/* ── 5. VIDEO TESTIMONIALS ── */}
       <FadeIn>
@@ -149,6 +194,13 @@ export default function LandingPage() {
         </section>
       </FadeIn>
 
+      {/* Scroll cue */}
+      <div className="bg-background">
+        <div className="max-w-[640px] mx-auto px-5">
+          <ScrollCue label="יש לך שאלה? כנראה ענינו עליה" />
+        </div>
+      </div>
+
       {/* ── 6. FAQ ── */}
       <FadeIn>
         <section className="bg-background border-t border-border">
@@ -160,6 +212,13 @@ export default function LandingPage() {
           </div>
         </section>
       </FadeIn>
+
+      {/* Scroll cue */}
+      <div className="bg-background">
+        <div className="max-w-[640px] mx-auto px-5">
+          <ScrollCue label="מוכן לקבל את התבנית?" />
+        </div>
+      </div>
 
       {/* ── 7. FINAL CTA ── */}
       <section className="bg-navy">
