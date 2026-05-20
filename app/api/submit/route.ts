@@ -1,4 +1,4 @@
-import { NextRequest, NextResponse } from "next/server";
+import { NextRequest, NextResponse, after } from "next/server";
 import { createHash } from "crypto";
 
 type Attribution = {
@@ -105,18 +105,20 @@ async function sendCAPI(params: {
 export async function POST(req: NextRequest) {
   const { name, phone, email, source, attribution, eventId } = await req.json();
 
-  if (!phone) {
+  if (!email && !phone) {
     return NextResponse.json({ error: "Missing fields" }, { status: 400 });
   }
 
   const attr: Attribution = attribution || {};
+  const isOffer = source === "offer";
 
   const payload = {
     name: name || "",
-    phone,
+    phone: phone || "",
     email: email || "",
     source: source || "landing",
     timestamp: new Date().toISOString(),
+    "תאריך יצירה": new Date().toISOString(),
     utm_source: attr.utm_source || "",
     utm_medium: attr.utm_medium || "",
     utm_campaign: attr.utm_campaign || "",
@@ -128,77 +130,76 @@ export async function POST(req: NextRequest) {
     landing_page: attr.landing_page || "",
   };
 
-  const isOffer = source === "offer";
-  const makeWebhook = isOffer
-    ? process.env.MAKE_OFFER_WEBHOOK
-    : process.env.MAKE_SIGNUP_WEBHOOK;
-  const gasWebhook = isOffer
-    ? process.env.GAS_OFFER_WEBHOOK
-    : process.env.SHEETS_WEBHOOK_URL;
-  const whatsappWebhook = process.env.WHATSAPP_WEBHOOK;
+  // Capture request-bound data before handing off to after() — headers aren't
+  // safe to read once the response is returned.
+  const { fbp, fbc } = parseFbpFbc(req.headers.get("cookie"));
+  const clientIp =
+    req.headers.get("x-forwarded-for")?.split(",")[0]?.trim() ||
+    req.headers.get("x-real-ip") ||
+    undefined;
+  const userAgent = req.headers.get("user-agent") || undefined;
+  const origin = req.headers.get("origin") || "";
+  const sourceUrl = origin + (attr.landing_page || (isOffer ? "/guide" : "/"));
 
-  const webhooks = [gasWebhook, makeWebhook, whatsappWebhook].filter(Boolean) as string[];
+  after(async () => {
+    const gasWebhook = isOffer
+      ? process.env.GAS_OFFER_WEBHOOK
+      : process.env.SHEETS_WEBHOOK_URL;
+    const whatsappWebhook = process.env.WHATSAPP_WEBHOOK;
+    const webhooks = [gasWebhook, whatsappWebhook].filter(Boolean) as string[];
 
-  await Promise.allSettled(
-    webhooks.map((url) =>
+    const tasks: Promise<unknown>[] = webhooks.map((url) =>
       fetch(url, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload),
-      })
-    )
-  );
+      }).catch(() => {})
+    );
 
-  // Conversions API — server-side mirror of the browser pixel event
-  if (eventId) {
-    const { fbp, fbc } = parseFbpFbc(req.headers.get("cookie"));
-    const clientIp =
-      req.headers.get("x-forwarded-for")?.split(",")[0]?.trim() ||
-      req.headers.get("x-real-ip") ||
-      undefined;
-    const userAgent = req.headers.get("user-agent") || undefined;
-    const origin = req.headers.get("origin") || "";
-    const sourceUrl = origin + (attr.landing_page || (isOffer ? "/guide" : "/"));
+    if (eventId) {
+      tasks.push(
+        sendCAPI({
+          eventName: isOffer ? "Purchase" : "Lead",
+          eventId,
+          email: email || undefined,
+          phone: phone || undefined,
+          name: name || undefined,
+          attribution: attr,
+          fbp,
+          fbc,
+          clientIp,
+          userAgent,
+          sourceUrl,
+        }).catch(() => {})
+      );
+    }
 
-    await sendCAPI({
-      eventName: isOffer ? "Purchase" : "Lead",
-      eventId,
-      email: email || undefined,
-      phone: phone || undefined,
-      name: name || undefined,
-      attribution: attr,
-      fbp,
-      fbc,
-      clientIp,
-      userAgent,
-      sourceUrl,
-    });
-  }
+    const mailSeqUrl = process.env.MAIL_SEQUENCE_INGEST_URL;
+    const mailSeqSecret = process.env.MAIL_SEQUENCE_INGEST_SECRET;
+    if (!isOffer && email && mailSeqUrl && mailSeqSecret) {
+      tasks.push(
+        fetch(mailSeqUrl, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            "x-ingest-secret": mailSeqSecret,
+          },
+          body: JSON.stringify({
+            email,
+            name: name || null,
+            phone: phone || null,
+            source: "liav-lead-magnet",
+            utm_source: attr.utm_source || null,
+            utm_medium: attr.utm_medium || null,
+            utm_campaign: attr.utm_campaign || null,
+            utm_content: attr.utm_content || null,
+          }),
+        }).catch(() => {})
+      );
+    }
 
-  // Ingest to mail-sequence (email drip). Only for the main landing-page signup
-  // (not the offer form on /guide), and only when we have an email address —
-  // the drip is email-based, no email = nothing to send.
-  const mailSeqUrl = process.env.MAIL_SEQUENCE_INGEST_URL;
-  const mailSeqSecret = process.env.MAIL_SEQUENCE_INGEST_SECRET;
-  if (!isOffer && email && mailSeqUrl && mailSeqSecret) {
-    fetch(mailSeqUrl, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        "x-ingest-secret": mailSeqSecret,
-      },
-      body: JSON.stringify({
-        email,
-        name: name || null,
-        phone: phone || null,
-        source: "liav-lead-magnet",
-        utm_source: attr.utm_source || null,
-        utm_medium: attr.utm_medium || null,
-        utm_campaign: attr.utm_campaign || null,
-        utm_content: attr.utm_content || null,
-      }),
-    }).catch(() => {});
-  }
+    await Promise.allSettled(tasks);
+  });
 
   return NextResponse.json({ success: true });
 }
