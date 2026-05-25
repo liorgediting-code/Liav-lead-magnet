@@ -228,7 +228,10 @@ export default function SalesGuide() {
 
       {/* חץ הנעה ללמטה */}
       <div className="flex flex-col items-center mt-10 mb-2 text-center">
-        <p className="text-sm font-bold text-foreground/70 mb-3">
+        <p className="text-sm font-bold text-foreground/70 mb-1">
+          לא חידש לך? כנראה שאתה כבר מתקדם.
+        </p>
+        <p className="text-sm text-foreground/60 mb-3">
           הנה משהו שיחדש לך, למטה.
         </p>
         <div className="w-14 h-14 rounded-full bg-primary flex items-center justify-center shadow-lg shadow-primary/40 animate-bounce">
