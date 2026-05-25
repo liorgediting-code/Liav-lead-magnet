@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse, after } from "next/server";
 import { createHash } from "crypto";
+import { isValidIsraeliPhone } from "@/lib/utils";
 
 type Attribution = {
   utm_source?: string;
@@ -107,6 +108,10 @@ export async function POST(req: NextRequest) {
 
   if (!email && !phone) {
     return NextResponse.json({ error: "Missing fields" }, { status: 400 });
+  }
+
+  if (phone && !isValidIsraeliPhone(phone)) {
+    return NextResponse.json({ error: "Invalid phone" }, { status: 400 });
   }
 
   const attr: Attribution = attribution || {};

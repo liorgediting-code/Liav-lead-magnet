@@ -5,16 +5,23 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { trackPurchase } from "@/lib/meta-pixel";
 import { readAttribution } from "@/lib/utm";
+import { isValidIsraeliPhone, PHONE_ERROR } from "@/lib/utils";
 
 export default function NamePhonePrompt() {
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
   const [sent, setSent] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
+    setError("");
     if (!phone.trim()) return;
+    if (!isValidIsraeliPhone(phone)) {
+      setError(PHONE_ERROR);
+      return;
+    }
     setLoading(true);
     try {
       const attribution = readAttribution();
@@ -58,10 +65,13 @@ export default function NamePhonePrompt() {
         disabled={loading}
         required
       />
+      {error && (
+        <p className="text-sm text-destructive font-medium text-center">{error}</p>
+      )}
       <Button
         type="submit"
         disabled={loading}
-        className="cursor-pointer h-11 w-full font-bold bg-primary text-white hover:bg-primary/90"
+        className="cursor-pointer h-11 w-full font-bold bg-primary text-primary-foreground hover:bg-primary/90"
       >
         {loading ? "..." : "שלח ונחזור אליך"}
       </Button>

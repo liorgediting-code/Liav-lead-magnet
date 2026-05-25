@@ -1,15 +1,20 @@
 "use client";
 
-import { useState } from "react";
+import { useId, useState } from "react";
 import { useRouter } from "next/navigation";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
 import { trackLead } from "@/lib/meta-pixel";
 import { readAttribution } from "@/lib/utm";
+import { isValidIsraeliPhone, PHONE_ERROR } from "@/lib/utils";
 
 export default function OptInForm() {
   const router = useRouter();
+  const fieldId = useId();
+  const nameId = `${fieldId}-name`;
+  const phoneId = `${fieldId}-phone`;
+  const emailId = `${fieldId}-email`;
   const [form, setForm] = useState({ name: "", phone: "", email: "" });
   const [consent, setConsent] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -31,6 +36,11 @@ export default function OptInForm() {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(form.email)) {
       setError("האימייל לא נראה תקין, בדוק שיש @");
+      return;
+    }
+
+    if (form.phone.trim() && !isValidIsraeliPhone(form.phone)) {
+      setError(PHONE_ERROR);
       return;
     }
 
@@ -62,11 +72,11 @@ export default function OptInForm() {
   return (
     <form onSubmit={handleSubmit} className="flex flex-col gap-4 w-full">
       <div className="flex flex-col gap-1.5">
-        <Label htmlFor="name" className="text-sm font-medium text-foreground">
+        <Label htmlFor={nameId} className="text-sm font-medium text-foreground">
           שם מלא
         </Label>
         <Input
-          id="name"
+          id={nameId}
           name="name"
           type="text"
           placeholder="ישראל ישראלי"
@@ -79,11 +89,11 @@ export default function OptInForm() {
       </div>
 
       <div className="flex flex-col gap-1.5">
-        <Label htmlFor="phone" className="text-sm font-medium text-foreground">
+        <Label htmlFor={phoneId} className="text-sm font-medium text-foreground">
           טלפון <span className="text-muted-foreground font-normal text-xs">(אופציונלי)</span>
         </Label>
         <Input
-          id="phone"
+          id={phoneId}
           name="phone"
           type="tel"
           placeholder="050-1234567"
@@ -95,11 +105,11 @@ export default function OptInForm() {
       </div>
 
       <div className="flex flex-col gap-1.5">
-        <Label htmlFor="email" className="text-sm font-medium text-foreground">
+        <Label htmlFor={emailId} className="text-sm font-medium text-foreground">
           אימייל
         </Label>
         <Input
-          id="email"
+          id={emailId}
           name="email"
           type="email"
           placeholder="israel@example.com"
@@ -134,7 +144,7 @@ export default function OptInForm() {
       <Button
         type="submit"
         disabled={loading}
-        className="cursor-pointer h-14 text-base font-bold mt-2 bg-primary text-white hover:bg-primary/90 active:scale-[0.98] transition-colors duration-200 shadow-lg shadow-primary/20 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
+        className="cursor-pointer h-14 text-base font-bold mt-2 bg-primary text-primary-foreground hover:bg-primary/90 active:scale-[0.98] transition-colors duration-200 shadow-lg shadow-primary/20 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
       >
         {loading ? "שולח..." : "שלחו לי את התבנית"}
       </Button>
