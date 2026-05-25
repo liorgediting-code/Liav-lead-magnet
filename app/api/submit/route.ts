@@ -103,6 +103,38 @@ async function sendCAPI(params: {
   }
 }
 
+// POST a lead to a webhook with retries. Checks the response status so a
+// CRM error (4xx/5xx) is treated as a failure, not silently ignored. Logs
+// every attempt outcome to Vercel logs so no lead can fail without a trace.
+async function postLead(
+  label: string,
+  url: string,
+  body: string,
+  attempts = 3
+) {
+  for (let i = 1; i <= attempts; i++) {
+    try {
+      const res = await fetch(url, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body,
+      });
+      if (res.ok) {
+        if (i > 1) console.log(`[lead] ${label} ok on attempt ${i}`);
+        return;
+      }
+      console.error(
+        `[lead] ${label} HTTP ${res.status} on attempt ${i}/${attempts}`
+      );
+    } catch (e) {
+      console.error(`[lead] ${label} error on attempt ${i}/${attempts}:`, e);
+    }
+    if (i < attempts) await new Promise((r) => setTimeout(r, 500 * i));
+  }
+  // Final failure — emit the payload so the lead can be recovered manually.
+  console.error(`[lead] ${label} FAILED after ${attempts} attempts. Payload:`, body);
+}
+
 export async function POST(req: NextRequest) {
   const { name, phone, email, source, attribution, eventId } = await req.json();
 
@@ -147,19 +179,24 @@ export async function POST(req: NextRequest) {
   const sourceUrl = origin + (attr.landing_page || (isOffer ? "/guide" : "/"));
 
   after(async () => {
-    const gasWebhook = isOffer
+    const body = JSON.stringify(payload);
+    const leadStoreWebhook = isOffer
       ? process.env.GAS_OFFER_WEBHOOK
       : process.env.SHEETS_WEBHOOK_URL;
     const whatsappWebhook = process.env.WHATSAPP_WEBHOOK;
-    const webhooks = [gasWebhook, whatsappWebhook].filter(Boolean) as string[];
 
-    const tasks: Promise<unknown>[] = webhooks.map((url) =>
-      fetch(url, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(payload),
-      }).catch(() => {})
-    );
+    const tasks: Promise<unknown>[] = [];
+    if (leadStoreWebhook) {
+      tasks.push(postLead(isOffer ? "crm-offer" : "crm-landing", leadStoreWebhook, body));
+    } else {
+      console.error(
+        `[lead] no lead-store webhook configured (${isOffer ? "GAS_OFFER_WEBHOOK" : "SHEETS_WEBHOOK_URL"}). Payload:`,
+        body
+      );
+    }
+    if (whatsappWebhook) {
+      tasks.push(postLead("whatsapp", whatsappWebhook, body));
+    }
 
     // WhatsApp sender (wa-sender-kappa) — fire only for the landing opt-in
     // ("first form") and only when we have a phone to message. Open endpoint,
