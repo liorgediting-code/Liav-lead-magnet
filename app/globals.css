@@ -44,7 +44,8 @@
   --popover-foreground: oklch(0.16 0.04 55);
   /* Rich orange — slightly deeper and more saturated than before */
   --primary: oklch(0.72 0.21 50);
-  --primary-foreground: oklch(0.98 0.01 65);
+  /* Dark navy on orange — ~7.4:1 contrast, passes WCAG AAA. Was near-white (~2.7:1, failed AA). */
+  --primary-foreground: oklch(0.14 0.045 55);
   --secondary: oklch(0.93 0.025 65);
   --secondary-foreground: oklch(0.16 0.04 55);
   --muted: oklch(0.93 0.02 65);

@@ -3,9 +3,18 @@
 import { useState } from "react";
 import { ChevronRight, ChevronLeft } from "lucide-react";
 
-const testimonials = [
+type Testimonial = {
+  screenshotUrl: string;
+  avifUrl?: string;
+  avif2xUrl?: string;
+  alt: string;
+};
+
+const testimonials: Testimonial[] = [
   {
-    screenshotUrl: "/testimonials/whatsapp-1.png",
+    screenshotUrl: "/testimonials/whatsapp-1-fallback.jpg",
+    avifUrl: "/testimonials/whatsapp-1.avif",
+    avif2xUrl: "/testimonials/whatsapp-1@2x.avif",
     alt: 'לקוח: "בזכותך אני מרגיש כל כך ביטחון... אתה תותח ומקצועי"',
   },
   {
@@ -28,13 +37,34 @@ export default function TestimonialCarousel() {
       {/* Fixed-height container — image fits inside, never cropped */}
       <div className="rounded-2xl overflow-hidden border border-border bg-muted">
         <div className="h-[480px] flex items-center justify-center">
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
-            src={item.screenshotUrl}
-            alt={item.alt}
-            className="h-full w-auto max-w-full object-contain"
-            loading="lazy"
-          />
+          {item.avifUrl ? (
+            <picture>
+              <source
+                type="image/avif"
+                srcSet={`${item.avifUrl} 1x${item.avif2xUrl ? `, ${item.avif2xUrl} 2x` : ""}`}
+              />
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src={item.screenshotUrl}
+                alt={item.alt}
+                width={222}
+                height={480}
+                decoding="async"
+                className="h-full w-auto max-w-full object-contain"
+              />
+            </picture>
+          ) : (
+            /* eslint-disable-next-line @next/next/no-img-element */
+            <img
+              src={item.screenshotUrl}
+              alt={item.alt}
+              width={222}
+              height={480}
+              decoding="async"
+              className="h-full w-auto max-w-full object-contain"
+              loading="lazy"
+            />
+          )}
         </div>
       </div>
 
