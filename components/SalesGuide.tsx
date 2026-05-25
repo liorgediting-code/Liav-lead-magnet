@@ -227,9 +227,9 @@ export default function SalesGuide() {
       </div>
 
       {/* חץ הנעה ללמטה */}
-      <div className="flex flex-col items-center mt-10 mb-2">
+      <div className="flex flex-col items-center mt-10 mb-2 text-center">
         <p className="text-sm font-bold text-foreground/70 mb-3">
-          רוצה לדעת איפה אתה נופל בשיחות שלך?
+          הנה משהו שיחדש לך, למטה.
         </p>
         <div className="w-14 h-14 rounded-full bg-primary flex items-center justify-center shadow-lg shadow-primary/40 animate-bounce">
           <ChevronDown className="w-8 h-8 text-white" aria-hidden="true" strokeWidth={3} />

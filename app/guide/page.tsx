@@ -1,31 +1,13 @@
 import type { Metadata } from "next";
-import { CheckCircle, Search, PhoneCall, RotateCcw, ShieldAlert } from "lucide-react";
+import Link from "next/link";
+import { CheckCircle, ShieldAlert, Sparkles, ArrowLeft } from "lucide-react";
 import SalesGuide from "@/components/SalesGuide";
-import NamePhonePrompt from "@/components/NamePhonePrompt";
 
 export const metadata: Metadata = {
   title: "המדריך שלך | תהליך מכירה ב-8 שלבים",
   description: "תבנית מכירה מוכנה עם תסריטים לכל שלב בשיחת המכירה",
   robots: "noindex",
 };
-
-const callFeatures = [
-  {
-    Icon: Search,
-    title: "נבין יחד איפה השיחות שלך נופלות",
-    desc: "נעבור על תהליך המכירה שלך ונאתר בדיוק באיזה שלב הלקוחות מתנתקים ולמה.",
-  },
-  {
-    Icon: PhoneCall,
-    title: "סימולציית שיחת מכירה חיה",
-    desc: "אני אהיה הלקוח, אתה תמכור לי. נראה בזמן אמת במה אתה מתקשה ומה אפשר לשפר.",
-  },
-  {
-    Icon: RotateCcw,
-    title: "תצא עם תסריט מותאם ונקודות שיפור ברורות",
-    desc: "לא עצות כלליות. תסריט שמתאים לעסק שלך ורשימה ספציפית של מה לתקן.",
-  },
-];
 
 export default function GuidePage() {
   return (
@@ -122,41 +104,42 @@ export default function GuidePage() {
         <SalesGuide />
       </section>
 
-      {/* פגישת פיצוח */}
+      {/* CTA למתקדמים — דף הבונוס */}
       <section className="bg-navy">
-        <div className="max-w-[680px] mx-auto px-5 py-16 md:py-20">
-          <h2 className="text-2xl md:text-3xl font-extrabold text-white leading-tight mb-3 text-center">
-            רוצה לדעת בדיוק{" "}
-            <span className="text-primary">איפה אתה נופל בשיחות?</span>
+        <div className="max-w-[680px] mx-auto px-5 py-16 md:py-20 text-center">
+          <div className="inline-flex items-center gap-2 bg-primary/15 border border-primary/30 rounded-full px-4 py-1.5 mb-6">
+            <Sparkles className="w-4 h-4 text-primary" aria-hidden="true" />
+            <span className="text-primary text-xs font-bold tracking-wide">
+              בונוס למתקדמים
+            </span>
+          </div>
+
+          <h2 className="text-[1.375rem] md:text-3xl font-extrabold text-white leading-snug md:leading-tight mb-4 text-balance">
+            <span className="whitespace-nowrap">מכיר את תהליך</span>{" "}
+            <span className="whitespace-nowrap">המכירה הזה כבר?</span>
+            <br />
+            <span className="text-primary">כנראה שאתה כבר מתקדם.</span>
           </h2>
-          <p className="text-white/55 text-sm text-center leading-relaxed mb-10 max-w-md mx-auto">
-            פגישת פיצוח אחד על אחד. 30 דקות שבהן נעבור על השיחות שלך, נעשה סימולציה חיה, ותצא עם תמונה ברורה של מה לשנות.
+          <p className="text-white/65 text-base leading-relaxed mb-4 max-w-md mx-auto">
+            הכנתי עוד בונוס בשביל מתקדמים יותר שמכירים את תהליך המכירה, ורוצים לצלול יותר לעומק.
+          </p>
+          <p className="text-white/85 text-base font-semibold leading-relaxed mb-8 max-w-md mx-auto">
+            החוקים הסודיים במכירות. הדברים שאסור לך{" "}
+            <span className="text-primary">בחיים</span>{" "}
+            לעשות בשיחה, ובדיוק הם אלו שמפילים לך את העסקאות.
           </p>
 
-          <div className="flex flex-col gap-4 mb-10 max-w-md mx-auto">
-            {callFeatures.map((item) => (
-              <div
-                key={item.title}
-                className="flex items-start gap-4 bg-white/[0.05] rounded-2xl p-5 border border-white/10"
-              >
-                <item.Icon className="w-5 h-5 text-primary mt-0.5 flex-shrink-0" aria-hidden="true" />
-                <div>
-                  <p className="text-sm font-bold text-white mb-1">{item.title}</p>
-                  <p className="text-xs text-white/55 leading-relaxed">{item.desc}</p>
-                </div>
-              </div>
-            ))}
-          </div>
+          <Link
+            href="/bonus"
+            className="inline-flex items-center justify-center gap-2 h-12 px-7 rounded-full font-bold bg-primary text-primary-foreground hover:bg-primary/90 transition-colors shadow-lg shadow-primary/20"
+          >
+            לצפייה בחינם לגמרי
+            <ArrowLeft className="w-4 h-4" aria-hidden="true" />
+          </Link>
 
-          <div className="bg-white/[0.07] rounded-2xl p-6 max-w-sm mx-auto border border-white/10">
-            <p className="text-sm font-extrabold text-white text-center mb-1">
-              השאר שם ומספר ונחזור אליך
-            </p>
-            <p className="text-xs text-white/40 text-center mb-5">
-              ללא עלות. ללא התחייבות.
-            </p>
-            <NamePhonePrompt />
-          </div>
+          <p className="text-xs text-white/40 mt-4">
+            ללא הרשמה. גישה מיידית.
+          </p>
         </div>
       </section>
     </main>
