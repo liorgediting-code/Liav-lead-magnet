@@ -161,6 +161,22 @@ export async function POST(req: NextRequest) {
       }).catch(() => {})
     );
 
+    // WhatsApp sender (wa-sender-kappa) — fire only for the landing opt-in
+    // ("first form") and only when we have a phone to message. Open endpoint,
+    // tolerant of field names; URL overridable via env.
+    const waSenderWebhook =
+      process.env.WA_SENDER_WEBHOOK ||
+      "https://wa-sender-kappa.vercel.app/api/webhook";
+    if (!isOffer && phone) {
+      tasks.push(
+        fetch(waSenderWebhook, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ phone, name: name || "" }),
+        }).catch(() => {})
+      );
+    }
+
     if (eventId) {
       tasks.push(
         sendCAPI({
