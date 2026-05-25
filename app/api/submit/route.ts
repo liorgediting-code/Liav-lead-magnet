@@ -183,7 +183,6 @@ export async function POST(req: NextRequest) {
     const leadStoreWebhook = isOffer
       ? process.env.GAS_OFFER_WEBHOOK
       : process.env.SHEETS_WEBHOOK_URL;
-    const whatsappWebhook = process.env.WHATSAPP_WEBHOOK;
 
     const tasks: Promise<unknown>[] = [];
     if (leadStoreWebhook) {
@@ -194,23 +193,16 @@ export async function POST(req: NextRequest) {
         body
       );
     }
-    if (whatsappWebhook) {
-      tasks.push(postLead("whatsapp", whatsappWebhook, body));
-    }
 
-    // WhatsApp sender (wa-sender-kappa) — fire only for the landing opt-in
-    // ("first form") and only when we have a phone to message. Open endpoint,
-    // tolerant of field names; URL overridable via env.
+    // WhatsApp sender (wa-sender-kappa) — fire for the landing opt-in
+    // ("first form") when we have a phone to message. POST { phone, name }.
+    // Open endpoint, tolerant of field names; URL overridable via env.
     const waSenderWebhook =
       process.env.WA_SENDER_WEBHOOK ||
       "https://wa-sender-kappa.vercel.app/api/webhook";
     if (!isOffer && phone) {
       tasks.push(
-        fetch(waSenderWebhook, {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ phone, name: name || "" }),
-        }).catch(() => {})
+        postLead("whatsapp", waSenderWebhook, JSON.stringify({ phone, name: name || "" }))
       );
     }
 
