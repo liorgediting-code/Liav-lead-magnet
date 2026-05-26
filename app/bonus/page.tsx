@@ -86,11 +86,11 @@ export default function BonusPage() {
 
           {/* חץ הנעה לשלב הבא */}
           <div className="flex flex-col items-center mt-12 mb-2">
-            <p className="text-sm font-bold text-foreground/70 mb-3 tracking-wide">
+            <p className="text-2xl md:text-3xl font-black text-foreground mb-4 tracking-wide">
               השלב הבא
             </p>
-            <div className="w-14 h-14 rounded-full bg-primary flex items-center justify-center shadow-lg shadow-primary/40 animate-bounce">
-              <ChevronDown className="w-8 h-8 text-white" aria-hidden="true" strokeWidth={3} />
+            <div className="w-16 h-16 md:w-20 md:h-20 rounded-full bg-primary flex items-center justify-center shadow-xl shadow-primary/40 animate-bounce">
+              <ChevronDown className="w-10 h-10 md:w-12 md:h-12 text-white" aria-hidden="true" strokeWidth={3} />
             </div>
           </div>
         </div>
