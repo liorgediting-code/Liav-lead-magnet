@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
-import { Sparkles, AlertTriangle, Eye, Search, PhoneCall, RotateCcw } from "lucide-react";
+import { Sparkles, AlertTriangle, Eye, Search, PhoneCall, RotateCcw, ChevronDown } from "lucide-react";
 import NamePhonePrompt from "@/components/NamePhonePrompt";
+import ScrollToTop from "@/components/ScrollToTop";
 
 export const metadata: Metadata = {
   title: "בונוס למתקדמים | החוקים שמפילים עסקאות + סימולציית מכירה",
@@ -29,6 +30,7 @@ const callFeatures = [
 export default function BonusPage() {
   return (
     <main className="flex-1">
+      <ScrollToTop />
       {/* Header */}
       <section className="bg-gradient-to-b from-navy to-[oklch(0.22_0.04_55)] text-white">
         <div className="max-w-[720px] mx-auto px-5 py-14 text-center">
@@ -82,6 +84,15 @@ export default function BonusPage() {
             </div>
           </div>
 
+          {/* חץ הנעה לשלב הבא */}
+          <div className="flex flex-col items-center mt-12 mb-2">
+            <p className="text-sm font-bold text-foreground/70 mb-3 tracking-wide">
+              השלב הבא
+            </p>
+            <div className="w-14 h-14 rounded-full bg-primary flex items-center justify-center shadow-lg shadow-primary/40 animate-bounce">
+              <ChevronDown className="w-8 h-8 text-white" aria-hidden="true" strokeWidth={3} />
+            </div>
+          </div>
         </div>
       </section>
 
