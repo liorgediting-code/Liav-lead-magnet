@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse, after } from "next/server";
 import { createHash } from "crypto";
 import { isValidIsraeliPhone } from "@/lib/utils";
+import { sendLeadToResponder } from "@/lib/responder";
 
 type Attribution = {
   utm_source?: string;
@@ -221,6 +222,20 @@ export async function POST(req: NextRequest) {
           userAgent,
           sourceUrl,
         }).catch(() => {})
+      );
+    }
+
+    // Push to Responder (רב מסר) — landing opt-in only (offer is a separate
+    // funnel stage). Best-effort, doesn't block the response.
+    if (!isOffer && email) {
+      tasks.push(
+        sendLeadToResponder({
+          name: name || undefined,
+          email,
+          phone: phone || undefined,
+        }).catch((e) => {
+          console.error("[lead] responder push failed:", e);
+        })
       );
     }
 
