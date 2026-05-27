@@ -65,8 +65,19 @@ export default function LandingPage() {
             כדי שתדע בדיוק מה להגיד בכל רגע בשיחה, ותגיע לסגירה מהר יותר
           </p>
 
+          {/* Hero form card */}
+          <div className="bg-card rounded-2xl p-6 max-w-sm mx-auto shadow-2xl shadow-black/50 mb-12">
+            <p className="text-sm font-extrabold text-foreground mb-1 text-center">
+              קבל את התבנית עכשיו
+            </p>
+            <p className="text-xs text-muted-foreground text-center mb-5 leading-relaxed">
+              מעבר ישיר לתבנית + נשלח ישירות למייל
+            </p>
+            <OptInForm />
+          </div>
+
           {/* Benefit bullets — start-aligned for personality */}
-          <ul className="flex flex-col gap-3 mb-12 max-w-md mx-auto">
+          <ul className="flex flex-col gap-3 max-w-md mx-auto">
             {benefits.map((b) => (
               <li key={b} className="flex items-start gap-3">
                 <span className="mt-0.5 flex-shrink-0 w-5 h-5 rounded-full bg-primary/20 flex items-center justify-center">
@@ -76,17 +87,6 @@ export default function LandingPage() {
               </li>
             ))}
           </ul>
-
-          {/* Hero form card */}
-          <div className="bg-card rounded-2xl p-6 max-w-sm mx-auto shadow-2xl shadow-black/50">
-            <p className="text-sm font-extrabold text-foreground mb-1 text-center">
-              קבל את התבנית עכשיו
-            </p>
-            <p className="text-xs text-muted-foreground text-center mb-5 leading-relaxed">
-              מעבר ישיר לתבנית + נשלח ישירות למייל
-            </p>
-            <OptInForm />
-          </div>
         </div>
       </section>
 
