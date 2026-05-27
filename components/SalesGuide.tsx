@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { Lightbulb, AlertCircle, Trophy, ChevronDown } from "lucide-react";
 
 const steps = [
@@ -211,7 +212,10 @@ export default function SalesGuide() {
             <Trophy className="w-5 h-5 text-white" aria-hidden="true" />
           </div>
         </div>
-        <div className="flex-1 rounded-2xl bg-primary p-5 flex items-center justify-between shadow-lg shadow-primary/25">
+        <Link
+          href="/bonus"
+          className="flex-1 rounded-2xl bg-primary p-5 flex items-center justify-between shadow-lg shadow-primary/25 transition-transform hover:scale-[1.02] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
+        >
           <div>
             <p className="text-xs font-bold text-primary-foreground/70 uppercase tracking-widest mb-0.5">
               התוצאה
@@ -223,7 +227,7 @@ export default function SalesGuide() {
           <div className="text-4xl opacity-20 font-black text-white">
             ✓
           </div>
-        </div>
+        </Link>
       </div>
 
       {/* חץ הנעה ללמטה */}
