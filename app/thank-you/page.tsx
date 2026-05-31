@@ -50,6 +50,36 @@ export default function ThankYouPage() {
         </div>
       </section>
 
+      {/* Personal implementation interrupt */}
+      <section className="bg-[oklch(0.22_0.04_55)]">
+        <div className="max-w-[680px] mx-auto px-5 py-10">
+          <div className="rounded-2xl border border-primary/40 bg-primary/[0.07] p-7 md:p-8 text-center">
+            <p className="text-white/50 text-sm mb-5 leading-relaxed">
+              אבל רגע לפני שאתה צולל לקריאה...
+            </p>
+            <h2 className="text-xl md:text-2xl font-extrabold text-white leading-tight mb-4">
+              רוצה שאעזור לך ליישם את ה&apos;פרוטוקול&apos;
+              <br />
+              על הקמפיינים שלך –{" "}
+              <span className="text-primary">באופן אישי?</span>
+            </h2>
+            <p className="text-white/60 text-sm leading-relaxed mb-7 max-w-md mx-auto">
+              המדריך ייתן לך את המפות, אבל אם אתה רוצה לקצר את הדרך ולבנות מנגנון ממומן שמביא לקוחות זהב על אוטומט — אני מזמין אותך לשיחת אסטרטגיה ממוקדת{" "}
+              <span className="font-bold text-white">(בשווי 500 ש&quot;ח ללא עלות)</span>.
+            </p>
+            <a
+              href={CALENDLY_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center justify-center h-13 px-9 bg-primary text-primary-foreground font-bold text-base rounded-xl hover:bg-primary/90 transition-colors duration-200 shadow-lg shadow-primary/30 active:scale-[0.98] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
+            >
+              קבע שיחת אסטרטגיה — בחינם
+            </a>
+            <p className="text-white/30 text-xs mt-3">בשווי 500 ש&quot;ח · ללא עלות · ללא התחייבות</p>
+          </div>
+        </div>
+      </section>
+
       {/* Inbox instructions */}
       <section className="max-w-[680px] mx-auto px-5 py-12">
         <div className="rounded-2xl border border-primary/30 bg-gradient-to-br from-primary/[0.08] via-card to-card overflow-hidden shadow-sm">
