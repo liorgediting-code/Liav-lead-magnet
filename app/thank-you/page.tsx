@@ -58,13 +58,13 @@ export default function ThankYouPage() {
               אבל רגע לפני שאתה צולל לקריאה...
             </p>
             <h2 className="text-xl md:text-2xl font-extrabold text-white leading-tight mb-4">
-              רוצה שאעזור לך ליישם את ה&apos;פרוטוקול&apos;
+              רוצה שאעזור לך ליישם את התבנית
               <br />
-              על הקמפיינים שלך –{" "}
+              בעסק שלך –{" "}
               <span className="text-primary">באופן אישי?</span>
             </h2>
             <p className="text-white/60 text-sm leading-relaxed mb-7 max-w-md mx-auto">
-              המדריך ייתן לך את המפות, אבל אם אתה רוצה לקצר את הדרך ולבנות מנגנון ממומן שמביא לקוחות זהב על אוטומט — אני מזמין אותך לשיחת אסטרטגיה ממוקדת{" "}
+              התבנית ב-8 השלבים תיתן לך את המפה, אבל אם אתה רוצה לקצר את הדרך וליישם אותה בדיוק על המוצר שלך — אני מזמין אותך לפגישת פיצוח ממוקדת{" "}
               <span className="font-bold text-white">(בשווי 500 ש&quot;ח ללא עלות)</span>.
             </p>
             <a
@@ -73,7 +73,7 @@ export default function ThankYouPage() {
               rel="noopener noreferrer"
               className="inline-flex items-center justify-center h-13 px-9 bg-primary text-primary-foreground font-bold text-base rounded-xl hover:bg-primary/90 transition-colors duration-200 shadow-lg shadow-primary/30 active:scale-[0.98] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
             >
-              קבע שיחת אסטרטגיה — בחינם
+              קבע פגישת פיצוח — בחינם
             </a>
             <p className="text-white/30 text-xs mt-3">בשווי 500 ש&quot;ח · ללא עלות · ללא התחייבות</p>
           </div>
