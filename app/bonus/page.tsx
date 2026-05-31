@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
-import { Sparkles, AlertTriangle, Eye, Search, PhoneCall, RotateCcw, ChevronDown } from "lucide-react";
-import NamePhonePrompt from "@/components/NamePhonePrompt";
+import { Sparkles, AlertTriangle, Eye, Wrench, SlidersHorizontal, Clock, ChevronDown } from "lucide-react";
 import ScrollToTop from "@/components/ScrollToTop";
 
 export const metadata: Metadata = {
@@ -9,21 +8,23 @@ export const metadata: Metadata = {
   robots: "noindex",
 };
 
+const CALENDLY_URL = "https://calendly.com/liavcohen798/30min";
+
 const callFeatures = [
   {
-    Icon: Search,
-    title: "נבין יחד איפה השיחות שלך נופלות",
-    desc: "נעבור על תהליך המכירה שלך ונאתר בדיוק באיזה שלב הלקוחות מתנתקים ולמה.",
+    Icon: Wrench,
+    title: "נטמיע את כל 8 השלבים על המוצר שלך",
+    desc: "לא תבנית גנרית — נעבור שלב-שלב ונתאים כל אחד בדיוק למוצר, לקהל ולדרך המכירה שלך.",
   },
   {
-    Icon: PhoneCall,
-    title: "סימולציית שיחת מכירה חיה",
-    desc: "אני אהיה הלקוח, אתה תמכור לי. נראה בזמן אמת במה אתה מתקשה ומה אפשר לשפר.",
+    Icon: SlidersHorizontal,
+    title: "תצא עם תסריט מכירה מוכן ליישום",
+    desc: "בסוף הפגישה יהיה לך תסריט ספציפי שאתה יכול להשתמש בו כבר בשיחה הבאה שלך.",
   },
   {
-    Icon: RotateCcw,
-    title: "תצא עם תסריט מותאם ונקודות שיפור ברורות",
-    desc: "לא עצות כלליות. תסריט שמתאים לעסק שלך ורשימה ספציפית של מה לתקן.",
+    Icon: Clock,
+    title: "30 דקות. בלי תשלום. בלי התחייבות.",
+    desc: "פגישת פיצוח חינמית לגמרי, רק כדי שתצא עם תבנית שעובדת בשבילך.",
   },
 ];
 
@@ -143,11 +144,11 @@ export default function BonusPage() {
             הצעד האחרון, והכי חשוב
           </p>
           <h2 className="text-2xl md:text-3xl font-extrabold text-white leading-tight mb-3 text-center">
-            עכשיו בוא נעשה את זה{" "}
-            <span className="text-primary">על המוצר שלך</span>
+            עכשיו בוא נטמיע את התבנית{" "}
+            <span className="text-primary">בעסק שלך</span>
           </h2>
           <p className="text-white/55 text-sm text-center leading-relaxed mb-10 max-w-md mx-auto">
-            פגישת פיצוח חינמית לגמרי. נעשה סימולציית מכירה אמיתית על המוצר שלך, ותוך כדי נשפר את תהליך המכירה שלך, צעד-צעד, בזמן אמת.
+            ראית את התבנית בפעולה — עכשיו הגיע הזמן ליישם אותה ספציפית על המוצר שלך. בפגישת פיצוח אנחנו עושים את זה יחד, צעד-צעד.
           </p>
 
           <div className="flex flex-col gap-4 mb-10 max-w-md mx-auto">
@@ -165,14 +166,16 @@ export default function BonusPage() {
             ))}
           </div>
 
-          <div className="bg-white/[0.07] rounded-2xl p-6 max-w-sm mx-auto border border-white/10">
-            <p className="text-sm font-extrabold text-white text-center mb-1">
-              השאר שם ומספר ונתאם פגישת פיצוח
-            </p>
-            <p className="text-xs text-white/40 text-center mb-5">
-              חינם לגמרי. ללא התחייבות.
-            </p>
-            <NamePhonePrompt />
+          <div className="text-center">
+            <a
+              href={CALENDLY_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center justify-center h-14 px-10 bg-primary text-primary-foreground font-bold text-base rounded-xl hover:bg-primary/90 transition-colors duration-200 shadow-lg shadow-primary/25 active:scale-[0.98] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
+            >
+              קבע פגישת פיצוח חינם
+            </a>
+            <p className="text-white/35 text-xs mt-3">חינם לגמרי. ללא התחייבות.</p>
           </div>
         </div>
       </section>
