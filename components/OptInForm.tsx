@@ -15,10 +15,12 @@ export default function OptInForm() {
   const nameId = `${fieldId}-name`;
   const phoneId = `${fieldId}-phone`;
   const emailId = `${fieldId}-email`;
+  const errorId = `${fieldId}-error`;
   const [form, setForm] = useState({ name: "", phone: "", email: "" });
   const [consent, setConsent] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
+  const [errors, setErrors] = useState<Record<string, string>>({});
 
   function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
     setForm((prev) => ({ ...prev, [e.target.name]: e.target.value }));
@@ -27,25 +29,33 @@ export default function OptInForm() {
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     setError("");
+    setErrors({});
+    const newErrors: Record<string, string> = {};
 
-    if (!form.name.trim() || !form.email.trim()) {
-      setError("מלא שם ואימייל כדי להמשיך");
-      return;
+    if (!form.name.trim()) {
+      newErrors.name = "הוסף שם כדי להמשיך";
     }
 
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRegex.test(form.email)) {
-      setError("האימייל לא נראה תקין, בדוק שיש @");
-      return;
+    if (!form.email.trim()) {
+      newErrors.email = "הוסף אימייל כדי להמשיך";
+    } else {
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!emailRegex.test(form.email)) {
+        newErrors.email = "האימייל לא נראה תקין (בדוק שיש @)";
+      }
     }
 
     if (form.phone.trim() && !isValidIsraeliPhone(form.phone)) {
-      setError(PHONE_ERROR);
-      return;
+      newErrors.phone = PHONE_ERROR;
     }
 
     if (!consent) {
-      setError("סמן את תיבת האישור כדי להמשיך");
+      newErrors.consent = "סמן את תיבת האישור כדי להמשיך";
+    }
+
+    if (Object.keys(newErrors).length > 0) {
+      setErrors(newErrors);
+      setError("בדוק את השגיאות בטופס");
       return;
     }
 
@@ -59,12 +69,15 @@ export default function OptInForm() {
         body: JSON.stringify({ ...form, attribution, eventId }),
       });
 
-      if (!res.ok) throw new Error("שגיאה בשרת");
+      if (!res.ok) {
+        const data = await res.json().catch(() => ({}));
+        throw new Error(data.error || "קרתה שגיאה בשרת");
+      }
       trackLead({ email: form.email, phone: form.phone }, eventId);
       await new Promise((resolve) => setTimeout(resolve, 300));
       router.push("/thank-you");
-    } catch {
-      setError("קרתה תקלה, נסה שוב");
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "קרתה תקלה, בדוק את הנתונים ונסה שוב");
       setLoading(false);
     }
   }
@@ -79,13 +92,21 @@ export default function OptInForm() {
           id={nameId}
           name="name"
           type="text"
+          autoComplete="name"
           placeholder="ישראל ישראלי"
           value={form.name}
           onChange={handleChange}
-          className="text-base h-12 bg-white border-border/60 focus-visible:ring-primary"
+          aria-invalid={!!errors.name}
+          aria-describedby={errors.name ? `${nameId}-error` : undefined}
+          className={`text-base h-12 bg-white border-border/60 focus-visible:ring-primary ${errors.name ? "border-destructive" : ""}`}
           disabled={loading}
           required
         />
+        {errors.name && (
+          <p id={`${nameId}-error`} className="text-xs text-destructive font-medium">
+            {errors.name}
+          </p>
+        )}
       </div>
 
       <div className="flex flex-col gap-1.5">
@@ -96,12 +117,20 @@ export default function OptInForm() {
           id={phoneId}
           name="phone"
           type="tel"
+          autoComplete="tel"
           placeholder="050-1234567"
           value={form.phone}
           onChange={handleChange}
-          className="text-base h-12 bg-white border-border/60 focus-visible:ring-primary"
+          aria-invalid={!!errors.phone}
+          aria-describedby={errors.phone ? `${phoneId}-error` : undefined}
+          className={`text-base h-12 bg-white border-border/60 focus-visible:ring-primary ${errors.phone ? "border-destructive" : ""}`}
           disabled={loading}
         />
+        {errors.phone && (
+          <p id={`${phoneId}-error`} className="text-xs text-destructive font-medium">
+            {errors.phone}
+          </p>
+        )}
       </div>
 
       <div className="flex flex-col gap-1.5">
@@ -112,28 +141,44 @@ export default function OptInForm() {
           id={emailId}
           name="email"
           type="email"
+          autoComplete="email"
           placeholder="israel@example.com"
           value={form.email}
           onChange={handleChange}
-          className="text-base h-12 bg-white border-border/60 focus-visible:ring-primary"
+          aria-invalid={!!errors.email}
+          aria-describedby={errors.email ? `${emailId}-error` : undefined}
+          className={`text-base h-12 bg-white border-border/60 focus-visible:ring-primary ${errors.email ? "border-destructive" : ""}`}
           disabled={loading}
           required
         />
+        {errors.email && (
+          <p id={`${emailId}-error`} className="text-xs text-destructive font-medium">
+            {errors.email}
+          </p>
+        )}
       </div>
 
       {/* Consent checkbox — חוק התקשורת (בזק ושידורים) תיקון מס׳ 40 */}
-      <label className="flex items-start gap-3 cursor-pointer">
-        <input
-          type="checkbox"
-          checked={consent}
-          onChange={(e) => setConsent(e.target.checked)}
-          disabled={loading}
-          className="mt-1 w-4 h-4 accent-primary flex-shrink-0 cursor-pointer"
-        />
-        <span className="text-xs text-muted-foreground leading-relaxed">
-          אני מאשר/ת קבלת תכנים שיווקיים ועדכונים בדוא״ל. ניתן לבטל בכל עת.
-        </span>
-      </label>
+      <div className="flex flex-col gap-1">
+        <label className="flex items-start gap-3 cursor-pointer">
+          <input
+            type="checkbox"
+            checked={consent}
+            onChange={(e) => setConsent(e.target.checked)}
+            disabled={loading}
+            aria-invalid={!!errors.consent}
+            className="mt-1 w-4 h-4 accent-primary flex-shrink-0 cursor-pointer"
+          />
+          <span className="text-xs text-muted-foreground leading-relaxed">
+            אני מאשר/ת קבלת תכנים שיווקיים ועדכונים בדוא״ל. ניתן לבטל בכל עת.
+          </span>
+        </label>
+        {errors.consent && (
+          <p className="text-xs text-destructive font-medium">
+            {errors.consent}
+          </p>
+        )}
+      </div>
 
       {error && (
         <p className="text-sm text-destructive font-medium text-center">

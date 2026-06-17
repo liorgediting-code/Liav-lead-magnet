@@ -21,7 +21,7 @@ function ScrollCue({ label }: { label: string }) {
   return (
     <div className="flex flex-col items-center gap-2 py-6">
       <p className="text-sm font-bold text-foreground/70">{label}</p>
-      <div className="w-10 h-10 rounded-full bg-primary/15 border border-primary/30 flex items-center justify-center animate-bounce">
+      <div className="w-10 h-10 rounded-full bg-primary/15 border border-primary/30 flex items-center justify-center" style={{ animation: 'var(--animate-scroll-cue)' }}>
         <ChevronDown className="w-5 h-5 text-primary" aria-hidden="true" strokeWidth={3} />
       </div>
     </div>
@@ -58,7 +58,7 @@ export default function LandingPage() {
             <br />
             <span className="text-primary">כדי לסגור עסקאות בעשרות אלפי שקלים</span>
             <br />
-            <span className="text-4xl md:text-6xl">עכשיו בחינם</span>
+            <span className="text-2xl md:text-4xl">עכשיו בחינם</span>
           </h1>
 
           <p className="text-base text-white/55 text-center mb-10 leading-relaxed">
@@ -121,13 +121,6 @@ export default function LandingPage() {
         </div>
       </section>
 
-      {/* Scroll cue */}
-      <div className="bg-background">
-        <div className="max-w-[640px] mx-auto px-5">
-          <ScrollCue label="מי עומד מאחורי התבנית" />
-        </div>
-      </div>
-
       {/* ── 3. CREDENTIALS ── */}
       <FadeIn>
         <section className="bg-navy">
@@ -148,18 +141,6 @@ export default function LandingPage() {
         </section>
       </FadeIn>
 
-      {/* Scroll cue (on navy) */}
-      <div className="bg-navy">
-        <div className="max-w-[640px] mx-auto px-5">
-          <div className="flex flex-col items-center gap-2 py-6">
-            <p className="text-sm font-bold text-white/80">תראה הוכחות מהשטח</p>
-            <div className="w-10 h-10 rounded-full bg-primary/20 border border-primary/40 flex items-center justify-center animate-bounce">
-              <ChevronDown className="w-5 h-5 text-primary" aria-hidden="true" strokeWidth={3} />
-            </div>
-          </div>
-        </div>
-      </div>
-
       {/* ── 4. PHOTO TESTIMONIALS ── */}
       <FadeIn>
         <section className="bg-background">
@@ -171,13 +152,6 @@ export default function LandingPage() {
           </div>
         </section>
       </FadeIn>
-
-      {/* Scroll cue */}
-      <div className="bg-background">
-        <div className="max-w-[640px] mx-auto px-5">
-          <ScrollCue label="עוד המלצות בוידאו" />
-        </div>
-      </div>
 
       {/* ── 5. VIDEO TESTIMONIALS ── */}
       <FadeIn>
@@ -193,13 +167,6 @@ export default function LandingPage() {
           </div>
         </section>
       </FadeIn>
-
-      {/* Scroll cue */}
-      <div className="bg-background">
-        <div className="max-w-[640px] mx-auto px-5">
-          <ScrollCue label="יש לך שאלה? כנראה ענינו עליה" />
-        </div>
-      </div>
 
       {/* ── 6. FAQ ── */}
       <FadeIn>

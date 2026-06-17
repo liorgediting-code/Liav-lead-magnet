@@ -1,32 +1,13 @@
 import type { Metadata } from "next";
-import { Sparkles, AlertTriangle, Eye, Wrench, SlidersHorizontal, Clock, ChevronDown } from "lucide-react";
+import { Sparkles, AlertTriangle, Eye, ChevronDown } from "lucide-react";
 import ScrollToTop from "@/components/ScrollToTop";
+import { CalendlyCallout } from "@/components/CalendlyCallout";
 
 export const metadata: Metadata = {
   title: "בונוס למתקדמים | החוקים שמפילים עסקאות + סימולציית מכירה",
   description: "שני סרטוני בונוס: החוקים שאסור לעשות בשיחת מכירה וסימולציה אמיתית עם לקוח",
   robots: "noindex",
 };
-
-const CALENDLY_URL = "https://calendly.com/liavcohen798/30min";
-
-const callFeatures = [
-  {
-    Icon: Wrench,
-    title: "נטמיע את כל 8 השלבים על המוצר שלך",
-    desc: "לא תבנית גנרית — נעבור שלב-שלב ונתאים כל אחד בדיוק למוצר, לקהל ולדרך המכירה שלך.",
-  },
-  {
-    Icon: SlidersHorizontal,
-    title: "תצא עם תסריט מכירה מוכן ליישום",
-    desc: "בסוף הפגישה יהיה לך תסריט ספציפי שאתה יכול להשתמש בו כבר בשיחה הבאה שלך.",
-  },
-  {
-    Icon: Clock,
-    title: "30 דקות. בלי תשלום. בלי התחייבות.",
-    desc: "פגישת פיצוח חינמית לגמרי, רק כדי שתצא עם תבנית שעובדת בשבילך.",
-  },
-];
 
 export default function BonusPage() {
   return (
@@ -90,7 +71,7 @@ export default function BonusPage() {
             <p className="text-2xl md:text-3xl font-black text-foreground mb-4 tracking-wide">
               השלב הבא
             </p>
-            <div className="w-16 h-16 md:w-20 md:h-20 rounded-full bg-primary flex items-center justify-center shadow-xl shadow-primary/40 animate-bounce">
+            <div className="w-16 h-16 md:w-20 md:h-20 rounded-full bg-primary flex items-center justify-center shadow-xl shadow-primary/40" style={{ animation: 'var(--animate-scroll-cue)' }}>
               <ChevronDown className="w-10 h-10 md:w-12 md:h-12 text-white" aria-hidden="true" strokeWidth={3} />
             </div>
           </div>
@@ -138,47 +119,13 @@ export default function BonusPage() {
       </section>
 
       {/* פגישת פיצוח */}
-      <section className="bg-navy">
-        <div className="max-w-[680px] mx-auto px-5 py-16 md:py-20">
-          <p className="text-primary text-xs font-bold tracking-widest uppercase text-center mb-3">
-            הצעד האחרון, והכי חשוב
-          </p>
-          <h2 className="text-2xl md:text-3xl font-extrabold text-white leading-tight mb-3 text-center">
-            עכשיו בוא נטמיע את התבנית{" "}
-            <span className="text-primary">בעסק שלך</span>
-          </h2>
-          <p className="text-white/55 text-sm text-center leading-relaxed mb-10 max-w-md mx-auto">
-            ראית את התבנית בפעולה — עכשיו הגיע הזמן ליישם אותה ספציפית על המוצר שלך. בפגישת פיצוח אנחנו עושים את זה יחד, צעד-צעד.
-          </p>
-
-          <div className="flex flex-col gap-4 mb-10 max-w-md mx-auto">
-            {callFeatures.map((item) => (
-              <div
-                key={item.title}
-                className="flex items-start gap-4 bg-white/[0.05] rounded-2xl p-5 border border-white/10"
-              >
-                <item.Icon className="w-5 h-5 text-primary mt-0.5 flex-shrink-0" aria-hidden="true" />
-                <div>
-                  <p className="text-sm font-bold text-white mb-1">{item.title}</p>
-                  <p className="text-xs text-white/55 leading-relaxed">{item.desc}</p>
-                </div>
-              </div>
-            ))}
-          </div>
-
-          <div className="text-center">
-            <a
-              href={CALENDLY_URL}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center justify-center h-14 px-10 bg-primary text-primary-foreground font-bold text-base rounded-xl hover:bg-primary/90 transition-colors duration-200 shadow-lg shadow-primary/25 active:scale-[0.98] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
-            >
-              קבע פגישת פיצוח חינם
-            </a>
-            <p className="text-white/35 text-xs mt-3">חינם לגמרי. ללא התחייבות.</p>
-          </div>
-        </div>
-      </section>
+      <CalendlyCallout
+        title="עכשיו בוא נטמיע את התבנית בעסק שלך"
+        intro="ראית את התבנית בפעולה — עכשיו הגיע הזמן ליישם אותה ספציפית על המוצר שלך. בפגישת פיצוח אנחנו עושים את זה יחד, צעד-צעד."
+        variant="dark"
+        buttonText="קבע פגישת פיצוח חינם"
+        subtitle="חינם לגמרי. ללא התחייבות."
+      />
     </main>
   );
 }

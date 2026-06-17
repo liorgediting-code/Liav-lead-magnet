@@ -238,7 +238,7 @@ export default function SalesGuide() {
         <p className="text-sm text-foreground/60 mb-3">
           הנה משהו שיחדש לך, למטה.
         </p>
-        <div className="w-14 h-14 rounded-full bg-primary flex items-center justify-center shadow-lg shadow-primary/40 animate-bounce">
+        <div className="w-14 h-14 rounded-full bg-primary flex items-center justify-center shadow-lg shadow-primary/40" style={{ animation: 'var(--animate-scroll-cue)' }}>
           <ChevronDown className="w-8 h-8 text-white" aria-hidden="true" strokeWidth={3} />
         </div>
       </div>
