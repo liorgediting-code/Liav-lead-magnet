@@ -1,6 +1,13 @@
 "use client";
 
-import { Wrench, SlidersHorizontal, Clock, LucideIcon } from "lucide-react";
+import {
+  Wrench,
+  SlidersHorizontal,
+  Clock,
+  PlayCircle,
+  Target,
+  LucideIcon,
+} from "lucide-react";
 
 const CALENDLY_URL = "https://calendly.com/liavcohen798/30min";
 
@@ -28,31 +35,59 @@ const DEFAULT_FEATURES: CallFeature[] = [
   },
 ];
 
+const SIMULATION_FEATURES: CallFeature[] = [
+  {
+    Icon: PlayCircle,
+    title: "סימולציית מכירות חיה מולי",
+    desc: "ניכנס לתרגול אמיתי — אתה מוכר, אני הלקוח. תרגיש על הגוף איך מקשיבים, משיבים בשאלה ומובילים לסגירה.",
+  },
+  {
+    Icon: Target,
+    title: "נפצח את השיחה הספציפית שלך",
+    desc: "ניקח את המוצר, הקהל וההתנגדויות האמיתיות שלך, ונבנה יחד את הדרך להוביל אותם מנקודה A לנקודה B.",
+  },
+  {
+    Icon: Clock,
+    title: "30 דקות. בלי תשלום. בלי התחייבות.",
+    desc: "פגישת פיצוח חינמית לגמרי, רק כדי שתצא עם ביטחון וודאות לשיחה הבאה שלך.",
+  },
+];
+
+const FEATURE_PRESETS: Record<string, CallFeature[]> = {
+  template: DEFAULT_FEATURES,
+  simulation: SIMULATION_FEATURES,
+};
+
 interface CalendlyCalloutProps {
   title?: string;
   intro?: string;
   features?: CallFeature[];
+  featurePreset?: "template" | "simulation";
   variant?: "light" | "dark";
   buttonText?: string;
   subtitle?: string;
+  eyebrow?: string;
 }
 
 export function CalendlyCallout({
   title = "רוצה שאעזור לך ליישם את התבנית\nבעסק שלך – באופן אישי?",
   intro = "התבנית ב-8 השלבים שקיבלת היא כלי עוצמתי — אבל ליישם אותה נכון על המוצר שלך זה משהו אחר. בפגישת פיצוח אנחנו עושים את זה יחד, ספציפית לעסק שלך.",
-  features = DEFAULT_FEATURES,
+  features,
+  featurePreset = "template",
   variant = "dark",
   buttonText = "קבע פגישת פיצוח חינם",
   subtitle = "חינם לגמרי. ללא התחייבות.",
+  eyebrow = "בזמן שאתה מחכה למייל",
 }: CalendlyCalloutProps) {
   const isDark = variant === "dark";
+  const resolvedFeatures = features ?? FEATURE_PRESETS[featurePreset];
 
   return (
     <section className={isDark ? "bg-navy" : "bg-[oklch(0.22_0.04_55)]"}>
       <div className="max-w-[680px] mx-auto px-5 py-16 md:py-20">
-        {isDark && (
+        {isDark && eyebrow && (
           <p className="text-primary text-xs font-bold tracking-widest uppercase text-center mb-3">
-            בזמן שאתה מחכה למייל
+            {eyebrow}
           </p>
         )}
         <h2 className={`text-2xl md:text-3xl font-extrabold leading-tight mb-3 text-center ${
@@ -71,9 +106,9 @@ export function CalendlyCallout({
           {intro}
         </p>
 
-        {features.length > 0 && (
+        {resolvedFeatures.length > 0 && (
           <div className="flex flex-col gap-4 mb-10 max-w-md mx-auto">
-            {features.map((item) => (
+            {resolvedFeatures.map((item) => (
               <div
                 key={item.title}
                 className={`flex items-start gap-4 rounded-2xl p-5 border ${

@@ -1,9 +1,6 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 import {
   CheckCircle,
-  ArrowLeft,
-  Gift,
   Ear,
   MessageCircleQuestion,
   Search,
@@ -11,6 +8,7 @@ import {
   Check,
 } from "lucide-react";
 import FadeIn from "@/components/FadeIn";
+import { CalendlyCallout } from "@/components/CalendlyCallout";
 
 export const metadata: Metadata = {
   title: "המדריך שלך | להוביל כל שיחה ולסגור עסקאות פרימיום",
@@ -349,38 +347,14 @@ export default function GuidePage() {
         </FadeIn>
       </section>
 
-      {/* CTA — מתנה למשתתפי הוובינר */}
-      <section className="bg-navy">
-        <div className="max-w-[720px] mx-auto px-5 py-16 md:py-20 text-center">
-          <div className="inline-flex items-center gap-2 bg-primary/15 border border-primary/30 rounded-full px-4 py-1.5 mb-6">
-            <Gift className="w-4 h-4 text-primary" aria-hidden="true" />
-            <span className="text-primary text-xs font-bold tracking-wide">
-              מתנה בשבילך, כמשתתף בוובינר
-            </span>
-          </div>
-
-          <h2 className="text-[1.375rem] md:text-3xl font-extrabold text-white leading-snug md:leading-tight mb-4 text-balance">
-            רוצה לצלול <span className="text-primary">עוד יותר לעומק?</span>
-          </h2>
-          <p className="text-white/65 text-base leading-relaxed mb-4 max-w-md mx-auto">
-            כי נרשמת לוובינר, הכנתי לך בונוס נוסף במתנה: החוקים הסודיים במכירות.
-          </p>
-          <p className="text-white/85 text-base font-semibold leading-relaxed mb-8 max-w-md mx-auto">
-            הדברים שאסור לך <span className="text-primary">בחיים</span> לעשות
-            בשיחה, ובדיוק הם אלו שמפילים לך את העסקאות.
-          </p>
-
-          <Link
-            href="/bonus"
-            className="inline-flex items-center justify-center gap-2 h-12 px-7 rounded-full font-bold bg-primary text-primary-foreground hover:bg-primary/90 transition-colors shadow-lg shadow-primary/20"
-          >
-            לקבלת המתנה בחינם
-            <ArrowLeft className="w-4 h-4" aria-hidden="true" />
-          </Link>
-
-          <p className="text-xs text-white/40 mt-4">ללא הרשמה. גישה מיידית.</p>
-        </div>
-      </section>
+      {/* CTA — פגישת פיצוח עם סימולציית מכירות */}
+      <CalendlyCallout
+        eyebrow="הצעד הבא, באופן אישי"
+        title={"בוא נעשה פגישת פיצוח\nעם סימולציית מכירות אמיתית"}
+        intro="לקרוא על הקשבה ולהשיב בשאלה זה נחמד — אבל השינוי האמיתי קורה כשמתרגלים. בפגישת פיצוח נעשה יחד סימולציית מכירות חיה, ונתרגם את המדריך הזה לשיחה שאתה מוביל בביטחון."
+        featurePreset="simulation"
+        buttonText="קבע פגישת פיצוח חינם"
+      />
     </main>
   );
 }
