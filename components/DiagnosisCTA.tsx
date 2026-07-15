@@ -69,7 +69,7 @@ export function DiagnosisCTA() {
             {/* למי זה מיועד */}
             <p className="text-sm text-white/50 leading-relaxed mb-8 ps-4 border-s border-white/15">
               <span className="font-bold text-white/80">מיועד לבעלי עסקים</span>{" "}
-              שמוכרים שירות, סדנאות או ליווי, ומקבלים מעל 20 פניות בחודש.
+              שמוכרים שירות או ליווי, ומקבלים מעל 20 פניות בחודש.
             </p>
 
             {/* ההבטחה הגדולה */}
@@ -78,9 +78,9 @@ export function DiagnosisCTA() {
                 המטרה של הפגישה
               </p>
               <p className="font-display text-2xl md:text-[1.75rem] font-black text-white leading-tight">
-                לבנות לך מנגנון שסוגר{" "}
-                <span className="text-primary">כל ליד רלוונטי כבר בשיחה הראשונה</span>
-                , תוך <span className="text-primary">90 יום</span>.
+                לבנות לך תהליך מכירה שיעזור לך{" "}
+                <span className="text-primary">לסגור לקוח כבר בשיחה הבאה שלך</span>{" "}
+                בקלות יותר.
               </p>
               <ul className="flex flex-col gap-2 mt-5">
                 {objections.map((item) => (
