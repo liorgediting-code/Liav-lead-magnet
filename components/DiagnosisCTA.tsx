@@ -125,7 +125,7 @@ export function DiagnosisCTA() {
                 לתיאום פגישת אבחון בחינם 👇
               </a>
               <p className="text-xs mt-3 text-white/35">
-                30 דקות. בלי תשלום. בלי התחייבות.
+                45 דקות. בלי תשלום. בלי התחייבות.
               </p>
             </div>
           </div>

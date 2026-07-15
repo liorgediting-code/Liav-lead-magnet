@@ -65,7 +65,6 @@ export default function GuidePage() {
         <div className="relative max-w-[760px] mx-auto px-5 pt-16 pb-14 md:pt-24 md:pb-20">
           <div className="flex items-center gap-3 text-[11px] font-bold tracking-[0.2em] uppercase text-primary mb-8">
             <span className="w-8 h-px bg-primary/60" aria-hidden="true" />
-            מדריך שדה
             <span className="text-white/30 tracking-normal normal-case font-medium">
               6 דקות קריאה
             </span>
