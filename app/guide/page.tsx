@@ -8,7 +8,7 @@ import {
   Check,
 } from "lucide-react";
 import FadeIn from "@/components/FadeIn";
-import { CalendlyCallout } from "@/components/CalendlyCallout";
+import { DiagnosisCTA } from "@/components/DiagnosisCTA";
 
 export const metadata: Metadata = {
   title: "המדריך שלך | להוביל כל שיחה ולסגור עסקאות פרימיום",
@@ -347,14 +347,8 @@ export default function GuidePage() {
         </FadeIn>
       </section>
 
-      {/* CTA — פגישת פיצוח עם סימולציית מכירות */}
-      <CalendlyCallout
-        eyebrow="הצעד הבא, באופן אישי"
-        title={"בוא נעשה פגישת פיצוח\nעם סימולציית מכירות אמיתית"}
-        intro="לקרוא על הקשבה ולהשיב בשאלה זה נחמד — אבל השינוי האמיתי קורה כשמתרגלים. בפגישת פיצוח נעשה יחד סימולציית מכירות חיה, ונתרגם את המדריך הזה לשיחה שאתה מוביל בביטחון."
-        featurePreset="simulation"
-        buttonText="קבע פגישת פיצוח חינם"
-      />
+      {/* CTA — פגישת אבחון אישית עם סימולציית מכירות */}
+      <DiagnosisCTA />
     </main>
   );
 }
