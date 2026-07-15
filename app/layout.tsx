@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Heebo } from "next/font/google";
+import { Heebo, Frank_Ruhl_Libre } from "next/font/google";
 import Script from "next/script";
 import AttributionCapture from "@/components/AttributionCapture";
 import "./globals.css";
@@ -11,6 +11,15 @@ const heebo = Heebo({
   display: "swap",
   preload: true,
   adjustFontFallback: true,
+});
+
+// Display serif for headings · editorial, authored-playbook character.
+const frankRuhl = Frank_Ruhl_Libre({
+  subsets: ["hebrew", "latin"],
+  weight: ["500", "700", "800", "900"],
+  variable: "--font-display",
+  display: "swap",
+  preload: true,
 });
 
 export const metadata: Metadata = {
@@ -31,7 +40,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="he" dir="rtl" className={`${heebo.variable} h-full`}>
+    <html lang="he" dir="rtl" className={`${heebo.variable} ${frankRuhl.variable} h-full`}>
       <head>
         <Script
           id="fb-pixel"

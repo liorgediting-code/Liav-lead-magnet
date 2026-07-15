@@ -36,16 +36,16 @@
 }
 
 :root {
-  /* Warm off-white — every neutral tinted toward orange (hue ~65) */
+  /* Warm off-white · every neutral tinted toward orange (hue ~65) */
   --background: oklch(0.97 0.015 65);
   --foreground: oklch(0.16 0.04 55);
   --card: oklch(0.99 0.007 65);
   --card-foreground: oklch(0.16 0.04 55);
   --popover: oklch(0.99 0.007 65);
   --popover-foreground: oklch(0.16 0.04 55);
-  /* Rich orange — slightly deeper and more saturated than before */
+  /* Rich orange · slightly deeper and more saturated than before */
   --primary: oklch(0.72 0.21 50);
-  /* Dark navy on orange — ~7.4:1 contrast, passes WCAG AAA. Was near-white (~2.7:1, failed AA). */
+  /* Dark navy on orange · ~7.4:1 contrast, passes WCAG AAA. Was near-white (~2.7:1, failed AA). */
   --primary-foreground: oklch(0.14 0.045 55);
   --secondary: oklch(0.93 0.025 65);
   --secondary-foreground: oklch(0.16 0.04 55);
@@ -58,7 +58,7 @@
   --input: oklch(0.87 0.025 65);
   --ring: oklch(0.72 0.21 50);
   --radius: 0.75rem;
-  /* Brand colors — navy is now warm dark instead of cold blue-black */
+  /* Brand colors · navy is now warm dark instead of cold blue-black */
   --navy: oklch(0.14 0.045 55);
   --gold: oklch(0.72 0.21 50);
   --gold-light: oklch(0.92 0.08 65);
@@ -84,7 +84,32 @@
   }
 }
 
-/* Step badge colors — warm orange/amber spectrum instead of rainbow */
+/* Display serif for headings · editorial, authored-playbook character */
+.font-display {
+  font-family: var(--font-display), "Frank Ruhl Libre", Georgia, serif;
+  font-feature-settings: "kern";
+}
+
+/* Fine film grain for dark sections · tactile, printed-manual feel */
+.grain-dark::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.35;
+  mix-blend-mode: soft-light;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* Oversized ghost numeral behind chapter headings */
+.ghost-numeral {
+  font-family: var(--font-display), "Frank Ruhl Libre", Georgia, serif;
+  font-weight: 900;
+  line-height: 0.8;
+  font-variant-numeric: lining-nums;
+}
+
+/* Step badge colors · warm orange/amber spectrum instead of rainbow */
 .step-badge-1 { background: oklch(0.56 0.22 30); }
 .step-badge-2 { background: oklch(0.61 0.22 42); }
 .step-badge-3 { background: oklch(0.67 0.21 52); }
