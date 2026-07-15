@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Heebo, Frank_Ruhl_Libre } from "next/font/google";
+import { Heebo, Rubik } from "next/font/google";
 import Script from "next/script";
 import AttributionCapture from "@/components/AttributionCapture";
 import "./globals.css";
@@ -13,10 +13,10 @@ const heebo = Heebo({
   adjustFontFallback: true,
 });
 
-// Display serif for headings · editorial, authored-playbook character.
-const frankRuhl = Frank_Ruhl_Libre({
+// Heavy geometric sans for headings · modern, high-impact, bold.
+const rubik = Rubik({
   subsets: ["hebrew", "latin"],
-  weight: ["500", "700", "800", "900"],
+  weight: ["500", "600", "700", "800", "900"],
   variable: "--font-display",
   display: "swap",
   preload: true,
@@ -40,7 +40,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="he" dir="rtl" className={`${heebo.variable} ${frankRuhl.variable} h-full`}>
+    <html lang="he" dir="rtl" className={`${heebo.variable} ${rubik.variable} h-full`}>
       <head>
         <Script
           id="fb-pixel"

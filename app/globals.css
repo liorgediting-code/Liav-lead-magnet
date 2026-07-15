@@ -84,10 +84,11 @@
   }
 }
 
-/* Display serif for headings · editorial, authored-playbook character */
+/* Heavy geometric sans for headings · modern, high-impact.
+   Weight is controlled per-element via Tailwind (font-black / font-bold). */
 .font-display {
-  font-family: var(--font-display), "Frank Ruhl Libre", Georgia, serif;
-  font-feature-settings: "kern";
+  font-family: var(--font-display), "Heebo", system-ui, sans-serif;
+  letter-spacing: -0.02em;
 }
 
 /* Fine film grain for dark sections · tactile, printed-manual feel */
@@ -103,10 +104,28 @@
 
 /* Oversized ghost numeral behind chapter headings */
 .ghost-numeral {
-  font-family: var(--font-display), "Frank Ruhl Libre", Georgia, serif;
+  font-family: var(--font-display), "Heebo", system-ui, sans-serif;
   font-weight: 900;
   line-height: 0.8;
+  letter-spacing: -0.04em;
   font-variant-numeric: lining-nums;
+}
+
+/* Reading progress bar · thin scroll-linked indicator */
+.reading-progress {
+  position: fixed;
+  inset-block-start: 0;
+  inset-inline: 0;
+  height: 3px;
+  transform-origin: right center;
+  background: var(--primary);
+  z-index: 50;
+  will-change: transform;
+}
+@media (prefers-reduced-motion: reduce) {
+  .reading-progress {
+    transition: none;
+  }
 }
 
 /* Step badge colors · warm orange/amber spectrum instead of rainbow */

@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Check, X } from "lucide-react";
 import FadeIn from "@/components/FadeIn";
 import { DiagnosisCTA } from "@/components/DiagnosisCTA";
+import { ReadingProgress } from "@/components/ReadingProgress";
 
 export const metadata: Metadata = {
   title: "המדריך שלך | להוביל כל שיחה ולסגור עסקאות פרימיום",
@@ -52,6 +53,7 @@ const rules = [
 export default function GuidePage() {
   return (
     <main className="flex-1">
+      <ReadingProgress />
       {/* Hero */}
       <section className="relative overflow-hidden bg-navy grain-dark">
         {/* soft radial glow, off-center for asymmetry */}
@@ -98,7 +100,7 @@ export default function GuidePage() {
       <section className="relative bg-navy grain-dark border-t border-white/[0.06]">
         <div className="relative max-w-[680px] mx-auto px-5 py-16 md:py-20">
           <FadeIn>
-            <p className="font-display text-2xl md:text-[2rem] leading-snug text-white font-medium mb-8">
+            <p className="font-display text-[1.75rem] md:text-[2.25rem] leading-[1.15] text-white font-bold mb-8">
               תקשיב לי רגע, ותהיה כן עם עצמך.
             </p>
             <div className="flex flex-col gap-5 text-[17px] leading-[1.75] text-white/70">
@@ -123,7 +125,7 @@ export default function GuidePage() {
 
             {/* pull-quote במקום card */}
             <blockquote className="mt-12 pt-2">
-              <p className="font-display text-[1.75rem] md:text-[2.25rem] leading-[1.25] text-white font-medium">
+              <p className="font-display text-[1.9rem] md:text-[2.5rem] leading-[1.15] text-white font-black">
                 <span className="text-primary">אתה לא אשם.</span> אף אחד לא לימד
                 אותך איך לנהל שיחה ולהוביל אותה מנקודה א׳ לנקודה ב׳.
               </p>
@@ -161,7 +163,7 @@ export default function GuidePage() {
               </p>
             </div>
 
-            <p className="font-display text-xl md:text-2xl leading-snug text-foreground font-medium my-10 max-w-lg">
+            <p className="font-display text-2xl md:text-[2rem] leading-[1.2] text-foreground font-black my-10 max-w-xl">
               מכירה אמיתית היא לא לשכנע. היא לקחת את הלקוח מהמצב הקיים למצב טוב יותר,
               עם השירות שלך. זו לא נוכלות, זו שליחות.
             </p>
@@ -252,7 +254,7 @@ export default function GuidePage() {
             </div>
 
             <blockquote className="mt-12">
-              <p className="font-display text-[1.75rem] md:text-[2.25rem] leading-[1.25] text-white font-medium">
+              <p className="font-display text-[1.9rem] md:text-[2.5rem] leading-[1.12] text-white font-black">
                 העולם לא מתגמל ספק.
                 <br />
                 הוא מתגמל <span className="text-primary">ודאות</span>.
