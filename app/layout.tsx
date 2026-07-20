@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Heebo, Rubik } from "next/font/google";
 import Script from "next/script";
 import AttributionCapture from "@/components/AttributionCapture";
+import AccessibilityWidget from "@/components/AccessibilityWidget";
 import "./globals.css";
 
 const heebo = Heebo({
@@ -84,6 +85,7 @@ export default function RootLayout({
       <body className="min-h-full flex flex-col antialiased">
         <AttributionCapture />
         {children}
+        <AccessibilityWidget />
       </body>
     </html>
   );

@@ -125,8 +125,9 @@ export default function GuidePage() {
             {/* pull-quote במקום card */}
             <blockquote className="mt-12 pt-2">
               <p className="font-display text-[1.9rem] md:text-[2.5rem] leading-[1.15] text-white font-black">
-                <span className="text-primary">אתה לא אשם.</span> אף אחד לא לימד
-                אותך איך לנהל שיחה ולהוביל אותה מנקודה א׳ לנקודה ב׳.
+                <span className="text-primary">אתה לא אשם.</span>
+                <br />
+                אף אחד לא לימד אותך איך לנהל שיחה ולהוביל אותה מנקודה א׳ לנקודה ב׳.
               </p>
               <p className="mt-5 text-[17px] text-white/60 leading-relaxed">
                 התעשייה ניסתה לתכנת אותך לפעול כמו רובוט אגרסיבי, והערכים שלך פשוט
@@ -142,7 +143,7 @@ export default function GuidePage() {
         <div className="max-w-[680px] mx-auto px-5 py-16 md:py-24">
           <FadeIn>
             <ChapterHeading number={1} eyebrow="הפרדיגמה">
-              אשליית ה״כריש״
+              אשליית ה״גורו״
             </ChapterHeading>
             <p className="text-lg md:text-xl text-foreground/70 leading-relaxed mb-8 max-w-lg">
               למה שיטות השכנוע של פעם רק מבריחות את הלקוחות שלך היום?
@@ -150,7 +151,7 @@ export default function GuidePage() {
 
             <div className="flex flex-col gap-5 text-[17px] leading-[1.75] text-foreground/80">
               <p>
-                שנים שטפו לנו את המוח שמכירות הן קרב. אמרו לך להיות כריש, לטרוף את
+                שנים שטפו לנו את המוח שמכירות הן קרב. אמרו לך להיות גורו, לטרוף את
                 השוק, לדחוף בכל הכוח ולדקלם סקריפטים נוקשים של טיפול בהתנגדויות,
                 כאילו האדם בצד השני הוא אויב שצריך להכניע.
               </p>
