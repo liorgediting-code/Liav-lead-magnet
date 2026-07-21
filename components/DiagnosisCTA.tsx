@@ -63,7 +63,7 @@ export function DiagnosisCTA() {
             </h2>
             <p className="text-lg text-white/65 leading-relaxed mb-8 max-w-md">
               ולא רק לקרוא עוד מדריך. אז אני רוצה לתת לך הזדמנות לעשות את זה יחד
-              איתי, בפגישת אבחון אישית, במתנה.
+              איתי, באימון מכירות אישי, במתנה.
             </p>
 
             {/* למי זה מיועד */}
@@ -75,7 +75,7 @@ export function DiagnosisCTA() {
             {/* ההבטחה הגדולה */}
             <div className="rounded-2xl bg-white/[0.04] border border-white/10 p-6 mb-8">
               <p className="text-[11px] font-bold tracking-[0.2em] uppercase text-primary mb-3">
-                המטרה של הפגישה
+                המטרה של האימון
               </p>
               <p className="font-display text-2xl md:text-[1.75rem] font-black text-white leading-tight">
                 לבנות לך תהליך מכירה שיעזור לך{" "}
@@ -122,7 +122,7 @@ export function DiagnosisCTA() {
                 rel="noopener noreferrer"
                 className="inline-flex items-center justify-center h-14 px-10 bg-primary text-primary-foreground font-bold text-base rounded-xl hover:bg-primary/90 transition-colors duration-200 shadow-lg shadow-primary/25 active:scale-[0.98] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
               >
-                לתיאום פגישת אבחון בחינם 👇
+                לתיאום אימון מכירות בחינם 👇
               </a>
               <p className="text-xs mt-3 text-white/35">
                 45 דקות. בלי תשלום. בלי התחייבות.
