@@ -143,7 +143,7 @@ export default function GuidePage() {
         <div className="max-w-[680px] mx-auto px-5 py-16 md:py-24">
           <FadeIn>
             <ChapterHeading number={1} eyebrow="הפרדיגמה">
-              אשליית ה״גורו״
+              אשליית ה״גורו מכירות״
             </ChapterHeading>
             <p className="text-lg md:text-xl text-foreground/70 leading-relaxed mb-8 max-w-lg">
               למה שיטות השכנוע של פעם רק מבריחות את הלקוחות שלך היום?
@@ -151,7 +151,7 @@ export default function GuidePage() {
 
             <div className="flex flex-col gap-5 text-[17px] leading-[1.75] text-foreground/80">
               <p>
-                שנים שטפו לנו את המוח שמכירות הן קרב. אמרו לך להיות גורו, לטרוף את
+                שנים שטפו לנו את המוח שמכירות הן קרב. אמרו לך להיות גורו מכירות, לטרוף את
                 השוק, לדחוף בכל הכוח ולדקלם סקריפטים נוקשים של טיפול בהתנגדויות,
                 כאילו האדם בצד השני הוא אויב שצריך להכניע.
               </p>
