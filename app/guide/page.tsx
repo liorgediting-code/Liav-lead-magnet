@@ -315,7 +315,7 @@ export default function GuidePage() {
                             הליד
                           </p>
                           <p className="text-[15px] text-foreground/65 leading-relaxed">
-                            „{rule.dialogue.customer}”
+                            “{rule.dialogue.customer}”
                           </p>
                         </div>
                         <div className="px-6 py-4 bg-primary/[0.05]">
@@ -323,7 +323,7 @@ export default function GuidePage() {
                             אתה, מפעיל שפת גישור
                           </p>
                           <p className="text-[15px] text-foreground leading-relaxed font-medium">
-                            „{rule.dialogue.seller}”
+                            “{rule.dialogue.seller}”
                           </p>
                         </div>
                       </div>
