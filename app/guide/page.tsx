@@ -70,7 +70,7 @@ export default function GuidePage() {
             </span>
           </div>
 
-          <h1 className="font-display text-[2.5rem] leading-[1.05] md:text-6xl md:leading-[1.02] font-black text-white text-balance mb-6">
+          <h1 className="font-display text-[clamp(0.85rem,4.5vw,2.5rem)] leading-[1.05] md:text-6xl md:leading-[1.02] font-black text-white text-balance mb-6">
             להוביל כל שיחה בביטחון
             <br />
             ולסגור <span className="text-primary">עסקאות גדולות שמכבדות אותך</span>!
