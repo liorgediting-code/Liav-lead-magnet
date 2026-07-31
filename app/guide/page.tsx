@@ -5,9 +5,9 @@ import { DiagnosisCTA } from "@/components/DiagnosisCTA";
 import { ReadingProgress } from "@/components/ReadingProgress";
 
 export const metadata: Metadata = {
-  title: "המדריך שלך | להוביל כל שיחה ולסגור עסקאות פרימיום",
+  title: "המדריך שלך | להוביל כל שיחה ולסגור עסקאות גדולות שמכבדות אותך",
   description:
-    "איך להוביל כל שיחה בביטחון ולסגור עסקאות פרימיום מתוך הקשבה ואותנטיות.",
+    "איך להוביל כל שיחה בביטחון ולסגור עסקאות גדולות שמכבדות אותך מתוך הקשבה ואותנטיות.",
   robots: "noindex",
 };
 
@@ -73,7 +73,7 @@ export default function GuidePage() {
           <h1 className="font-display text-[2.5rem] leading-[1.05] md:text-6xl md:leading-[1.02] font-black text-white text-balance mb-6">
             להוביל כל שיחה בביטחון,
             <br />
-            ולסגור <span className="text-primary">עסקאות פרימיום</span> מתוך
+            ולסגור <span className="text-primary">עסקאות גדולות שמכבדות אותך</span> מתוך
             הקשבה.
           </h1>
 
@@ -261,7 +261,7 @@ export default function GuidePage() {
               </p>
               <p className="mt-5 text-[17px] text-white/60 leading-relaxed max-w-lg">
                 כשאתה משדר ודאות שאין לה עוררין, אנשים מעריכים אותך, מכבדים את
-                הגבולות שלך, ומשלמים מחירי פרימיום בלי להתווכח.
+                הגבולות שלך, ומשלמים מחירים גבוהים שמכבדים אותך בלי להתווכח.
               </p>
             </blockquote>
           </FadeIn>
