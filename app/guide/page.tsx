@@ -71,10 +71,11 @@ export default function GuidePage() {
           </div>
 
           <h1 className="font-display text-[2.5rem] leading-[1.05] md:text-6xl md:leading-[1.02] font-black text-white text-balance mb-6">
-            להוביל כל שיחה בביטחון,
+            להוביל כל שיחה בביטחון
             <br />
-            ולסגור <span className="text-primary">עסקאות גדולות שמכבדות אותך</span> מתוך
-            הקשבה.
+            ולסגור <span className="text-primary">עסקאות גדולות שמכבדות אותך</span>!
+            <br />
+            דרך הקשבה, הסכמה והחזרת שאלה בשאלה.
           </h1>
 
           <p className="text-lg md:text-xl text-white/65 leading-relaxed max-w-xl">
