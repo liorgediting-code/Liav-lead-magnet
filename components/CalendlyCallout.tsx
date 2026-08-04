@@ -53,16 +53,27 @@ const SIMULATION_FEATURES: CallFeature[] = [
   },
 ];
 
+const BONUS_FEATURES: CallFeature[] = [
+  DEFAULT_FEATURES[0],
+  DEFAULT_FEATURES[1],
+  {
+    Icon: Clock,
+    title: "30 דקות. בלי תשלום. בלי התחייבות.",
+    desc: "אימון מכירות במתנה, רק כדי שתצא עם תבנית שעובדת בשבילך.",
+  },
+];
+
 const FEATURE_PRESETS: Record<string, CallFeature[]> = {
   template: DEFAULT_FEATURES,
   simulation: SIMULATION_FEATURES,
+  bonus: BONUS_FEATURES,
 };
 
 interface CalendlyCalloutProps {
   title?: string;
   intro?: string;
   features?: CallFeature[];
-  featurePreset?: "template" | "simulation";
+  featurePreset?: "template" | "simulation" | "bonus";
   variant?: "light" | "dark";
   buttonText?: string;
   subtitle?: string;
