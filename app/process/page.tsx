@@ -3,7 +3,7 @@ import { CheckCircle2, ShieldAlert, Sparkles, ArrowLeft } from "lucide-react";
 import SalesGuide from "@/components/SalesGuide";
 
 export const metadata: Metadata = {
-  title: "תהליך מכירה ב-8 שלבים | תבנית מלאה עם תסריטים",
+  title: "מדריך המכירה שיעשה לך סדר במכירות",
   description: "תבנית מכירה מוכנה עם תסריטים לכל שלב בשיחת המכירה",
 };
 
