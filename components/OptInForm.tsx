@@ -9,7 +9,20 @@ import { trackLead } from "@/lib/meta-pixel";
 import { readAttribution } from "@/lib/utm";
 import { isValidIsraeliPhone, PHONE_ERROR } from "@/lib/utils";
 
-export default function OptInForm() {
+type OptInFormProps = {
+  /** Where to send the lead after a successful submit. */
+  redirectTo?: string;
+  /** Submit button label. */
+  submitLabel?: string;
+  /** Make the phone field mandatory instead of optional. */
+  requirePhone?: boolean;
+};
+
+export default function OptInForm({
+  redirectTo = "/thank-you",
+  submitLabel = "שלחו לי את התבנית",
+  requirePhone = false,
+}: OptInFormProps = {}) {
   const router = useRouter();
   const fieldId = useId();
   const nameId = `${fieldId}-name`;
@@ -45,7 +58,11 @@ export default function OptInForm() {
       }
     }
 
-    if (form.phone.trim() && !isValidIsraeliPhone(form.phone)) {
+    if (!form.phone.trim()) {
+      if (requirePhone) {
+        newErrors.phone = "הוסף מספר טלפון כדי להמשיך";
+      }
+    } else if (!isValidIsraeliPhone(form.phone)) {
       newErrors.phone = PHONE_ERROR;
     }
 
@@ -75,7 +92,7 @@ export default function OptInForm() {
       }
       trackLead({ email: form.email, phone: form.phone }, eventId);
       await new Promise((resolve) => setTimeout(resolve, 300));
-      router.push("/thank-you");
+      router.push(redirectTo);
     } catch (err) {
       setError(err instanceof Error ? err.message : "קרתה תקלה, בדוק את הנתונים ונסה שוב");
       setLoading(false);
@@ -111,7 +128,10 @@ export default function OptInForm() {
 
       <div className="flex flex-col gap-1.5">
         <Label htmlFor={phoneId} className="text-sm font-medium text-foreground">
-          טלפון <span className="text-muted-foreground font-normal text-xs">(אופציונלי)</span>
+          טלפון{" "}
+          {!requirePhone && (
+            <span className="text-muted-foreground font-normal text-xs">(אופציונלי)</span>
+          )}
         </Label>
         <Input
           id={phoneId}
@@ -125,6 +145,7 @@ export default function OptInForm() {
           aria-describedby={errors.phone ? `${phoneId}-error` : undefined}
           className={`text-base h-12 bg-white border-border/60 focus-visible:ring-primary ${errors.phone ? "border-destructive" : ""}`}
           disabled={loading}
+          required={requirePhone}
         />
         {errors.phone && (
           <p id={`${phoneId}-error`} className="text-xs text-destructive font-medium">
@@ -191,7 +212,7 @@ export default function OptInForm() {
         disabled={loading}
         className="cursor-pointer h-14 text-base font-bold mt-2 bg-primary text-primary-foreground hover:bg-primary/90 active:scale-[0.98] transition-colors duration-200 shadow-lg shadow-primary/20 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
       >
-        {loading ? "שולח..." : "שלחו לי את התבנית"}
+        {loading ? "שולח..." : submitLabel}
       </Button>
 
       <p className="text-xs text-muted-foreground text-center leading-relaxed">
