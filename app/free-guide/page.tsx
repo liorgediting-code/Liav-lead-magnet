@@ -75,16 +75,6 @@ export default function FreeGuideLandingPage() {
               ))}
             </ul>
 
-            <div className="flex items-center gap-3 mt-10 pt-7 border-t border-white/10 max-w-lg">
-              <span className="text-sm text-white/45">מאת</span>
-              <span className="text-sm font-bold text-white">ליאב כהן</span>
-              <span className="text-white/20" aria-hidden="true">
-                ·
-              </span>
-              <span className="text-sm text-white/45">
-                מלווה בעלי עסקים לסגור בשיחה הראשונה
-              </span>
-            </div>
           </div>
 
           {/* טופס */}
@@ -100,6 +90,9 @@ export default function FreeGuideLandingPage() {
               submitLabel="קבל את המדריך"
               requirePhone
             />
+            <p className="mt-4 text-[11px] text-muted-foreground leading-relaxed">
+              המדריך הוא חומר לימודי כללי ואינו מהווה ייעוץ אישי או התחייבות לתוצאות עסקיות.
+            </p>
           </div>
         </div>
       </section>

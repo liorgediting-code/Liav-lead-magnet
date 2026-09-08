@@ -2,6 +2,7 @@
 
 import { useId, useState } from "react";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
@@ -191,7 +192,15 @@ export default function OptInForm({
             className="mt-1 w-4 h-4 accent-primary flex-shrink-0 cursor-pointer"
           />
           <span className="text-xs text-muted-foreground leading-relaxed">
-            אני מאשר/ת קבלת תכנים שיווקיים ועדכונים בדוא״ל. ניתן לבטל בכל עת.
+            אני מאשר/ת קבלת תכנים שיווקיים ועדכונים בדוא״ל, ומסכים/ה ל
+            <Link href="/privacy" className="underline hover:text-foreground">
+              מדיניות הפרטיות
+            </Link>{" "}
+            ול
+            <Link href="/terms" className="underline hover:text-foreground">
+              תנאי השימוש
+            </Link>
+            . ניתן לבטל בכל עת.
           </span>
         </label>
         {errors.consent && (
