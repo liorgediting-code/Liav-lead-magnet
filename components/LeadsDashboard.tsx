@@ -33,8 +33,7 @@ const STATUS_STYLES: Record<LeadStatus, string> = {
 };
 
 type Lead = {
-  /** 1-based sheet row — doubles as the lead's identity in the UI. */
-  row: number;
+  id: string;
   name: string;
   phone: string;
   email: string;
@@ -101,7 +100,7 @@ export default function LeadsDashboard() {
   const [stats, setStats] = useState<Stats | null>(null);
   const [loadError, setLoadError] = useState("");
   const [loading, setLoading] = useState(false);
-  const [selected, setSelected] = useState<Set<number>>(new Set());
+  const [selected, setSelected] = useState<Set<string>>(new Set());
   const [query, setQuery] = useState("");
   const [statusFilter, setStatusFilter] = useState<"all" | LeadStatus>("all");
 
@@ -152,8 +151,8 @@ export default function LeadsDashboard() {
       setLeads(data.leads || []);
       setStats(data.stats || null);
       setSelected((prev) => {
-        const rows = new Set((data.leads || []).map((l: Lead) => l.row));
-        return new Set([...prev].filter((r) => rows.has(r)));
+        const ids = new Set((data.leads || []).map((l: Lead) => l.id));
+        return new Set([...prev].filter((id) => ids.has(id)));
       });
     } catch (e) {
       setLoadError(e instanceof Error ? e.message : "טעינה נכשלה");
@@ -200,62 +199,59 @@ export default function LeadsDashboard() {
   }, [leads, query, statusFilter]);
 
   const recipients = useMemo(
-    () => leads.filter((l) => selected.has(l.row) && l.phone),
+    () => leads.filter((l) => selected.has(l.id) && l.phone),
     [leads, selected]
   );
 
-  function toggle(row: number) {
+  function toggle(id: string) {
     setSelected((prev) => {
       const next = new Set(prev);
-      if (next.has(row)) next.delete(row);
-      else next.add(row);
+      if (next.has(id)) next.delete(id);
+      else next.add(id);
       return next;
     });
   }
 
   function toggleAll() {
-    const allShown = visible.length > 0 && visible.every((l) => selected.has(l.row));
+    const allShown = visible.length > 0 && visible.every((l) => selected.has(l.id));
     setSelected((prev) => {
       const next = new Set(prev);
-      visible.forEach((l) => (allShown ? next.delete(l.row) : next.add(l.row)));
+      visible.forEach((l) => (allShown ? next.delete(l.id) : next.add(l.id)));
       return next;
     });
   }
 
-  async function changeStatus(lead: Lead, status: LeadStatus) {
+  async function changeStatus(id: string, status: LeadStatus) {
     const before = leads;
-    setLeads((prev) => prev.map((l) => (l.row === lead.row ? { ...l, status } : l)));
+    setLeads((prev) => prev.map((l) => (l.id === id ? { ...l, status } : l)));
     try {
       const res = await api("/api/admin/leads", {
         method: "PATCH",
-        body: JSON.stringify({ row: lead.row, status, phone: lead.phone, name: lead.name }),
+        body: JSON.stringify({ id, status }),
       });
-      const data = await res.json().catch(() => ({}));
-      if (!res.ok) throw new Error(data.error || "עדכון הסטטוס נכשל");
-    } catch (e) {
+      if (!res.ok) throw new Error();
+    } catch {
       setLeads(before);
-      alert(e instanceof Error ? e.message : "עדכון הסטטוס נכשל");
+      alert("עדכון הסטטוס נכשל");
     }
   }
 
   async function remove(lead: Lead) {
-    if (
-      !confirm(
-        `למחוק את ${lead.name || "הליד"}? השורה תימחק מהגיליון לצמיתות.`
-      )
-    )
-      return;
+    if (!confirm(`למחוק את ${lead.name || "הליד"} מהרשימה? הפעולה בלתי הפיכה.`)) return;
     try {
       const res = await api("/api/admin/leads", {
         method: "DELETE",
-        body: JSON.stringify({ row: lead.row, phone: lead.phone, name: lead.name }),
+        body: JSON.stringify({ id: lead.id }),
       });
-      const data = await res.json().catch(() => ({}));
-      if (!res.ok) throw new Error(data.error || "המחיקה נכשלה");
-      // Deleting a row renumbers everything below it — reload rather than splice.
-      await load();
-    } catch (e) {
-      alert(e instanceof Error ? e.message : "המחיקה נכשלה");
+      if (!res.ok) throw new Error();
+      setLeads((prev) => prev.filter((l) => l.id !== lead.id));
+      setSelected((prev) => {
+        const next = new Set(prev);
+        next.delete(lead.id);
+        return next;
+      });
+    } catch {
+      alert("המחיקה נכשלה");
     }
   }
 
@@ -353,7 +349,7 @@ export default function LeadsDashboard() {
   }
 
   /* ── dashboard ── */
-  const allShown = visible.length > 0 && visible.every((l) => selected.has(l.row));
+  const allShown = visible.length > 0 && visible.every((l) => selected.has(l.id));
 
   return (
     <div className="max-w-6xl mx-auto px-4 md:px-6 py-8 md:py-12">
@@ -464,14 +460,14 @@ export default function LeadsDashboard() {
             <tbody>
               {visible.map((l) => (
                 <tr
-                  key={l.row}
-                  className={`border-t border-white/[0.07] ${selected.has(l.row) ? "bg-primary/[0.06]" : ""}`}
+                  key={l.id}
+                  className={`border-t border-white/[0.07] ${selected.has(l.id) ? "bg-primary/[0.06]" : ""}`}
                 >
                   <td className="py-3 px-2">
                     <input
                       type="checkbox"
-                      checked={selected.has(l.row)}
-                      onChange={() => toggle(l.row)}
+                      checked={selected.has(l.id)}
+                      onChange={() => toggle(l.id)}
                       aria-label={`בחר את ${l.name}`}
                       className="w-4 h-4 accent-[oklch(0.72_0.21_50)] cursor-pointer"
                     />
@@ -500,7 +496,7 @@ export default function LeadsDashboard() {
                   <td className="py-3 px-2">
                     <select
                       value={l.status || "new"}
-                      onChange={(e) => changeStatus(l, e.target.value as LeadStatus)}
+                      onChange={(e) => changeStatus(l.id, e.target.value as LeadStatus)}
                       aria-label={`סטטוס של ${l.name}`}
                       className={`h-8 rounded-lg border px-2 text-xs font-bold cursor-pointer bg-transparent ${STATUS_STYLES[l.status || "new"]}`}
                     >
