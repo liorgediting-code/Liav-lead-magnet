@@ -1,20 +1,40 @@
-// Lead store on top of Upstash Redis — the data behind /dashboard.
-// Google Sheets stays the system of record; this is the working copy the
-// dashboard reads, marks up and messages from.
-import { redis, hgetallEntries, kvConfigured } from "./kv";
+// Lead store backed by the Google Sheet that /api/submit already writes to.
+// No extra database: the sheet is the system of record, and the dashboard is
+// just a nicer window onto it. Column mapping is header-driven, so whatever
+// layout the Apps Script webhook produces keeps working.
+import {
+  deleteRow,
+  readSheet,
+  sheetsConfigured,
+  writeCell,
+} from "./google-sheets";
+
+export { sheetsConfigured };
 
 export const LEAD_STATUSES = ["new", "contacted", "booked", "won", "lost"] as const;
 export type LeadStatus = (typeof LEAD_STATUSES)[number];
 
+// Stored in the sheet in Hebrew so the column is readable to a human editing
+// it directly. Anything unrecognised falls back to "new".
+const STATUS_TO_SHEET: Record<LeadStatus, string> = {
+  new: "חדש",
+  contacted: "נוצר קשר",
+  booked: "נקבעה שיחה",
+  won: "נסגר",
+  lost: "לא רלוונטי",
+};
+const SHEET_TO_STATUS = new Map(
+  Object.entries(STATUS_TO_SHEET).map(([k, v]) => [v, k as LeadStatus])
+);
+
 export type Lead = {
-  id: string;
+  /** 1-based sheet row — the row number shown in the Sheets UI. */
+  row: number;
   name: string;
   phone: string;
   email: string;
   source: string;
   status: LeadStatus;
-  utmSource: string;
-  utmMedium: string;
   utmCampaign: string;
   utmContent: string;
   fbclid: string;
@@ -22,94 +42,131 @@ export type Lead = {
   createdAt: string;
 };
 
-const KEY = "leads";
+// Accepted header spellings per field, Hebrew and English. Matching is
+// case-insensitive and ignores spaces/underscores/quotes.
+const ALIASES: Record<keyof Omit<Lead, "row">, string[]> = {
+  name: ["name", "שם", "שםמלא", "fullname"],
+  phone: ["phone", "טלפון", "נייד", "מספרטלפון", "mobile"],
+  email: ["email", "mail", "אימייל", "מייל", "דואל", "דואראלקטרוני"],
+  source: ["source", "מקור", "דף"],
+  status: ["status", "סטטוס", "מצב"],
+  createdAt: ["timestamp", "תאריךיצירה", "תאריך", "date", "createdat", "created", "זמן"],
+  utmCampaign: ["utmcampaign", "קמפיין"],
+  utmContent: ["utmcontent"],
+  fbclid: ["fbclid"],
+  landingPage: ["landingpage", "דףנחיתה"],
+};
 
-// Data-retention enforcement (חוק הגנת הפרטיות — עקרון צמצום המידע).
-// Leads older than this are permanently deleted on the next dashboard read.
-const RETENTION_DAYS = Number(process.env.LEAD_RETENTION_DAYS || 730);
+const normalize = (s: string) =>
+  String(s ?? "")
+    .toLowerCase()
+    .replace(/[\s_\-."'״׳]/g, "");
 
-/** Persist a lead. Best-effort — never throws, never blocks lead capture. */
-export async function saveLead(lead: Omit<Lead, "id" | "status"> & Partial<Pick<Lead, "id" | "status">>) {
-  if (!kvConfigured) return;
-  const record: Lead = {
-    status: "new",
-    id: `${Date.now()}_${Math.random().toString(36).slice(2, 10)}`,
-    ...lead,
-  };
-  try {
-    await redis(["HSET", KEY, record.id, JSON.stringify(record)]);
-  } catch (e) {
-    console.error("[lead] KV save failed:", e);
+function mapColumns(headers: string[]) {
+  const normalized = headers.map(normalize);
+  const map = {} as Record<keyof Omit<Lead, "row">, number>;
+  for (const [field, aliases] of Object.entries(ALIASES)) {
+    map[field as keyof Omit<Lead, "row">] = normalized.findIndex((h) =>
+      aliases.includes(h)
+    );
   }
+  return map;
 }
 
-function parse(value: unknown): Lead | null {
-  try {
-    return typeof value === "string" ? JSON.parse(value) : (value as Lead);
-  } catch {
-    return null;
-  }
-}
+export class SheetShapeError extends Error {}
 
-/** Delete every lead past the retention window. Best-effort. */
-async function purgeExpired(entries: [string, unknown][]) {
-  const cutoff = Date.now() - RETENTION_DAYS * 24 * 60 * 60 * 1000;
-  const expired: string[] = [];
-  for (const [id, value] of entries) {
-    const lead = parse(value);
-    const t = Date.parse(lead?.createdAt || "");
-    // Leads without a parseable createdAt are left alone — we never guess.
-    if (!Number.isNaN(t) && t < cutoff) expired.push(id);
-  }
-  if (expired.length) {
-    try {
-      await redis(["HDEL", KEY, ...expired]);
-    } catch (e) {
-      console.error("[lead] retention purge failed:", e);
-    }
-  }
-  return new Set(expired);
-}
-
+/** Read every lead out of the sheet, newest first. */
 export async function listLeads(): Promise<Lead[]> {
-  if (!kvConfigured) return [];
-  const entries = hgetallEntries(await redis(["HGETALL", KEY]));
-  const expired = await purgeExpired(entries);
-  const leads: Lead[] = [];
-  for (const [id, value] of entries) {
-    if (expired.has(id)) continue;
-    const lead = parse(value);
-    if (lead) leads.push({ ...lead, status: lead.status || "new" });
+  const { headers, rows } = await readSheet();
+  const col = mapColumns(headers);
+
+  if (col.name < 0 && col.phone < 0 && col.email < 0) {
+    throw new SheetShapeError(
+      "לא זוהו עמודות בגיליון. ודא ששורה 1 מכילה כותרות כמו: שם, טלפון, אימייל, תאריך יצירה."
+    );
   }
-  leads.sort((a, b) => String(b.createdAt || "").localeCompare(String(a.createdAt || "")));
+
+  const at = (row: string[], i: number) => (i >= 0 ? String(row[i] ?? "").trim() : "");
+
+  const leads = rows
+    .map((row, i) => ({
+      // +2: row 1 is the header, and `i` is 0-based.
+      row: i + 2,
+      name: at(row, col.name),
+      phone: at(row, col.phone),
+      email: at(row, col.email),
+      source: at(row, col.source),
+      status: SHEET_TO_STATUS.get(at(row, col.status)) || ("new" as LeadStatus),
+      utmCampaign: at(row, col.utmCampaign),
+      utmContent: at(row, col.utmContent),
+      fbclid: at(row, col.fbclid),
+      landingPage: at(row, col.landingPage),
+      createdAt: at(row, col.createdAt),
+    }))
+    // Skip blank rows left behind in the sheet.
+    .filter((l) => l.name || l.phone || l.email);
+
+  leads.sort((a, b) => {
+    const ta = Date.parse(a.createdAt);
+    const tb = Date.parse(b.createdAt);
+    if (!Number.isNaN(ta) && !Number.isNaN(tb)) return tb - ta;
+    return b.row - a.row;
+  });
   return leads;
 }
 
-export async function deleteLead(id: string) {
-  await redis(["HDEL", KEY, id]);
+/** The status column, creating it as a new right-most column if missing. */
+async function statusColumn() {
+  const { headers } = await readSheet();
+  const existing = mapColumns(headers).status;
+  if (existing >= 0) return existing;
+  const index = headers.length;
+  await writeCell(1, index, "סטטוס");
+  return index;
 }
 
-export async function setLeadStatus(id: string, status: LeadStatus) {
-  const raw = await redis(["HGET", KEY, id]);
-  const lead = parse(raw);
-  if (!lead) return false;
-  lead.status = status;
-  await redis(["HSET", KEY, id, JSON.stringify(lead)]);
-  return true;
+/**
+ * Row numbers shift when rows are deleted, so every mutation re-reads the row
+ * and refuses to act unless it still holds the lead the dashboard meant.
+ */
+async function assertRowMatches(row: number, expectedPhone: string, expectedName: string) {
+  const leads = await listLeads();
+  const current = leads.find((l) => l.row === row);
+  const same =
+    current &&
+    (expectedPhone ? current.phone === expectedPhone : current.name === expectedName);
+  if (!same) {
+    throw new SheetShapeError("הגיליון השתנה מאז הטעינה. רענן ונסה שוב.");
+  }
+  return current;
+}
+
+export async function setLeadStatus(
+  row: number,
+  status: LeadStatus,
+  expectedPhone: string,
+  expectedName: string
+) {
+  await assertRowMatches(row, expectedPhone, expectedName);
+  await writeCell(row, await statusColumn(), STATUS_TO_SHEET[status]);
+}
+
+export async function removeLead(row: number, expectedPhone: string, expectedName: string) {
+  await assertRowMatches(row, expectedPhone, expectedName);
+  await deleteRow(row);
 }
 
 export function statsFor(leads: Lead[]) {
-  const now = Date.now();
   const startOfToday = new Date();
   startOfToday.setHours(0, 0, 0, 0);
-  const inWindow = (l: Lead, from: number) => {
-    const t = Date.parse(l.createdAt || "");
+  const since = (l: Lead, from: number) => {
+    const t = Date.parse(l.createdAt);
     return !Number.isNaN(t) && t >= from;
   };
   return {
     total: leads.length,
-    today: leads.filter((l) => inWindow(l, startOfToday.getTime())).length,
-    week: leads.filter((l) => inWindow(l, now - 7 * 24 * 60 * 60 * 1000)).length,
+    today: leads.filter((l) => since(l, startOfToday.getTime())).length,
+    week: leads.filter((l) => since(l, Date.now() - 7 * 24 * 60 * 60 * 1000)).length,
     withPhone: leads.filter((l) => l.phone).length,
     booked: leads.filter((l) => l.status === "booked" || l.status === "won").length,
   };

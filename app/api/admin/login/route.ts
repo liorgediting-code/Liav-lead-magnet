@@ -23,15 +23,15 @@ export async function POST(req: Request) {
     );
 
   // Already locked out? Reject before even checking the password.
-  if ((await peek(failKey)) >= MAX_FAILS) return lockedResponse();
+  if (peek(failKey) >= MAX_FAILS) return lockedResponse();
 
   const body = await req.json().catch(() => ({}));
   if (!passwordMatches(body?.password)) {
-    const count = await hit(failKey, LOCK_WINDOW);
+    const count = hit(failKey, LOCK_WINDOW);
     if (count >= MAX_FAILS) return lockedResponse();
     return NextResponse.json({ error: "סיסמה שגויה" }, { status: 401 });
   }
 
-  await reset(failKey);
+  reset(failKey);
   return NextResponse.json({ token: issueToken() });
 }

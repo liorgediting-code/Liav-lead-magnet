@@ -2,7 +2,6 @@ import { NextRequest, NextResponse, after } from "next/server";
 import { createHash } from "crypto";
 import { isValidIsraeliPhone } from "@/lib/utils";
 import { sendLeadToResponder } from "@/lib/responder";
-import { saveLead } from "@/lib/leads-store";
 
 type Attribution = {
   utm_source?: string;
@@ -187,24 +186,6 @@ export async function POST(req: NextRequest) {
       : process.env.SHEETS_WEBHOOK_URL;
 
     const tasks: Promise<unknown>[] = [];
-
-    // Working copy for the /dashboard mini-CRM. No-ops when KV isn't wired up.
-    tasks.push(
-      saveLead({
-        name: payload.name,
-        phone: payload.phone,
-        email: payload.email,
-        source: payload.source,
-        utmSource: payload.utm_source,
-        utmMedium: payload.utm_medium,
-        utmCampaign: payload.utm_campaign,
-        utmContent: payload.utm_content,
-        fbclid: payload.fbclid,
-        landingPage: payload.landing_page,
-        createdAt: payload.timestamp,
-      })
-    );
-
     if (leadStoreWebhook) {
       tasks.push(postLead(isOffer ? "crm-offer" : "crm-landing", leadStoreWebhook, body));
     } else {
