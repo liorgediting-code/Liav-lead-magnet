@@ -17,12 +17,15 @@ type OptInFormProps = {
   submitLabel?: string;
   /** Make the phone field mandatory instead of optional. */
   requirePhone?: boolean;
+  /** Ask for an email address. Turn off for phone-only funnels. */
+  collectEmail?: boolean;
 };
 
 export default function OptInForm({
   redirectTo = "/thank-you",
   submitLabel = "שלחו לי את התבנית",
   requirePhone = false,
+  collectEmail = true,
 }: OptInFormProps = {}) {
   const router = useRouter();
   const fieldId = useId();
@@ -50,17 +53,19 @@ export default function OptInForm({
       newErrors.name = "הוסף שם כדי להמשיך";
     }
 
-    if (!form.email.trim()) {
-      newErrors.email = "הוסף אימייל כדי להמשיך";
-    } else {
-      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-      if (!emailRegex.test(form.email)) {
-        newErrors.email = "האימייל לא נראה תקין (בדוק שיש @)";
+    if (collectEmail) {
+      if (!form.email.trim()) {
+        newErrors.email = "הוסף אימייל כדי להמשיך";
+      } else {
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(form.email)) {
+          newErrors.email = "האימייל לא נראה תקין (בדוק שיש @)";
+        }
       }
     }
 
     if (!form.phone.trim()) {
-      if (requirePhone) {
+      if (requirePhone || !collectEmail) {
         newErrors.phone = "הוסף מספר טלפון כדי להמשיך";
       }
     } else if (!isValidIsraeliPhone(form.phone)) {
@@ -130,7 +135,7 @@ export default function OptInForm({
       <div className="flex flex-col gap-1.5">
         <Label htmlFor={phoneId} className="text-sm font-medium text-foreground">
           טלפון{" "}
-          {!requirePhone && (
+          {!requirePhone && collectEmail && (
             <span className="text-muted-foreground font-normal text-xs">(אופציונלי)</span>
           )}
         </Label>
@@ -146,7 +151,7 @@ export default function OptInForm({
           aria-describedby={errors.phone ? `${phoneId}-error` : undefined}
           className={`text-base h-12 bg-white border-border/60 focus-visible:ring-primary ${errors.phone ? "border-destructive" : ""}`}
           disabled={loading}
-          required={requirePhone}
+          required={requirePhone || !collectEmail}
         />
         {errors.phone && (
           <p id={`${phoneId}-error`} className="text-xs text-destructive font-medium">
@@ -155,6 +160,7 @@ export default function OptInForm({
         )}
       </div>
 
+      {collectEmail && (
       <div className="flex flex-col gap-1.5">
         <Label htmlFor={emailId} className="text-sm font-medium text-foreground">
           אימייל
@@ -179,6 +185,7 @@ export default function OptInForm({
           </p>
         )}
       </div>
+      )}
 
       {/* Consent checkbox — חוק התקשורת (בזק ושידורים) תיקון מס׳ 40 */}
       <div className="flex flex-col gap-1">
@@ -192,7 +199,7 @@ export default function OptInForm({
             className="mt-1 w-4 h-4 accent-primary flex-shrink-0 cursor-pointer"
           />
           <span className="text-xs text-muted-foreground leading-relaxed">
-            אני מאשר/ת קבלת תכנים שיווקיים ועדכונים בדוא״ל, ומסכים/ה ל
+            אני מאשר/ת קבלת תכנים שיווקיים ועדכונים{collectEmail ? " בדוא״ל" : " בוואטסאפ ובהודעות"}, ומסכים/ה ל
             <Link href="/privacy" className="underline hover:text-foreground">
               מדיניות הפרטיות
             </Link>{" "}

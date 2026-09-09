@@ -80,15 +80,16 @@ export default function FreeGuideLandingPage() {
           {/* טופס */}
           <div className="bg-card rounded-2xl p-6 md:p-7 shadow-2xl shadow-black/50 md:sticky md:top-8">
             <p className="text-base font-extrabold text-foreground mb-1">
-              לאן לשלוח את המדריך?
+              קבל את המדריך
             </p>
             <p className="text-xs text-muted-foreground mb-5 leading-relaxed">
-              נפתח לך מיד אחרי השליחה, וגם יישלח אליך למייל
+              שני פרטים והמדריך נפתח לך מיד
             </p>
             <OptInForm
               redirectTo="/guide"
               submitLabel="קבל את המדריך"
               requirePhone
+              collectEmail={false}
             />
             <p className="mt-4 text-[11px] text-muted-foreground leading-relaxed">
               המדריך הוא חומר לימודי כללי ואינו מהווה ייעוץ אישי או התחייבות לתוצאות עסקיות.
