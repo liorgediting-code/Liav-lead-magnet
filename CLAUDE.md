@@ -58,3 +58,4 @@ shadcn UI components live in `components/ui/`. Additional custom components are 
 |---|---|
 | `SHEETS_WEBHOOK_URL` | Google Sheets webhook URL for lead capture |
 | `CALENDAR_LINK` | Booking calendar URL shown on the guide page |
+| `MAKE_WEBHOOK_URL` | Make.com webhook — POSTed with every lead (landing + offer) for downstream automation |

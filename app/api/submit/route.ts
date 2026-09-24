@@ -214,6 +214,13 @@ export async function POST(req: NextRequest) {
       );
     }
 
+    // Make.com — fires for every lead (landing + offer) so it can be routed
+    // into whatever automation the user builds there.
+    const makeWebhook = process.env.MAKE_WEBHOOK_URL;
+    if (makeWebhook) {
+      tasks.push(postLead("make", makeWebhook, body));
+    }
+
     // WhatsApp sender (wa-sender-kappa) — fire for the landing opt-in
     // ("first form") when we have a phone to message. POST { phone, name }.
     // Open endpoint, tolerant of field names; URL overridable via env.
