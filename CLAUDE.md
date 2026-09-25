@@ -59,3 +59,4 @@ shadcn UI components live in `components/ui/`. Additional custom components are 
 | `SHEETS_WEBHOOK_URL` | Google Sheets webhook URL for lead capture |
 | `CALENDAR_LINK` | Booking calendar URL shown on the guide page |
 | `MAKE_WEBHOOK_URL` | Make.com webhook — POSTed with every lead (landing + offer) for downstream automation |
+| `N8N_SITE_LEAD_WEBHOOK_URL` | n8n "Site Lead Warmup - Liav Cohen" webhook — POSTed for every lead with a phone number. Waits 25s, sends a WhatsApp intro from 2 Green API instances, and registers the lead in the Liav Cohen AI-agent Google Sheet |

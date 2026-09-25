@@ -221,6 +221,14 @@ export async function POST(req: NextRequest) {
       tasks.push(postLead("make", makeWebhook, body));
     }
 
+    // n8n — Site Lead Warmup (Liav Cohen): waits 25s, sends a WhatsApp intro
+    // from both Green API instances, and registers the lead in the same
+    // Google Sheet the WhatsApp AI agent reads from. Phone required.
+    const n8nSiteLeadWebhook = process.env.N8N_SITE_LEAD_WEBHOOK_URL;
+    if (n8nSiteLeadWebhook && phone) {
+      tasks.push(postLead("n8n-site-lead", n8nSiteLeadWebhook, body));
+    }
+
     // WhatsApp sender (wa-sender-kappa) — fire for the landing opt-in
     // ("first form") when we have a phone to message. POST { phone, name }.
     // Open endpoint, tolerant of field names; URL overridable via env.
